@@ -1,0 +1,36 @@
+
+body{
+    height:100vh;
+    width:100%;
+}
+
+
+.fit{
+    width:max-content;
+    height:max-content;
+}
+
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height:100%;
+}
+
+.middle{
+    justify-content: center;
+    align-items: center;
+}
+
+.max{
+    width:100%;
+}
+
+.color{
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.login{
+    width: fit-content;
+}
