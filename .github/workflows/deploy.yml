@@ -8,6 +8,12 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@master
+            - name: tar files
+              run: |
+                mkdir ../build 
+                cp -TR . ../build
+                tar -cvf deploy.tar ../build/
+                
             - name: deploy website to host
               uses: appleboy/scp-action@master
               env:
