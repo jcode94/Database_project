@@ -2,44 +2,99 @@
 <html>
     <head>
         <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
 
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        
         <!-- My CSS -->
-        <link href="./index.css" rel="stylesheet">
+        <link href="./homePage.css" rel="stylesheet">
         <script src="./getSurveys.js"></script>
     
         <title>Home Page</title>
       </head>
 
-    <body onload="getSurveys()">
+    <body onload="" class="container-fluid parent flxflw">
 
-        <div class="container-fluid">
-            <div class="row">
-                <p>Database Project</p>
+        <div id="area1" class="parent color bd">
+
+            <div class="row bd">
+
+                <div class="col-auto ">
+                    <div class="row"><p>Create A Survey</p></div>
+                </div>
+
+                <div class="col-auto ">
+                    <div class="row"><p>Take A Survey</p></div>
+                </div>
+
             </div>
+            
         </div>
         
-        <div class="container-fluid parent color">
+        <div id="surveyArea" class="parent color">
 
-            <div id="createSurveyArea" class="row color">
+            <div class="row">
                 
-            </div>
+                <div class="col-auto">
+                    <div id="surveyID" class="row color clickableSurvey bd">
+                        <div class="col-auto">
+                            <div class="row color">
+                                <p>Survey Name</p>
+                            </div>
+                            
+                            <div class="row color">
+                                <p>Questions: ###</p>
+                            </div>
 
-            <div id="allSurveys" class="row color">
+                            <div class="row color">
+                                <p>Pending</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <div id="" class="row color clickableSurvey bd">
+                        <div class="col-auto">
+                            <div class="row color">
+                                <p>Survey Name</p>
+                            </div>
+                            
+                            <div class="row color">
+                                <p>Questions: ###</p>
+                            </div>
+
+                            <div class="row color">
+                                <p>Pending</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
+                <div class="col-auto">
+                    <div id="" class="row color clickableSurvey bd">
+                        <div class="col-auto">
+                            <div class="row color">
+                                <p>Survey Name</p>
+                            </div>
+                            
+                            <div class="row color">
+                                <p>Questions: ###</p>
+                            </div>
+
+                            <div class="row color">
+                                <p>Pending</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
                 
     </body>
+
 </html>

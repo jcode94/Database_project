@@ -1,0 +1,66 @@
+
+html, body{
+    height:100%;
+    margin:0;
+}
+
+input{
+    width:fit-content;
+}
+
+.color{
+    background-color: rgba(175, 175, 175, 0.1);
+}
+
+.bd{
+    border-color: black;
+    border-style: dashed;
+}
+
+.flxflw{
+    flex-flow: column;
+    height:100%;
+}
+
+.parent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.center{
+    justify-content: center;
+    align-items: center;
+}
+
+.col {
+    margin:0px;
+    padding:0px;
+}
+.row{
+    margin:0px;
+    padding:0px;
+}
+
+#area1{
+    flex: 1 1 40%;
+}
+
+#surveyArea{
+    flex: 1 1 auto;
+}
+#surveyArea p{
+    margin:0px;
+    padding:0px;
+}
+#surveyArea .clickableSurvey{
+    margin:0px;
+    padding:0px;
+
+    background-color: rgba(175, 175, 175, 0.1);
+}
+/* #surveyArea .row{
+    margin:0px;
+    padding:0px;
+} */

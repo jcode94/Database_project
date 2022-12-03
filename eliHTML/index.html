@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+
         <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
 
-        <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-        <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        
         <!-- My CSS -->
         <link href="./index.css" rel="stylesheet">
         <script src="./login.js"></script>
@@ -23,38 +18,23 @@
         <title>Login/Register</title>
       </head>
 
-    <body>
+    <body class="color">
 
-        <div class="container-fluid">
-            <div class="row">
-                <p>Database Project</p>
-            </div>
-        </div>
-        
-        <div class="container-fluid parent color">
+        <div class="container parent color">
 
-            <div class="row color">
-                <div class="row color">
+            <div id="loginArea" class="row center color">
+                <div class="row">
+                    <h1>Database Project</h1>
+                </div>
+                
+                <div class="row">
+                    <input placeholder="Email">
+                    <input placeholder="Password">
+                </div>
 
-                    <div class="row">
-                        <input type="input" placeholder="Email">
-                    </div>
-
-                    <div class="row">
-                        <input placeholder="Password">
-                    </div>
-
-                    <div class="row">
-                        <button type="button" onclick="doLogin()">Login</button>
-                        <button type="button" onclick="doRegister()">Sign Up</button>                        
-                    </div>
-
-                    
-
-                    <!-- <div class="row">
-                        <p>Don't Have an account click <a>Here</a></p>
-                    </div> -->
-
+                <div class="row">
+                    <div id="email" class="col text-end" onclick="doLogin()"><button>Login</button></div>
+                    <div id="password" class="col text-start" onclick="doRegister()"><button>Sign Up</button></div>
                 </div>
             </div>
 
