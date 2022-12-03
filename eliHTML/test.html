@@ -16,7 +16,7 @@
         <title>Home Page</title>
       </head>
 
-    <body onload="getSurveys()">
+    <body onload="">
 
         <div class="container-fluid tall color">
             
@@ -30,23 +30,26 @@
                             <div><button onclick="location.href='./index.html';">Logout</button></div>
                         </div>
 
-                        <div class="row center grow60 color bd">
-                            
-                            <div class="col-4 box clickable bd" onclick="location.href='./index.html';">
-                                <p>Create A Survey</p>
-                            </div>
-                            <div class="col-4 box clickable bd" onclick="location.href='./test.html';">
-                                <p>Take A Survey</p>
-                            </div>
-
-                        </div>
-
                         <div class="row center color bd">
-                            <div><h1>Your Surveys</h1></div>
+                            <div><h1>Survey Name</h1></div>
                         </div>
 
-                        <div id="surveyList" class="row center grow40 color bd">
-                            <!-- Available Surveys will automatically populate here from database -->
+                        <div id="questionList" class="row center growAuto color bd">
+                            <!-- Available Surveys Questions will automatically populate here from database -->
+
+                            <div class="col bd">
+                                <div class="row left"><p>#)</p></div>
+                                <div class="row left"><p>This Is An Example Question?</p></div>
+                                <div class="row left"><p>This is the response Area</p></div>
+                            </div>
+
+                            <div class="col bd">
+                                <div class="row left"><p>#)</p></div>
+                                <div class="row left"><p>This Is An Example Question?</p></div>
+                                <div class="row left"><p>This is the response Area</p></div>
+                            </div>
+                            
+
                         </div>
 
                     </div>

@@ -1,66 +1,68 @@
-
 html, body{
     height:100%;
-    margin:0;
+    margin:0%;
+    padding:0%;
 }
 
-input{
-    width:fit-content;
+.row, .col, .container-fluid, *{
+    margin:0%;
+    padding:0%;
 }
 
 .color{
-    background-color: rgba(175, 175, 175, 0.1);
+    background-color: rgba(61, 61, 61, 0.1);
 }
 
 .bd{
     border-color: black;
-    border-style: dashed;
+    border-style: dotted;
+    border-width: 2px;
+}
+
+.tall{
+    height: 100%;
+}
+
+.dflx{
+    display: flex;
 }
 
 .flxflw{
     flex-flow: column;
-    height:100%;
-}
-
-.parent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
 }
 
 .center{
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
-.col {
-    margin:0px;
-    padding:0px;
+.right{
+    justify-content: end;
+    align-items: end;
+    text-align:end;
 }
-.row{
-    margin:0px;
-    padding:0px;
-}
-
-#area1{
-    flex: 1 1 40%;
+.left{
+    justify-content: start;
+    align-items: start;
+    text-align:start;
 }
 
-#surveyArea{
+.growAuto{
     flex: 1 1 auto;
 }
-#surveyArea p{
-    margin:0px;
-    padding:0px;
-}
-#surveyArea .clickableSurvey{
-    margin:0px;
-    padding:0px;
 
-    background-color: rgba(175, 175, 175, 0.1);
+.grow40{
+    flex: 0 1 40%;
 }
-/* #surveyArea .row{
-    margin:0px;
-    padding:0px;
-} */
+
+.grow60{
+    flex: 1 1 60%;
+}
+
+.box {
+    margin:5px;
+}
+.clickable {
+    cursor: pointer;
+}
