@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
     <head>
-
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,32 +12,49 @@
         <link href="./index.css" rel="stylesheet">
         <script src="./login.js"></script>
         <script src="./register.js"></script>
-
     
-        <title>Login/Register</title>
+        <title>Home Page</title>
       </head>
 
-    <body class="color">
+    <body onload="">
 
-        <div class="container parent color">
+        <div class="container-fluid tall color">
+            
+            <div class="row tall">
 
-            <div id="loginArea" class="row center color">
-                <div class="row">
-                    <h1>Database Project</h1>
-                </div>
-                
-                <div class="row">
-                    <input placeholder="Email">
-                    <input placeholder="Password">
+                <div class="col color">
+
+                    <div class="tall dflx flxflw color">
+
+                        <div id="title" class="row center color bd">
+                            <h1>Welcome To The Database Project</h1>
+                        </div>
+
+                        <div id="surveyList" class="row center growAuto color bd">
+
+                            <div class="col-auto color">
+                                <div class="row box"><h2>Login Or<br/>Sign Up</h2></div>
+                                <div class="row box"><input placeholder="Email"></div>
+                                <div class="row box"><input placeholder="Password"></div>
+                                <div class="row box">
+                                    <div class="col box"><button class="fill" onclick="doLogin()">Login</button></div>
+                                    <div class="col box"><button class="fill" onclick="doRegister()">Sign Up</button></div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="row">
-                    <div id="email" class="col text-end" onclick="doLogin()"><button>Login</button></div>
-                    <div id="password" class="col text-start" onclick="doRegister()"><button>Sign Up</button></div>
-                </div>
+                <!-- <div class="col-8 color bd"></div> -->
+
             </div>
 
-        </div>
+        </div>            
                 
     </body>
+
 </html>

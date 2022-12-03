@@ -1,40 +1,71 @@
-
 html, body{
     height:100%;
-    margin:0;
+    margin:0%;
+    padding:0%;
 }
 
-input{
-    width:fit-content;
+.row, .col, .col-auto, .container-fluid, *{
+    margin:0%;
+    padding:0%;
 }
 
 .color{
-    background-color: rgba(175, 175, 175, 0.1);
+    background-color: rgba(61, 61, 61, 0.1);
 }
 
-.parent {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.bd{
+    border-color: black;
+    border-style: dotted;
+    border-width: 2px;
+}
 
+.tall{
+    height: 100%;
+}
+.fill{
+    width:100%;
+}
+
+.dflx{
+    display: flex;
+}
+
+.flxflw{
     flex-flow: column;
-    height:100%;
 }
 
 .center{
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
-.col {
-    margin:0px;
-    padding:0px;
+.right{
+    justify-content: end;
+    align-items: end;
+    text-align:end;
+}
+.left{
+    justify-content: start;
+    align-items: start;
+    text-align:start;
 }
 
-#loginArea{
-    flex: 0 0 auto;
+.growAuto{
+    flex: 1 1 auto;
 }
-#loginArea div {
-    margin: 10px 10px 10px 10px;
+
+.grow40{
+    flex: 0 1 40%;
+}
+
+.grow60{
+    flex: 1 1 60%;
+}
+
+.box {
+    margin:5px;
+}
+.clickable {
+    cursor: pointer;
 }
