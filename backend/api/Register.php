@@ -10,7 +10,7 @@ $db_config = new Config();
 $conn = new DBConnection($db_config);
 
 if (empty($email) || empty($password)) {
-    echo 0;
+    echo json_encode(array("valid" => 0));
     exit;
 } else {
     $query = "SELECT `email` FROM `users` where `email` = '$email'";
@@ -22,7 +22,7 @@ if (empty($email) || empty($password)) {
         $stmt = $conn->prepare(file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_NEW_USER.sql'));
         $stmt->bind_param("ss", $email, $password);
         if($stmt->execute()) {
-            echo 1;
+            echo json_encode(array("valid" => 1));
             exit;
         }
     }
