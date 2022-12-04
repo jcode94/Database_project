@@ -20,7 +20,7 @@ if (empty($email) || empty($password)) {
         exit;
     } else {
         $stmt = $conn->prepare(file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_NEW_USER.sql'));
-        $stmt->bind_param("is", $email, $password);
+        $stmt->bind_param("ss", $email, $password);
         if($stmt->execute()) {
             echo 'success';
             exit;
