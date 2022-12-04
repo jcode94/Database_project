@@ -2,13 +2,14 @@
 require_once(WEB_ROOT.'/backend/models/Constants.php');
 require_once(CONFIG_DIR.'/Config.class.php');
 require_once(WEBROOT.'/backend/dao/DBConnection.php');
+
 $data = json_decode(file_get_contents("php://input"), true);
 $email = $data["email"];
 $password = $data["password"];
 $conn = new DBConnection(new Config());
 
 if (empty($email) || empty($password)) {
-    echo 'Empty email or password';
+    echo 'Email or password blank.';
     exit;
 } else {
     if ($stmt = $conn->prepare("SELECT `uid`, `password` FROM `users` WHERE `email` = ?")) {
