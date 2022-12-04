@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+
+        <!-- My CSS -->
+        <link href="./index.css" rel="stylesheet">
+        <script src="./generateQuestionsSurveyCreate.js"></script>
+        <script src="./generateEmailList.js"></script>
+    
+        <title>Home Page</title>
+      </head>
+
+    <body onload="">
+
+        <div class="container-fluid tall color">
+            
+            <div class="row tall">
+
+                <div class="col color">
+
+                    <div class="tall dflx flxflw color">
+
+                        <div class="row right color bd">
+                            <div><button onclick="location.href='./index.html';">Logout</button></div>
+                        </div>
+
+                        <div class="row center color bd">
+                            <div><h1>Survey Name</h1></div>
+                        </div>
+
+                        <div id="surveyQuestionsArea" class="row center growAuto color bd">
+
+                            <div class="col">
+
+                                <!-- Number Of Questions Area -->
+                                <div class="row center">
+                                    <div class="col-auto box bd">
+                                        <input id="totalNumberOfQuestions" class="fit" placeholder="Enter the Number of Questions">
+                                    </div>
+                                    <div class="col-auto box bd">
+                                        <button id="totalNumberOfQuestionsButton" onclick="generateQuestionsSurveyCreate()">Submit</button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Question Creation Area -->
+                                <div id="questionCreationList" class="row">
+                                </div>
+
+                            </div>
+                            
+                            
+
+                        </div>
+
+                        <div id="emailCollectionArea" class="row center color bd">
+
+                            <div class="col">
+                                
+                                <!-- Number Of Emails Area -->
+                                <div class="row box">
+                                    <div class="col">
+                                        <input id="totalNumberOfEmails" placeholder="Enter the Number of Emails">
+                                        <button onclick="generateEmailList()">Submit</button>
+                                    </div>
+                                </div>
+                                    
+    
+                                <div id="invisEmail" class="row box invisable">
+
+                                    <div class="col">
+
+                                        <!-- Email Prompts -->
+                                        <div id="emailPromptsArea" class="row left" >
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row box center bd">
+
+                            <div class="col">
+                                <button>Create Survey</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- <div class="col-8 color bd"></div> -->
+
+            </div>
+
+        </div>            
+                
+    </body>
+
+</html>

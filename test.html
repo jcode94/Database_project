@@ -1,6 +1,67 @@
 <!DOCTYPE html>
-    <head></head>
-    <body>
-        <p>Hello, World5!</p>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+ 
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+
+        <!-- My CSS -->
+        <link href="./homePage.css" rel="stylesheet">
+        <script src="./getSurveys.js"></script>
+        <script src="./openSurvey.js"></script>
+    
+        <title>Home Page</title>
+      </head>
+
+    <body onload="">
+
+        <div class="container-fluid tall color">
+            
+            <div class="row tall">
+
+                <div class="col color">
+
+                    <div class="tall dflx flxflw color">
+
+                        <div class="row right color bd">
+                            <div><button onclick="location.href='./index.html';">Logout</button></div>
+                        </div>
+
+                        <div class="row center color bd">
+                            <div><h1>Survey Name</h1></div>
+                        </div>
+
+                        <div id="questionList" class="row center growAuto color bd">
+                            <!-- Available Surveys Questions will automatically populate here from database -->
+
+                            <div class="col bd">
+                                <div class="row left"><p>#)</p></div>
+                                <div class="row left"><p>This Is An Example Question?</p></div>
+                                <div class="row left"><p>This is the response Area</p></div>
+                            </div>
+
+                            <div class="col bd">
+                                <div class="row left"><p>#)</p></div>
+                                <div class="row left"><p>This Is An Example Question?</p></div>
+                                <div class="row left"><p>This is the response Area</p></div>
+                            </div>
+                            
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- <div class="col-8 color bd"></div> -->
+
+            </div>
+
+        </div>            
+                
     </body>
+
 </html>

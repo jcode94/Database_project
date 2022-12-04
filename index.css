@@ -25,6 +25,13 @@ html, body{
 .fill{
     width:100%;
 }
+.fit{
+    width:fit-content;
+}
+
+.pad{
+    padding:5px 5px 5px 5px;
+}
 
 .dflx{
     display: flex;
@@ -66,6 +73,12 @@ html, body{
 .box {
     margin:5px;
 }
+
 .clickable {
     cursor: pointer;
+}
+
+.invisable{
+    visibility: hidden;
+    display: none;
 }
