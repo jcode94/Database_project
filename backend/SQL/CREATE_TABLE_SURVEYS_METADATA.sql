@@ -1,5 +1,5 @@
 CREATE TABLE `surveys_metadata` (
-	`survey_id` INT NOT NULL,
+	`survey_id` INT NOT NULL AUTO_INCREMENT,
 	`author` VARCHAR(30) NOT NULL,
 	`title` VARCHAR(30) NOT NULL,
 	`description` VARCHAR(50) NOT NULL,
@@ -8,3 +8,4 @@ CREATE TABLE `surveys_metadata` (
 	`number_of_questions` INT NOT NULL,
 	PRIMARY KEY (`survey_id`)
 ) ENGINE=InnoDB;
+SELECT IDENT_CURRENT(`surveys_metadata`);
