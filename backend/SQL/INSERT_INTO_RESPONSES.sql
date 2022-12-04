@@ -1,0 +1,1 @@
+INSERT INTO `responses`(`survey_id`, `email`, `number`, `value`) VALUES(?,?,?,?);
