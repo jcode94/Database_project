@@ -6,7 +6,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 $email = $data["email"];
 $password = $data["password"];
 $db_config = new Config();
-$conn = new DBConnection();
+$conn = new DBConnection($db_config);
 
 if (empty($email) || empty($password)) {
     echo 0;
