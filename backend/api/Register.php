@@ -1,6 +1,6 @@
 <?php
 
-define('__BACKEND_ROOT__', '/backend');
+define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'].'/backend');
 require_once(__BACKEND_ROOT__.'/dao/DBConnection.php');
 
 $email = $_POST['email'];
