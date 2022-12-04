@@ -1,22 +1,26 @@
 function doLogin() {
-    console.log("Login Button Clicked")
+    // console.log("Login Button Clicked")
 
-    window.location.href = "./HTML/homePage.html";
-    return
+    // window.location.href = "./HTML/homePage.html";
+    // return
 
-    urlBase = "http://157.245.93.191/backend/api";
-    extension = ".php";
+    let urlBase = "http://157.245.93.19/backend/api";
+    let extension = ".php";
 
-    this.email = document.getElementById("email").value;
-    this.password = document.getElementById("password").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    console.log(email, password)
 
     //* Variables for the http request to login with the login api
     let jsonPayLoad = JSON.stringify({
-        email: this.email,
-        password: this.password,
+        email: email,
+        pass: password,
     });
 
-    let url = this.urlBase + "/Login" + this.extension;
+    console.log('JSON Package', jsonPayLoad)
+
+    let url = urlBase + "/Login" + extension;
     let method = "POST";
 
     //* Opening the connection to the login api file with the login & password typed in
@@ -25,19 +29,15 @@ function doLogin() {
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
     try {
-        let that = this;
         xhr.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
+
                 let jsonObject = JSON.parse(xhr.responseText);
 
-                if (that.userId < 1) {
-                    document.getElementById("loginResult").innerHTML =
-                        "Username or Password are incorrect";
-                    return;
-                }
+                console.log('JSON Received', jsonObject)
 
-                let Cookie = new cookie(that.email);
-                Cookie.saveCookie();
+                sessionStorage['userEmail'] = 'email'
+                console.log( sessionStorage['email'] )
 
                 window.location.href = "./HTML/homePage.html";
             }
