@@ -16,7 +16,7 @@ function doLogin() {
         password: this.password,
     });
 
-    let url = this.urlBase + "/login" + this.extension;
+    let url = this.urlBase + "/Login" + this.extension;
     let method = "POST";
 
     //* Opening the connection to the login api file with the login & password typed in
