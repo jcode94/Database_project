@@ -4,7 +4,8 @@ $password = $_POST['password'];
 $conn = new DBConnection();
 
 if (empty($email) || empty($password)) {
-    echo 0;
+    echo 'empty field';
+    exit;
 } else {
     if ($stmt = $conn->prepare("SELECT `uid`, `password` FROM `users` WHERE `email` = ?")) {
         $stmt->bind_param('s', $email);
@@ -21,12 +22,10 @@ if (empty($email) || empty($password)) {
                 $_SESSION['loggedin'] = TRUE;
                 $_SESSION['email'] = $_POST['email'];
                 $_SESSION['uid'] = $uid;
-                echo 1;
+                echo 'success';
                 exit;
             }
         }
     }
 }
-
-echo 0;
 ?>
