@@ -5,8 +5,8 @@ require_once(__BACKEND_ROOT__.'/dao/DBConnection.php');
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-echo $data->email;
-echo $data->password;
+echo "$data->email";
+echo "$data->password";
 
 $db_config = new Config();
 $conn = new DBConnection($db_config);
