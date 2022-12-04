@@ -23,5 +23,10 @@
     
             return $this->connection;
         }
+        
+        public function __destruct()
+        {
+            mysql_close($this->connection);
+        }
     }
 ?>
