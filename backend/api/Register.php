@@ -10,19 +10,19 @@ $db_config = new Config();
 $conn = new DBConnection($db_config);
 
 if (empty($email) || empty($password)) {
-    echo json_encode(array("valid" => 0));
+    echo 'Email or password blank.';
     exit;
 } else {
     $query = "SELECT `email` FROM `users` where `email` = '$email'";
     $rs = $conn->query($query);
     if (mysqli_num_rows($rs) > 0) {
-        echo 0;
+        echo 'Email already exists.';
         exit;
     } else {
         $stmt = $conn->prepare(file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_NEW_USER.sql'));
         $stmt->bind_param("ss", $email, $password);
         if($stmt->execute()) {
-            echo json_encode(array("valid" => 1));
+            echo 'Register success.';
             exit;
         }
     }
