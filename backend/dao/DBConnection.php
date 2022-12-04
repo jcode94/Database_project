@@ -1,9 +1,11 @@
 <?php
+    require_once(__DIR__ . '/../../../config/config.php');
+    
     class DBConnection {
-        private $host = 'localhost';
-        private $username = 'root';
-        private $password = '';
-        private $database = 'survey_project_db';
+        private $host = $db_config['host'];
+        private $username = $db_config['username'];
+        private $password = $db_config['password'];
+        private $database = $db_config['database'];
     
         protected $connection;
     
