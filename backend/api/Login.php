@@ -9,7 +9,7 @@ $db_config = new Config();
 $conn = new DBConnection($db_config);
 
 if (empty($email) || empty($password)) {
-    echo 0;
+    echo json_encode(array("valid" => 0));
     exit;
 } else {
     if ($stmt = $conn->prepare("SELECT `uid`, `password` FROM `users` WHERE `email` = ?")) {
@@ -23,11 +23,11 @@ if (empty($email) || empty($password)) {
             if ($password === $pw) {
                 // Verification success! User has logged-in!
                 // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
-                session_regenerate_id();
+                session_start();
                 $_SESSION['loggedin'] = TRUE;
-                $_SESSION['email'] = $_POST['email'];
+                $_SESSION['email'] = $email;
                 $_SESSION['uid'] = $uid;
-                echo 1;
+                echo json_encode(array("valid" => 1));
                 exit;
             }
         }
