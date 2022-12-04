@@ -5,7 +5,6 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 // insert survey into table surveys_metadata, get back its ID
 $conn = new DBConnection(new Config());
-$numOfQuestions = count($data['questions']);
 $stmt = $conn->prepare(
     file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_INTO_SURVEYS_METADATA.sql')
 );
@@ -15,26 +14,46 @@ $stmt->bind_param("sssssi",
     $data['description'],
     $data['startD'],
     $data['endD'],
-    $numOfQuestions);
+    $data['numOfQuestions']);
 $stmt->execute();
 $stmt->bind_result($survey_id);
 $stmt_fetch();
 
 if (isset($survey)) {
+    // INSERT INTO QUESTIONS (survey_id, number, type, statement)
+    foreach($data['questions'] as $index=>$question) {
+        $stmt = $conn->prepare(
+            file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_INTO_QUESTIONS.sql')
+        )
+        $stmt->bind_param("iiis",
+            $survey_id, 
+            $index, 
+            $question['type'], 
+            $question['statement']
+        );
+        if($stmt->execute()) {
+            echo 'Insert questions success.';
+        }
+    }
+    
     foreach($data['emails'] as $key=>$value) {
         // INSERT INTO PARTICIPANTS (survey_id, email, status)
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_INTO_PARTICIPANTS.sql')
         )
         $stmt->bind_param("is", $survey_id, $value);
-        $stmt->execute();
+        if($stmt->execute()) {
+            echo 'Insert participants success.';
+        }
         
         // SET UP DEFAULT RESPONSES(save state)
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_INTO_RESPONSES.sql')
         )
         $stmt->bind_param("isis", $survey_id, $value, $key+1);
-        $stmt->execute();
+        if($stmt->execute()) {
+            echo 'Insert default responses success.';
+        }
     }
     echo 'Creation Success!';
     exit;

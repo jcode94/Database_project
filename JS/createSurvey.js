@@ -258,12 +258,13 @@ function createSurveyObject()
         jsonSurvey['questions'] = jsonQuestions
 
         let jsonPayLoad = JSON.stringify({
+            author: sessionStorage['userEmail'],
             emails: jsonSurvey['emails'],
-            numOfQuestions: jsonSurvey['numOfQuestions'],
             Title: jsonSurvey['title'],
             desc:   jsonSurvey['desc'],
             startD: jsonSurvey['startD'], 
             endD:   jsonSurvey['endD'], 
+            numOfQuestions: jsonSurvey['numOfQuestions'],
             questions: jsonSurvey['questions']
         });
 
