@@ -31,7 +31,7 @@
         }
         
         public function query($sql) {
-            return $this->conn->query($sql);
+            return $this->connection->query($sql);
         }
         
         public function __destruct()
