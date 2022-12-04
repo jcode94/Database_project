@@ -1,13 +1,13 @@
 <?php
     class Question {
-        private $number;
-        private $type;
-        private $statement;
+        public $order;
+        public $type;
+        public $statement;
         
-        public function __construct($n, $t, $s) {
-            $number = $n;
-            $type = $t;
-            $statement = $s;
+        public function __construct($o, $t, $s) {
+            $this->$order = $o;
+            $this->$type = $t;
+            $this->$statement = $s;
         }
     }
 ?>

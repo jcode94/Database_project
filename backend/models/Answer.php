@@ -1,11 +1,10 @@
 <?php
     class Answer {
-        $number;
-        $value;
+        public $order;
+        public $value;
         
-        public function __construct($number, $value) {
-            $this->number = $number;
+        public function __construct($order, $value) {
+            $this->order = $order;
             $this->value = $value;
         }
     }
-?>

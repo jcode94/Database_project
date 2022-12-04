@@ -1,5 +1,5 @@
 <?php
-require_once($_SERVER['DOCUMENT_ROOT'].'/backend/models/Constants.php');
+define('__BACKEND_ROOT__',$_SERVER['DOCUMENT_ROOT'].'/backend');
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -24,7 +24,7 @@ if (isset($survey)) {
     foreach($data['questions'] as $index=>$question) {
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_INTO_QUESTIONS.sql')
-        )
+        );
         $stmt->bind_param("iiis",
             $survey_id, 
             $index, 
@@ -40,7 +40,7 @@ if (isset($survey)) {
         // INSERT INTO PARTICIPANTS (survey_id, email, status)
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_INTO_PARTICIPANTS.sql')
-        )
+        );
         $stmt->bind_param("is", $survey_id, $value);
         if($stmt->execute()) {
             echo 'Insert participants success.';
@@ -49,7 +49,7 @@ if (isset($survey)) {
         // SET UP DEFAULT RESPONSES(save state)
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_INTO_RESPONSES.sql')
-        )
+        );
         $stmt->bind_param("isis", $survey_id, $value, $key+1);
         if($stmt->execute()) {
             echo 'Insert default responses success.';
