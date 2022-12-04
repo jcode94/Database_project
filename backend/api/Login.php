@@ -1,5 +1,5 @@
 <?php
-require_once(WEB_ROOT.'/backend/models/Constants.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/backend/models/Constants.php');
 require_once(CONFIG_DIR.'/Config.class.php');
 require_once(WEBROOT.'/backend/dao/DBConnection.php');
 
