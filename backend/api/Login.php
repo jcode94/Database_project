@@ -1,6 +1,7 @@
 <?php
-require_once('/../config/Config.class.php');
-require_once('/backend/dao/DBConnection.php');
+require_once(WEB_ROOT.'/backend/models/Constants.php');
+require_once(CONFIG_DIR.'/Config.class.php');
+require_once(WEBROOT.'/backend/dao/DBConnection.php');
 $data = json_decode(file_get_contents("php://input"), true);
 $email = $data["email"];
 $password = $data["password"];
