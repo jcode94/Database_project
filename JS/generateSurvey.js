@@ -6,13 +6,13 @@ function generateSurvey()
 
     let survey =
     {
-        title:"Food Survey",
-        desc:"Just A Few Questions On Food",
-        startD:"12/2022/1",
-        endD:"12/2022/5",
-        numQuestions:3
+        title:jsonSurvey[title],
+        desc:jsonSurvey[desc],
+        startD:jsonSurvey[startD],
+        endD:jsonSurvey[endD],
+        numQuestions:jsonSurvey[numQuestions]
     }
-
+    console.log(survey);
     let questions = [
         {
             number:1,
