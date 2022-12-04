@@ -3,8 +3,8 @@
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'].'/backend');
 require_once(__BACKEND_ROOT__.'/dao/DBConnection.php');
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+$email = $_POST['email'] ?? '';
+$password = $_POST['password'] ?? '';
 $conn = new DBConnection();
 
 if (empty($email) || empty($password)) {
