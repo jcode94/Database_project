@@ -1,1 +1,1 @@
-INSERT INTO users(email, password) VALUES(?, ?);
+INSERT INTO `users`(`email`, `password`) VALUES(?, ?);

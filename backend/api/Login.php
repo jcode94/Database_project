@@ -1,30 +1,36 @@
 <?php
-
-define('__BACKEND_ROOT__', '/backend');
+require_once(__DIR__ . '/../../../config/Config.class.php');
+define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'].'/backend');
 require_once(__BACKEND_ROOT__.'/dao/DBConnection.php');
-
-$email = $_POST['email'];
-$password = $_POST['password'];
-$conn = new DBConnection();
+$data = json_decode(file_get_contents("php://input"), true);
+$email = $data["email"];
+$password = $data["password"];
+$db_config = new Config();
+$conn = new DBConnection($db_config);
 
 if (empty($email) || empty($password)) {
-    echo(1);
+    echo 0;
+    exit;
 } else {
-    $query = "SELECT email FROM users where email = $email";
-    $rs = $conn->query($query);
-    if (mysqli_num_rows($rs) > 0) {
-        echo(1);
-    } else {
-        if ($_server["REQUEST_METHOD"] == "POST") {
-            $stmt = $conn->prepare(file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_NEW_USER.sql'));
-            $stmt->bind_param("is", $email, $password);
-            if($stmt->execute()) {
-                echo(0);
-            } else {
-                echo(1);
+    if ($stmt = $conn->prepare("SELECT `uid`, `password` FROM `users` WHERE `email` = ?")) {
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $stmt->store_result();
+        
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($uid, $pw);
+            $stmt->fetch();
+            if ($password === $pw) {
+                // Verification success! User has logged-in!
+                // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
+                session_regenerate_id();
+                $_SESSION['loggedin'] = TRUE;
+                $_SESSION['email'] = $_POST['email'];
+                $_SESSION['uid'] = $uid;
+                echo 1;
+                exit;
             }
         }
     }
 }
-
 ?>
