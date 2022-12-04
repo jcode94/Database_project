@@ -69,10 +69,20 @@ function doLogin() {
 
                 console.log('JSON Received', jsonObject)
 
-                sessionStorage['userEmail'] = 'email'
-                console.log( sessionStorage['email'] )
+                if ( !jsonObject.valid )
+                {
+                    sessionStorage['userEmail'] = 'email'
+                    console.log( "Session Storage", sessionStorage )
 
-                window.location.href = "./HTML/homePage.html";
+                    document.getElementById('loginResult').innerText = "Successful Login"
+
+                    window.location.href = "./HTML/homePage.html";
+
+                }
+                else
+                {
+                    document.getElementById('loginResult').innerText = "Failed To Login"
+                }
             }
         };
 
