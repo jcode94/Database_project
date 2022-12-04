@@ -20,6 +20,9 @@ function generateQuestionsSurveyCreate()
                 '<div class="col">' +
                     '<!-- Choose The Type Of Question -->' +
                     '<div class="row left">' +
+                        '<p>Question ' + (idx+1) + ')</p>' +
+                    '</div>' +
+                    '<div class="row left">' +
                         '<div class="col-auto box">' +
                             '<p>Type Of Question:</p>' +
                         '</div>' +
