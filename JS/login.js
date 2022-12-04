@@ -11,6 +11,9 @@ function doLogin() {
     if( email.value.trim() == '' )
     {
         flag=true
+
+        email.value = ''
+
         email.style.borderColor = 'red'
         
         email.addEventListener("focus", ()=>{
@@ -25,6 +28,9 @@ function doLogin() {
     if( password.value.trim() == '' )
     {
         flag=true
+
+        password.value = ''
+
         password.style.borderColor = 'red'
         
         password.addEventListener("focus", ()=>{
