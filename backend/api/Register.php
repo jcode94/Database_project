@@ -19,13 +19,11 @@ if (empty($email) || empty($password)) {
         echo 'already exists';
         exit;
     } else {
-        if ($_server["REQUEST_METHOD"] == "POST") {
-            $stmt = $conn->prepare(file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_NEW_USER.sql'));
-            $stmt->bind_param("is", $email, $password);
-            if($stmt->execute()) {
-                echo 'success';
-                exit;
-            } 
+        $stmt = $conn->prepare(file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_NEW_USER.sql'));
+        $stmt->bind_param("is", $email, $password);
+        if($stmt->execute()) {
+            echo 'success';
+            exit;
         }
     }
 }
