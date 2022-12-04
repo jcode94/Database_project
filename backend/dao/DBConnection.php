@@ -32,7 +32,7 @@
         
         public function __destruct()
         {
-            mysql_close($this->connection);
+            mysqli_close($this->connection);
         }
     }
 ?>
