@@ -13,7 +13,7 @@ if (empty($email) || empty($password)) {
     echo 'empty field';
     exit;
 } else {
-    $query = "SELECT email FROM users where email = `$email`";
+    $query = "SELECT `email` FROM `users` where `email` = '$email'";
     $rs = $conn->query($query);
     if (mysqli_num_rows($rs) > 0) {
         echo 'already exists';
