@@ -1,8 +1,8 @@
 function doLogin() {
-    console.log("Login Button Clicked")
+    console.log("Login Button Clicked");
 
     window.location.href = "./HTML/homePage.html";
-    return
+    return;
 
     urlBase = "http://157.245.93.191/backend/api";
     extension = ".php";
