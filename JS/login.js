@@ -39,7 +39,7 @@ function doLogin() {
                 let Cookie = new cookie(that.email);
                 Cookie.saveCookie();
 
-                window.location.href = "homePage.html";
+                window.location.href = "./HTML/homePage.html";
             }
         };
 
