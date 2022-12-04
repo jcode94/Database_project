@@ -1,15 +1,14 @@
 <?php
-require_once(__DIR__ . '/../../../config/Config.class.php');
+require_once('$_SERVER['DOCUMENT_ROOT'].'/../config/Config.class.php');
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'].'/backend');
 require_once(__BACKEND_ROOT__.'/dao/DBConnection.php');
 $data = json_decode(file_get_contents("php://input"), true);
 $email = $data["email"];
 $password = $data["password"];
-$db_config = new Config();
-$conn = new DBConnection($db_config);
+$conn = new DBConnection(new Config());
 
 if (empty($email) || empty($password)) {
-    echo json_encode(array("valid" => 0));
+    echo 'Empty email or password';
     exit;
 } else {
     if ($stmt = $conn->prepare("SELECT `uid`, `password` FROM `users` WHERE `email` = ?")) {
@@ -27,9 +26,12 @@ if (empty($email) || empty($password)) {
                 $_SESSION['loggedin'] = TRUE;
                 $_SESSION['email'] = $email;
                 $_SESSION['uid'] = $uid;
-                echo json_encode(array("valid" => 1));
+                echo 'Login success.';
                 exit;
             }
+        } else {
+            echo "No user found for email '$email'";
+            exit;
         }
     }
 }
