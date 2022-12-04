@@ -2,7 +2,7 @@
 
 function getSurveys()
 {
-    console.log("Here")
+    console.log( "Session Storage", sessionStorage )
 
     let surveyList = document.getElementById('surveyList')
 
