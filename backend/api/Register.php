@@ -1,11 +1,12 @@
 <?php
-
+require_once(__DIR__ . '/../../../config/Config.class.php');
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'].'/backend');
 require_once(__BACKEND_ROOT__.'/dao/DBConnection.php');
 
 $email = $_POST['email'] ?? '';
 $password = $_POST['password'] ?? '';
-$conn = new DBConnection();
+$db_config = new Config();
+$conn = new DBConnection($db_config);
 
 if (empty($email) || empty($password)) {
     echo 'empty field';

@@ -1,18 +1,22 @@
 <?php
-    require_once(__DIR__ . '/../../../config/config.php');
+    
     
     class DBConnection {
-        private $host = $db_config['host'];
-        private $username = $db_config['username'];
-        private $password = $db_config['password'];
-        private $database = $db_config['database'];
+        private $host;
+        private $username;
+        private $password;
+        private $database;
     
         protected $connection;
     
-        public function __construct(){
-    
+        public function __construct(Config $config){
+            
             if (!isset($this->connection)) {
-    
+                $this->host = $config->host;
+                $this->username = $config->username;
+                $this->password = $config->password;
+                $this->database = $config->database;
+                
                 $this->connection = new mysqli(
                     $this->host, $this->username, $this->password, $this->database
                 );
