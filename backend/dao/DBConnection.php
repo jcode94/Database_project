@@ -30,6 +30,10 @@
             return $this->connection;
         }
         
+        public function query($sql) {
+            return $this->conn->query($sql);
+        }
+        
         public function __destruct()
         {
             mysqli_close($this->connection);
