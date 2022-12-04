@@ -4,7 +4,7 @@ function openSurvey()
 {        
     console.log("Survey Button Clicked")
 
-    // window.location.href = "homePage.html";
+    window.location.href = "./takeSurvey.html";
     return
 
     urlBase = 'http://157.245.93.191';

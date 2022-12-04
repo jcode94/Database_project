@@ -4,7 +4,7 @@ function doRegister()
     {        
         console.log("Register Button Clicked")
 
-        window.location.href = "homePage.html";
+        window.location.href = "./HTML/homePage.html";
         return
 
         urlBase = 'http://157.245.93.191';

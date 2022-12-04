@@ -53,7 +53,7 @@ function getSurveys()
     for( let idx = 0; idx < surveyIds.length; idx++ )
     {
         surveyList.innerHTML = surveyList.innerHTML + 
-        '<div class="col-auto box clickable bd">\n' +
+        '<div class="col-auto box clickable bd" onclick="openSurvey()">\n' +
             '\t<div class="row"><p>' + surveyNames[idx] + '</p></div>\n' +
             '\t<div class="row"><p>Questions: ' + surveyQuestionNumbers[idx] + '</p></div>\n'+
             '\t<div class="row"><p>' + surveyStatuses[idx] + '</p></div>\n'+
