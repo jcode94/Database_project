@@ -18,7 +18,7 @@ if (empty($email) || empty($password)) {
         echo 'Email already exists.';
         exit;
     } else {
-        $stmt = $conn->prepare(file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_NEW_USER.sql'));
+        $stmt = $conn->prepare(file_get_contents(__BACKEND_ROOT__.'/SQL/INSERT_INTO_USERS.sql'));
         $stmt->bind_param("ss", $email, $password);
         if($stmt->execute()) {
             echo 'Register success.';
