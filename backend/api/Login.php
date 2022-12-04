@@ -20,7 +20,7 @@ if (empty($email) || empty($password)) {
         if ($stmt->num_rows > 0) {
             $stmt->bind_result($uid, $pw);
             $stmt->fetch();
-            if ($password === $pw)) {
+            if ($password === $pw) {
                 // Verification success! User has logged-in!
                 // Create sessions, so we know the user is logged in, they basically act like cookies but remember the data on the server.
                 session_regenerate_id();
