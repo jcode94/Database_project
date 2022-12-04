@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+echo '<script>console.log("herelogout"); </script>';
 $_SESSION = array();
 
 if (ini_get("session.use_cookies")) {

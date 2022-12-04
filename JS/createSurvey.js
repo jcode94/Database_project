@@ -4,6 +4,9 @@ function createSurveyObject()
 {
     console.log("Create Survey")
 
+    let urlBase = "http://157.245.93.19/backend/api";
+    let extension = ".php";
+
     let flag = false
 
     let jsonSurvey = {}
@@ -224,7 +227,12 @@ function createSurveyObject()
     else
     {
         /* Send Survey Packet To API */
+        let url = urlBase + "/CreateSurvey" + extension;
+        let method = 'POST';
 
+       
+     
+        // setting up the jsonSurvey
         jsonSurvey['title'] = surveyName
         jsonSurvey['desc'] = surveyDesc
         jsonSurvey['numOfQuestions'] = questions.length
@@ -232,22 +240,43 @@ function createSurveyObject()
         jsonSurvey['startD'] = startD
         jsonSurvey['endD'] = endD
 
+      
+
+
         for( let i = 0; i < questions.length; i++)
         {
             let tmpQuestion = {}
 
-            tmpQuestion['number'] = jsonNumbers[i]
+            
             tmpQuestion['type'] = jsonTypes[i]
             tmpQuestion['statement'] = jsonPrompts[i]
-
+            tmpQuestion['number'] = jsonNumbers[i]
+            
             jsonQuestions.push(tmpQuestion)
         }
 
         jsonSurvey['questions'] = jsonQuestions
 
-    }
+        let jsonPayLoad = JSON.stringify({
+            emails: jsonSurvey['emails'],
+            numOfQuestions: jsonSurvey['numOfQuestions'],
+            Title: jsonSurvey['title'],
+            desc:   jsonSurvey['desc'],
+            startD: jsonSurvey['startD'], 
+            endD:   jsonSurvey['endD'], 
+            questions: jsonSurvey['questions']
+        });
 
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, url, true);
+        
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+        xhr.send(jsonPayLoad);
+    }
+   
     // If no flag was triggered return jsonSurvey
     console.log(jsonSurvey)
+    
     return jsonSurvey
 }
