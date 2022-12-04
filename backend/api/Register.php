@@ -4,9 +4,9 @@ define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'].'/backend');
 require_once(__BACKEND_ROOT__.'/dao/DBConnection.php');
 
 $data = json_decode(file_get_contents("php://input"), true);
-foreach ($data as $key => $value) {
-    echo "Key: $key; Value: $value\n";
-}
+
+echo $data->email;
+echo $data->password;
 
 $db_config = new Config();
 $conn = new DBConnection($db_config);
