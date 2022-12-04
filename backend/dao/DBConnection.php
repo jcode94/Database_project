@@ -34,6 +34,10 @@
             return $this->connection->query($sql);
         }
         
+        public function prepare($sql) {
+            return $this->connection->prepare($sql);
+        }
+        
         public function __destruct()
         {
             mysqli_close($this->connection);
