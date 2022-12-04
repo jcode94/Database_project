@@ -3,7 +3,7 @@
         private $host = 'localhost';
         private $username = 'root';
         private $password = '';
-        private $database = 'test';
+        private $database = 'survey_project_db';
     
         protected $connection;
     
