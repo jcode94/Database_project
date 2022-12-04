@@ -1,29 +1,30 @@
 <?php
     class Survey {
-        
-        private $emails;
-        private $numQuestions;
-        private $title;
-        private $description;
-        private $startDate;
-        private $endDate;
-        private $questions;
+        public $survey_id;
+        public $author
+        public $title;
+        public $description;
+        public $startDate;
+        public $endDate;
+        public $numQuestions;
+        public $questions;
         
         public function __construct(
-            $emails,
-            $numQuestions,
+            $survey_id,
+            $author,
             $title,
             $description,
             $startDate,
             $endDate,
+            $numQuestions,
             $questions
         ) {
             $this->emails = array($emails);
-            $this->numQuestions = $numQuestions;
             $this->title = $title;
             $this->description = $description;
             $this->startDate = $startDate;
             $this->endDate = $endDate;
+            $this->numQuestions = $numQuestions;
             $this->questions = array($questions);
         }
     }
