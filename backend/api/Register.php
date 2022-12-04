@@ -8,12 +8,10 @@ foreach ($data as $key => $value) {
     echo "Key: $key; Value: $value\n";
 }
 
-$email = $data->email ?? '';
-$password = $data->password ?? '';
 $db_config = new Config();
 $conn = new DBConnection($db_config);
 
-if (empty($email) || empty($password)) {
+if (empty($data->email) || empty($data->password)) {
     echo 'empty field';
     exit;
 } else {
