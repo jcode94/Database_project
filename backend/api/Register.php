@@ -1,7 +1,6 @@
 <?php
-require_once('$_SERVER['DOCUMENT_ROOT'].'/../config/Config.class.php');
-define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'].'/backend');
-require_once(__BACKEND_ROOT__.'/dao/DBConnection.php');
+require_once('/../config/Config.class.php');
+require_once('/backend/dao/DBConnection.php');
 
 $data = json_decode(file_get_contents("php://input"), true);
 $email = $data["email"];
