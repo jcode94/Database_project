@@ -9,7 +9,7 @@ $password = $data["password"];
 $conn = new DBConnection(new Config());
 
 if (empty($email) || empty($password)) {
-    echo 'Email or password blank.';
+    echo json_encode( ["valid"=>"Missing Password Or Email"] );
     exit;
 } else {
     if ($stmt = $conn->prepare("SELECT `uid`, `password` FROM `users` WHERE `email` = ?")) {
@@ -27,11 +27,11 @@ if (empty($email) || empty($password)) {
                 $_SESSION['loggedin'] = TRUE;
                 $_SESSION['email'] = $email;
                 $_SESSION['uid'] = $uid;
-                echo 'Login success.';
+                echo json_encode( ["valid"=>"valid"] );
                 exit;
             }
         } else {
-            echo "No user found for email '$email'";
+            echo json_encode( ["valid"=>"Email Not Found"] );
             exit;
         }
     }

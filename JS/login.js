@@ -48,7 +48,7 @@ function doLogin() {
     //* Variables for the http request to login with the login api
     let jsonPayLoad = JSON.stringify({
         email: email,
-        pass: password,
+        password: password,
     });
 
     console.log('JSON Package', jsonPayLoad)
@@ -63,13 +63,17 @@ function doLogin() {
 
     try {
         xhr.onreadystatechange = function () {
+
+            // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
+
+                console.log('Received', xhr.responseText)
 
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 console.log('JSON Received', jsonObject)
 
-                if ( !jsonObject.valid )
+                if ( jsonObject.valid == "valid")
                 {
                     sessionStorage['userEmail'] = 'email'
                     console.log( "Session Storage", sessionStorage )
@@ -77,16 +81,16 @@ function doLogin() {
                     document.getElementById('loginResult').innerText = "Successful Login"
 
                     window.location.href = "./HTML/homePage.html";
-
                 }
                 else
                 {
-                    document.getElementById('loginResult').innerText = "Failed To Login"
+                    document.getElementById('loginResult').innerText = jsonObject.valid
                 }
             }
         };
 
-        xhr.send(jsonPayLoad);
+        xhr.send(jsonPayLoad)
+
     } catch (err) {
         document.getElementById("loginResult").innerHTML = err.message;
     }
