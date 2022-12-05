@@ -4,7 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Constants.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../config/Config.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/dao/DBConnection.php');
 // $data = json_decode(file_get_contents("php://input"), true);
-$data = file_get_contents("php://input");
+$data = json_decode(file_get_contents("php://input"));
 error_log(print_r($data));
 
 error_log(print_r($_POST));
