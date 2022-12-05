@@ -50,6 +50,8 @@ if (isset($continue)) {
         );
         if ($stmt->execute()) {
             echo 'Insert questions success.';
+        } else {
+            echo json_encode(["valid" => "alr entered this record"]);
         }
     }
 
