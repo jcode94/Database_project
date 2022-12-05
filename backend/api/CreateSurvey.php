@@ -25,7 +25,7 @@ echo json_encode([$a, $t, $d, $s, $e, $nq]);
 exit;
 
 $stmt->bind_param(
-    "sssssi",
+    'sssssi',
     $a,
     $t,
     $d,
