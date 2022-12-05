@@ -33,7 +33,8 @@ $nq = $data["numOfQuestions"] ?? 0;
 
 $continue = $stmt->execute();
 
-$survey_id = $conn->query("SELECT `survey_id` FROM `surveys_metadata` ORDER BY `survey_id` DESC LIMIT 1");
+$rs = $conn->query("SELECT `survey_id` FROM `surveys_metadata` ORDER BY `survey_id` DESC LIMIT 1");
+$survey_id = $rs->fetch_row()[0];
 
 if (isset($continue)) {
     // INSERT INTO QUESTIONS (survey_id, number, type, statement)
