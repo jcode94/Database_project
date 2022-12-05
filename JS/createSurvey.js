@@ -306,11 +306,18 @@ function doCreateSurvey(jsonPayLoad)
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
-                console.log('Received From PHP:\n', xhr)
-
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 console.log('JSON Received', jsonObject)
+
+                if(jsonObject.valid == "valid")
+                {
+                    window.location.href = "./HTML/homePage.html"
+                }
+                else
+                {
+                    console.log("Error In Survey Create")
+                }
             }
         };
 
