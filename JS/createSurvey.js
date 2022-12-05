@@ -320,7 +320,8 @@ function doCreateSurvey(jsonPayLoad)
             console.log("xhr whole:\n", xhr)
         }
 
-        xhr.send(jsonPayLoad)
+        // xhr.send(jsonPayLoad)
+        xhr.send({"test":"test"})
 
     } catch (err) {
         document.getElementById("loginResult").innerHTML = err.message;
