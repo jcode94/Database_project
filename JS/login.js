@@ -48,7 +48,7 @@ function doLogin() {
     //* Variables for the http request to login with the login api
     let jsonPayLoad = JSON.stringify({
         email: email,
-        pass: password,
+        password: password,
     });
 
     console.log('JSON Package', jsonPayLoad)
