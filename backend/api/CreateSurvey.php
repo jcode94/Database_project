@@ -14,6 +14,9 @@ $stmt = $conn->prepare(
     file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_SURVEYS_METADATA.sql')
 );
 
+echo file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_SURVEYS_METADATA.sql');
+exit;
+
 $a = $data["author"];
 $t = $data["title"];
 $d = $data["description"];
