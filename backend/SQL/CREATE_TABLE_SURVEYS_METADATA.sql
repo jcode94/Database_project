@@ -8,4 +8,3 @@ CREATE TABLE `surveys_metadata` (
 	`number_of_questions` INT NOT NULL,
 	PRIMARY KEY (`survey_id`)
 ) ENGINE=InnoDB;
-SELECT IDENT_CURRENT(`surveys_metadata`);
