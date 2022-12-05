@@ -324,7 +324,7 @@ function doCreateSurvey(jsonPayLoad)
 
         // xhr.send(jsonPayLoad)
         let testJSON = JSON.stringify( {test:"test"} )
-        console.log("From Frontend:", testJSON)
+        console.log("From Frontend:", xhr)
         xhr.send( testJSON )
 
     } catch (err) {
