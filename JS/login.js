@@ -67,6 +67,8 @@ function doLogin() {
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
+                console.log('Received', xhr.responseText)
+
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 console.log('JSON Received', jsonObject)
@@ -87,7 +89,8 @@ function doLogin() {
             }
         };
 
-        xhr.send(jsonPayLoad);
+        xhr.send(jsonPayLoad)
+
     } catch (err) {
         document.getElementById("loginResult").innerHTML = err.message;
     }
