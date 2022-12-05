@@ -26,6 +26,7 @@ $stmt->bind_param(
 );
 
 echo json_encode("Here");
+exit;
 
 $stmt->execute();
 
