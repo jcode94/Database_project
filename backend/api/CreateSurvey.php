@@ -65,8 +65,8 @@ if (isset($continue)) {
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_PARTICIPANTS.sql')
         );
-        $stmt->bind_param("is", $survey_id, $value);
-        $email = $data['emails'][$key] ?? "";
+        $stmt->bind_param("is", $survey_id, $email);
+        $email = $value ?? "";
         if (!$stmt->execute()) {
             echo json_encode(["valid" => "invalid p"]);
             exit;
