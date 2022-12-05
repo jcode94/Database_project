@@ -299,7 +299,8 @@ function doCreateSurvey(jsonPayLoad)
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-    try {
+    try
+    {
         xhr.onreadystatechange = function () {
 
             // If server pinged and a response is sent back
