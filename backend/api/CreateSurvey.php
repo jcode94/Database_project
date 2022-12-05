@@ -21,6 +21,9 @@ $s = $data["startD"];
 $e = $data["endD"];
 $nq = $data["numOfQuestions"];
 
+echo json_encode($a, $t, $d, $s, $e, $nq);
+exit;
+
 $stmt->bind_param(
     "sssssi",
     $a,
@@ -30,13 +33,6 @@ $stmt->bind_param(
     $e,
     $nq
 );
-
-// $a = $data["author"];
-// $t = $data["title"];
-// $d = $data["description"];
-// $s = $data["startD"];
-// $e = $data["endD"];
-// $nq = $data["numOfQuestions"];
 
 $stmt->execute();
 $stmt->bind_result($survey_id);
