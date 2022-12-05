@@ -71,7 +71,7 @@ if (isset($continue)) {
             file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_RESPONSES.sql')
         );
         $order = $key + 1;
-        $stmt->bind_param("isis", $survey_id, $value, $order);
+        $stmt->bind_param("isis", $survey_id, $value, $order, NULL);
         if ($stmt->execute()) {
             echo 'Insert default responses success.';
         }
