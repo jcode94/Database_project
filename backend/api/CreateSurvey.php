@@ -1,4 +1,5 @@
 <?php
+echo json_encode(print_r($_REQUEST));
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'] . '/backend');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Constants.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../config/Config.class.php');
