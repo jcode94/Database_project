@@ -36,7 +36,7 @@ $t = $data["title"] ?? "";
 $d = $data["description"] ?? "";
 $s = $data["startD"] ?? "";
 $e = $data["endD"] ?? "";
-$nq = $data["numOfQuestions"] ?? "";
+$nq = $data["numOfQuestions"] ?? 0;
 
 // echo json_encode([$a, $t, $d, $s, $e, $nq]);
 // exit;
