@@ -45,9 +45,9 @@ if (isset($continue)) {
         $stmt->bind_param(
             "iiis",
             $survey_id,
-            $question['number'],
-            $question['type'],
-            $question['statement']
+            $order,
+            $type,
+            $statement
         );
 
         $order = $question['number'] ?? "";
