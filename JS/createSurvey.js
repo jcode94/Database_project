@@ -273,6 +273,10 @@ function createSurveyObject()
         
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
+        xhr.onerror = () => {
+            console.log("On Error")
+        }
+
         xhr.send(jsonPayLoad);
     }
    
