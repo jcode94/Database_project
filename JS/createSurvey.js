@@ -299,13 +299,14 @@ function doCreateSurvey(jsonPayLoad)
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-    try {
+    try
+    {
         xhr.onreadystatechange = function () {
 
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
-                console.log('Received From PHP:\n', xhr.responseText)
+                console.log('Received From PHP:\n', xhr)
 
                 let jsonObject = JSON.parse(xhr.responseText);
 
