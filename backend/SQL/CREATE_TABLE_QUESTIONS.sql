@@ -3,5 +3,5 @@ CREATE TABLE `questions` (
 	`order` INT NOT NULL,
 	`type` TINYINT NOT NULL,
 	`statement` TEXT(200) NOT NULL,
-	PRIMARY KEY (`survey_id`)
+	PRIMARY KEY (`survey_id`, `order`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
