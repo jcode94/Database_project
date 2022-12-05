@@ -32,8 +32,14 @@ $e = $data["endD"] ?? "";
 $nq = $data["numOfQuestions"] ?? 0;
 
 $stmt->execute();
+
+$query = "SELECT IDENT_CURRENT(`surveys_metadata`)";
+
+$stmt = $conn->prepare($query);
+
+$stmt->execute();
+
 $stmt->bind_result($survey_id);
-$stmt_fetch();
 
 if (isset($survey)) {
     // INSERT INTO QUESTIONS (survey_id, number, type, statement)
