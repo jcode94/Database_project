@@ -321,7 +321,7 @@ function doCreateSurvey(jsonPayLoad)
         }
 
         // xhr.send(jsonPayLoad)
-        xhr.send( JSON.stringify( {"test":"test"} ) )
+        xhr.send( JSON.stringify( {test:"test"} ) )
 
     } catch (err) {
         document.getElementById("loginResult").innerHTML = err.message;
