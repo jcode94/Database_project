@@ -75,7 +75,7 @@ function doLogin() {
 
                 if ( jsonObject.valid == "valid")
                 {
-                    sessionStorage['userEmail'] = 'email'
+                    sessionStorage['userEmail'] = email
                     console.log( "Session Storage", sessionStorage )
 
                     document.getElementById('loginResult').innerText = "Successful Login"

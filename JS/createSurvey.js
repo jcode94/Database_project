@@ -260,14 +260,14 @@ function createSurveyObject()
         let jsonPayLoad = JSON.stringify({
             author: sessionStorage['userEmail'],
             emails: jsonSurvey['emails'],
-            Title: jsonSurvey['title'],
-            desc:   jsonSurvey['desc'],
+            title: jsonSurvey['title'],
+            description:   jsonSurvey['desc'],
             startD: jsonSurvey['startD'], 
             endD:   jsonSurvey['endD'], 
             numOfQuestions: jsonSurvey['numOfQuestions'],
             questions: jsonSurvey['questions']
         });
-
+        console.log(jsonPayLoad);
         let xhr = new XMLHttpRequest();
         xhr.open(method, url, true);
         

@@ -20,6 +20,7 @@ $stmt->bind_param(
     $data['endD'],
     $data['numOfQuestions']
 );
+
 $stmt->execute();
 $stmt->bind_result($survey_id);
 $stmt_fetch();
