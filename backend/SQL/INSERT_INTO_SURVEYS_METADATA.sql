@@ -4,5 +4,7 @@ INSERT INTO `surveys_metadata`(
     `description`,
     `start_date`,
     `end_date`,
-    `number_of_questions`) VALUES (?,?,?,?,?,?);
+    `number_of_questions`)
+OUTPUT INSERTED.ID
+VALUES (?,?,?,?,?,?);
     
