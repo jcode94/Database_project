@@ -10,6 +10,7 @@ $conn = new DBConnection(new Config());
 $stmt = $conn->prepare(
     file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_SURVEYS_METADATA.sql')
 );
+error_log(print_r($data['author'], true));
 $stmt->bind_param(
     "sssssi",
     $data['author'],
@@ -57,7 +58,7 @@ if (isset($survey)) {
         );
         $order = $key + 1;
         $stmt->bind_param("isis", $survey_id, $value, $order);
-        if($stmt->execute()) {
+        if ($stmt->execute()) {
             echo 'Insert default responses success.';
         }
     }

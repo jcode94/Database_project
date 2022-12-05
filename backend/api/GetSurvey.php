@@ -1,4 +1,6 @@
 <?php
+require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/dao/DBConnection.php');
+$conn = new DBConnection(new Config());
 
 $data = json_decode(file_get_contents("php://input"), true);
 
@@ -36,7 +38,10 @@ function getQuestions($conn, $data)
         $rs = $stmt->get_result();
         $questions = array();
         while ($row = $rs->fetch_assoc()) {
-            $questions[] = new Question($row['order'], $row['type'], $row['statement']);
+            array_push(
+                $questions,
+                new Question($row['order'], $row['type'], $row['statement'])
+            );
         }
     }
     return $questions;
@@ -55,8 +60,12 @@ function getResponses($conn, $data)
         $stmt->execute();
         $rs = $stmt->get_result();
         $responses = array();
-        $row = $rs->fetch_assoc();
-        $responses[] = new Answer($row['order'], $row['value']);
+        while ($row = $rs->fetch_assoc()) {
+            array_push(
+                $responses,
+                new Answer($row['order'], $row['value'])
+            );
+        }
     }
     return $responses;
 }
