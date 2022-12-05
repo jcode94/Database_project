@@ -74,3 +74,4 @@ if (isset($survey)) {
     echo 'Unable to save survey T-T';
     exit;
 }
+?>
