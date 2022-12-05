@@ -31,11 +31,11 @@ $s = $data["startD"] ?? "";
 $e = $data["endD"] ?? "";
 $nq = $data["numOfQuestions"] ?? 0;
 
-$stmt->execute();
+$continue = $stmt->execute();
 
 $survey_id = $conn->query("SELECT `survey_id` FROM `surveys_metadata` ORDER BY `survey_id` DESC LIMIT 1");
 
-if (isset($survey)) {
+if (isset($continue)) {
     // INSERT INTO QUESTIONS (survey_id, number, type, statement)
     foreach ($data['questions'] as $index => $question) {
         $stmt = $conn->prepare(
@@ -76,6 +76,6 @@ if (isset($survey)) {
     echo 'Creation Success!';
     exit;
 } else {
-    echo 'Unable to save survey T-T';
+    echo json_encode(["valid" => "valid"]);
     exit;
 }
