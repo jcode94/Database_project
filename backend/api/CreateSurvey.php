@@ -1,10 +1,10 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-echo json_encode($_POST);
+$data = json_decode(file_get_contents("php://input"), true);
+echo json_encode($data);
 exit;
 
-$data = json_decode(file_get_contents("php://input"), true);
 foreach ($_POST as $key => $value)
     echo "Key: $key Val: $value";
 echo json_encode($_GET);
