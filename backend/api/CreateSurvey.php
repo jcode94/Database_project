@@ -35,8 +35,6 @@ $continue = $stmt->execute();
 
 $survey_id = $conn->query("SELECT `survey_id` FROM `surveys_metadata` ORDER BY `survey_id` DESC LIMIT 1");
 
-echo $survey_id;
-
 if (isset($continue)) {
     // INSERT INTO QUESTIONS (survey_id, number, type, statement)
     foreach ($data['questions'] as $index => $question) {
