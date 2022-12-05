@@ -291,7 +291,7 @@ function doCreateSurvey(jsonPayLoad)
     let urlBase = "http://157.245.93.19/backend/api";
     let extension = ".php";
 
-    let url = urlBase + "/CreateSurvey" + extension;
+    let url = urlBase + "/Login" + extension;
     let method = "POST";
 
     //* Opening the connection to the login api file with the login & password typed in
@@ -305,7 +305,7 @@ function doCreateSurvey(jsonPayLoad)
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
-                console.log('Received', xhr.responseText)
+                console.log('Received\n', xhr.responseText)
 
                 let jsonObject = JSON.parse(xhr.responseText);
 
