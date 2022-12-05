@@ -32,6 +32,9 @@ $s = $data["startD"];
 $e = $data["endD"];
 $nq = $data["numOfQuestions"];
 
+echo json_encode([$a,$t,$d,$s,$e,$nq]);
+exit;
+
 $stmt->execute();
 $stmt->bind_result($survey_id);
 $stmt_fetch();
