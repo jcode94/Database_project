@@ -5,7 +5,7 @@ function doRegister()
         console.log("Register Button Clicked")
 
         window.location.href = "./HTML/homePage.html";
-        return
+        
 
         urlBase = 'http://157.245.93.191';
         extension = '.php';
@@ -20,8 +20,10 @@ function doRegister()
                 email:this.email,
                 password:this.password
             });
+            // logging the payload being sent 
+            console.log("Stringify sent: " + jsonPayLoad);
 
-        let url = this.urlBase + "/login" + this.extension;
+        let url = this.urlBase + "/Register" + this.extension;
         let method = "POST";
 
         //* Opening the connection to the login api file with the login & password typed in
@@ -57,4 +59,5 @@ function doRegister()
         {
             document.getElementById("loginResult").innerHTML = err.message;
         }
+        return
     }
