@@ -44,7 +44,7 @@ if (isset($continue)) {
         $stmt->bind_param(
             "iiis",
             $survey_id,
-            $index,
+            $question['number'],
             $question['type'],
             $question['statement']
         );
