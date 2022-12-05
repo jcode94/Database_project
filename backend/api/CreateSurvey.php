@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-echo 'hello world';
+echo json_encode('hello world');
 exit;
 
 $data = json_decode(file_get_contents("php://input"), true);
