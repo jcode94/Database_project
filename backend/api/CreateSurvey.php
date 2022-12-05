@@ -14,15 +14,12 @@ $stmt = $conn->prepare(
     file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_SURVEYS_METADATA.sql')
 );
 
-$a = $data["author"];
-$t = $data["title"];
-$d = $data["description"];
-$s = $data["startD"];
-$e = $data["endD"];
-$nq = $data["numOfQuestions"];
-
-// echo json_encode([$a, $t, $d, $s, $e, $nq]);
-// exit;
+// $a = $data["author"];
+// $t = $data["title"];
+// $d = $data["description"];
+// $s = $data["startD"];
+// $e = $data["endD"];
+// $nq = $data["numOfQuestions"];
 
 $stmt->bind_param(
     'sssssi', $a,$t,$d,$s,$e,$nq
