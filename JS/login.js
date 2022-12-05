@@ -63,13 +63,15 @@ function doLogin() {
 
     try {
         xhr.onreadystatechange = function () {
+
+            // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 console.log('JSON Received', jsonObject)
 
-                if ( !jsonObject.valid )
+                if ( jsonObject.valid == "valid")
                 {
                     sessionStorage['userEmail'] = 'email'
                     console.log( "Session Storage", sessionStorage )
@@ -77,11 +79,10 @@ function doLogin() {
                     document.getElementById('loginResult').innerText = "Successful Login"
 
                     window.location.href = "./HTML/homePage.html";
-
                 }
                 else
                 {
-                    document.getElementById('loginResult').innerText = "Failed To Login"
+                    document.getElementById('loginResult').innerText = jsonObject.valid
                 }
             }
         };
