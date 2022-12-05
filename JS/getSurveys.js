@@ -1,42 +1,40 @@
 
 
-function getSurveys()
+function getSurveys(authored, participant)
 {
     console.log( "Session Storage", sessionStorage )
 
-    let serverResponse = getSurveysAPICall()
-
     let jsonSurveys = {
-        ...serverResponse.authored,
-        ...serverResponse.participant
+        ...authored,
+        ...participant
     }
 
     console.log(jsonSurveys)
 
     let surveyList = document.getElementById('surveyList')
 
-    // let jsonSurveys = {
-    //     0:{
-    //         surveyName:"Zero",
-    //         numberOfQuestions:10,
-    //         completionStatus:"Pending"
-    //     },
-    //     1:{
-    //         surveyName:"One",
-    //         numberOfQuestions:25,
-    //         completionStatus:"Completed"
-    //     },
-    //     2:{
-    //         surveyName:"Two",
-    //         numberOfQuestions:16,
-    //         completionStatus:"In-Progress"
-    //     },
-    //     3:{
-    //         surveyName:"Three",
-    //         numberOfQuestions:30,
-    //         completionStatus:"Pending"
-    //     }
-    // }
+    jsonSurveys = {
+        0:{
+            surveyName:"Zero",
+            numberOfQuestions:10,
+            completionStatus:"Pending"
+        },
+        1:{
+            surveyName:"One",
+            numberOfQuestions:25,
+            completionStatus:"Completed"
+        },
+        2:{
+            surveyName:"Two",
+            numberOfQuestions:16,
+            completionStatus:"In-Progress"
+        },
+        3:{
+            surveyName:"Three",
+            numberOfQuestions:30,
+            completionStatus:"Pending"
+        }
+    }
 
     let surveyIds=[]
     let surveyNames=[]
@@ -67,9 +65,7 @@ function getSurveys()
             '\t<div class="row"><p>Questions: ' + surveyQuestionNumbers[idx] + '</p></div>\n'+
             '\t<div class="row"><p>' + surveyStatuses[idx] + '</p></div>\n'+
         '</div>\n'
-    }
-    console.log(surveyList)
-    
+    }    
 }
 
 function getSurveysAPICall() {
@@ -110,47 +106,58 @@ function getSurveysAPICall() {
 
     try
     {
-        xhr.onreadystatechange = function () {
+        xhr.onload = () => 
+        {
+            xhr.onreadystatechange = function () {
 
-            // If server pinged and a response is sent back
-            if (this.readyState == 4 && this.status == 200) {
+                // If server pinged and a response is sent back
+                if (this.readyState == 4 && this.status == 200) {
 
-                let jsonObject = JSON.parse(xhr.responseText);
+                    let jsonObject = JSON.parse(xhr.responseText);
 
-                console.log('JSON Received', jsonObject)
+                    console.log('JSON Received', jsonObject)
 
-                let authored = []
-                let participant = []
+                    let authored = []
+                    let participant = []
 
-                try
-                {
-                    authored = jsonObject.authored
-                    participant = jsonObject.participant
-
-                    return {'authored':authored, 'participant':participant}
-                }
-                catch
-                {
-                    let ret = [
+                    try
                     {
-                        surveyName : "Failed to fetch surveys",
-                        surveyQuestionNumbers : "",
-                        surveyStatus : "Error"
-                    }]
+                        getSurveys( jsonObject.authored, jsonObject.participant )
+                    }
+                    catch
+                    {
+                        let ret = [
+                        {
+                            surveyName : "Failed to fetch surveys",
+                            surveyQuestionNumbers : "",
+                            surveyStatus : "Error"
+                        }]
 
-                    return {'authored':ret, 'participant':ret}
+                        getSurveys( ret, ret )
+                    }
                 }
-            }
-        };
+            };
+        }
+
+        xhr.onerror = () =>
+        {
+            console.log('XHR On Error')
+            error = true
+            let ret = [
+            {
+                surveyName : "Failed to fetch surveys",
+                surveyQuestionNumbers : "",
+                surveyStatus : "Error"
+            }]
+
+            getSurveys( ret, ret )
+        }
 
         xhr.send(jsonPayLoad)
-
-        xhr.onerror()
     }
-    catch
+    catch (err)
     {
-        console.log('Catch')
-
+        console.log("Unknown Error", err)
         let ret = [
         {
             surveyName : "Failed to fetch surveys",
@@ -158,6 +165,6 @@ function getSurveysAPICall() {
             surveyStatus : "Error"
         }]
 
-        return {'authored':ret, 'participant':ret}
+        getSurveys( ret, ret )
     }
 }
