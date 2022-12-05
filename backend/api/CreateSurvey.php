@@ -2,8 +2,6 @@
 header('Content-Type: application/json; charset=utf-8');
 
 $data = json_decode(file_get_contents("php://input"), true);
-// echo json_encode($data);
-// exit;
 
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'] . '/backend');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Constants.php');
@@ -18,13 +16,20 @@ $stmt = $conn->prepare(
 
 $stmt->bind_param(
     "sssssi",
-    $data["author"],
-    $data["title"],
-    $data["description"],
-    $data["startD"],
-    $data["endD"],
-    $data["numOfQuestions"]
+    $a,
+    $t,
+    $d,
+    $s,
+    $e,
+    $nq
 );
+
+$a = $data["author"];
+$t = $data["title"];
+$d = $data["description"];
+$s = $data["startD"];
+$e = $data["endD"];
+$nq = $data["numOfQuestions"];
 
 $stmt->execute();
 $stmt->bind_result($survey_id);
