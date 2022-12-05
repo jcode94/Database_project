@@ -226,12 +226,6 @@ function createSurveyObject()
     }
     else
     {
-        // /* Send Survey Packet To API */
-        // let url = urlBase + "/CreateSurvey" + extension;
-        // let method = 'POST';
-
-       
-     
         // setting up the jsonSurvey
         jsonSurvey['title'] = surveyName
         jsonSurvey['desc'] = surveyDesc
@@ -239,9 +233,6 @@ function createSurveyObject()
         jsonSurvey['emails'] = jsonEmails
         jsonSurvey['startD'] = startD
         jsonSurvey['endD'] = endD
-
-      
-
 
         for( let i = 0; i < questions.length; i++)
         {
@@ -269,18 +260,6 @@ function createSurveyObject()
         });
 
         doCreateSurvey(jsonPayLoad)
-
-        // console.log(jsonPayLoad);
-        // let xhr = new XMLHttpRequest();
-        // xhr.open(method, url, true);
-        
-        // xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-        // xhr.onerror = () => {
-        //     console.log("On Error")
-        // }
-
-        // xhr.send(jsonPayLoad);
     }
 }
 
