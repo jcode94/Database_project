@@ -322,11 +322,11 @@ function doCreateSurvey(jsonPayLoad)
             console.log("xhr whole:\n", xhr)
         }
 
-        // xhr.send(jsonPayLoad)
-        let testJSON = JSON.stringify( {test:"test"} )
-        console.log("Sent Item", testJSON)
-        console.log("From Frontend:", xhr)
-        xhr.send( JSON.stringify( {test:"test"} ) )
+        xhr.send(jsonPayLoad)
+        // let testJSON = JSON.stringify( {test:"test"} )
+        // console.log("Sent Item", testJSON)
+        // console.log("From Frontend:", xhr)
+        // xhr.send( testJSON )
 
     } catch (err) {
         document.getElementById("loginResult").innerHTML = err.message;
