@@ -2,13 +2,9 @@
 header('Content-Type: application/json; charset=utf-8');
 
 $data = json_decode(file_get_contents("php://input"), true);
-echo json_encode($data);
-exit;
+// echo json_encode($data);
+// exit;
 
-foreach ($_POST as $key => $value)
-    echo "Key: $key Val: $value";
-echo json_encode($_GET);
-echo json_encode($_POST);
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'] . '/backend');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Constants.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../config/Config.class.php');
