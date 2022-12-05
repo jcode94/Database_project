@@ -21,7 +21,7 @@ $s = $data["startD"];
 $e = $data["endD"];
 $nq = $data["numOfQuestions"];
 
-echo json_encode($a, $t, $d, $s, $e, $nq);
+echo json_encode([$a, $t, $d, $s, $e, $nq]);
 exit;
 
 $stmt->bind_param(
