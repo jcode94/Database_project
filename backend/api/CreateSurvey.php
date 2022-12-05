@@ -13,6 +13,14 @@ $conn = new DBConnection(new Config());
 $stmt = $conn->prepare(
     file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_SURVEYS_METADATA.sql')
 );
+
+$a = $data["author"];
+$t = $data["title"];
+$d = $data["description"];
+$s = $data["startD"];
+$e = $data["endD"];
+$nq = $data["numOfQuestions"];
+
 $stmt->bind_param(
     "sssssi",
     $a,
@@ -23,12 +31,12 @@ $stmt->bind_param(
     $nq
 );
 
-$a = $data["author"];
-$t = $data["title"];
-$d = $data["description"];
-$s = $data["startD"];
-$e = $data["endD"];
-$nq = $data["numOfQuestions"];
+// $a = $data["author"];
+// $t = $data["title"];
+// $d = $data["description"];
+// $s = $data["startD"];
+// $e = $data["endD"];
+// $nq = $data["numOfQuestions"];
 
 $stmt->execute();
 $stmt->bind_result($survey_id);
