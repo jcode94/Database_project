@@ -3,17 +3,33 @@
 function generateSurvey()
 {
     console.log("generateSurvey")
+        /* Retrive the data from db  */
+        let urlBase = "http://157.245.93.19/backend/api";
+        let extension = ".php";
+        let url = urlBase + "/GetSurvey" + extension;
+        let method = 'POST';
+        let xhr = new XMLHttpRequest();
+        
+        xhr.open(method, url, true);
+        
+        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        let jsonObject = JSON.parse(xhr.responseText);
+
+        console.log('JSON Received', jsonObject)
+        //
 
     let survey =
     {
-        title:jsonSurvey[title],
-        desc:jsonSurvey[desc],
-        startD:jsonSurvey[startD],
-        endD:jsonSurvey[endD],
-        numQuestions:jsonSurvey[numQuestions]
+        title:jsonSurvey['title'],
+        desc:jsonSurvey['desc'],
+        startD:jsonSurvey['startD'],
+        endD:jsonSurvey['endD'],
+        numQuestions:jsonSurvey['numQuestions'],
+        questions:jsonSurvey['questions'],
     }
     console.log(survey);
     let questions = [
+       /* Testing keeping just incase
         {
             number:1,
             type:2,
@@ -28,13 +44,17 @@ function generateSurvey()
             number:3,
             type:2,
             statement:"List Your Favorite Foods"
-        }
+        }*/
     ]
-
+    for(let i =0; i < survey[5]; i++)
+    {
+        //Stores our question data in our questions array
+        questions[i] = questions
+    }
     let responses = [
         {
             number:1,
-            value:'Strawberries'
+            value:''
         },
         {
             number:2,

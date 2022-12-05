@@ -55,8 +55,9 @@ if (isset($survey)) {
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_RESPONSES.sql')
         );
-        $stmt->bind_param("isis", $survey_id, $value, $key + 1);
-        if ($stmt->execute()) {
+        $order = $key + 1;
+        $stmt->bind_param("isis", $survey_id, $value, $order);
+        if($stmt->execute()) {
             echo 'Insert default responses success.';
         }
     }
