@@ -49,6 +49,11 @@ if (isset($continue)) {
             $question['type'],
             $question['statement']
         );
+
+        $order = $question['number'] ?? "";
+        $type = $question['type'] ?? "";
+        $statement = $question['statement'] ?? "";
+
         if (!$stmt->execute()) {
             echo json_encode(["valid" => "invalid q"]);
             exit;
