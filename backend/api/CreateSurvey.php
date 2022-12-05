@@ -5,7 +5,7 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/../config/Config.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/dao/DBConnection.php');
 
 $data = json_decode(file_get_contents("php://input"), true);
-error_log(print_r($data));
+return print_r($data);
 
 // insert survey into table surveys_metadata, get back its ID
 $conn = new DBConnection(new Config());
