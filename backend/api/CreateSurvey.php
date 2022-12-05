@@ -25,8 +25,15 @@ $nq = $data["numOfQuestions"];
 // exit;
 
 $stmt->bind_param(
-    'sssssi', [$a,$t,$d,$s,$e,$nq]
+    'sssssi', $a,$t,$d,$s,$e,$nq
 );
+
+$a = $data["author"];
+$t = $data["title"];
+$d = $data["description"];
+$s = $data["startD"];
+$e = $data["endD"];
+$nq = $data["numOfQuestions"];
 
 $stmt->execute();
 $stmt->bind_result($survey_id);
