@@ -49,10 +49,9 @@ if (isset($continue)) {
             $question['type'],
             $question['statement']
         );
-        if ($stmt->execute()) {
-            echo 'Insert questions success.';
-        } else {
-            echo json_encode(["valid" => "alr entered this record"]);
+        if (!$stmt->execute()) {
+            echo json_encode(["valid" => "invalid q"]);
+            exit;
         }
     }
 
@@ -62,8 +61,9 @@ if (isset($continue)) {
             file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_PARTICIPANTS.sql')
         );
         $stmt->bind_param("is", $survey_id, $value);
-        if ($stmt->execute()) {
-            echo 'Insert participants success.';
+        if (!$stmt->execute()) {
+            echo json_encode(["valid" => "invalid p"]);
+            exit;
         }
 
         // SET UP DEFAULT RESPONSES(save state)
@@ -73,13 +73,14 @@ if (isset($continue)) {
         $order = $key + 1;
         $response = "";
         $stmt->bind_param("isis", $survey_id, $value, $order, $response);
-        if ($stmt->execute()) {
-            echo 'Insert default responses success.';
+        if (!$stmt->execute()) {
+            echo json_encode(["valid" => "invalid r"]);
+            exit;
         }
     }
-    echo 'Creation Success!';
+    echo json_encode(["valid" => "valid"]);
     exit;
 } else {
-    echo json_encode(["valid" => "valid"]);
+    echo json_encode(["valid" => "invalid sm"]);
     exit;
 }
