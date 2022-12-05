@@ -25,10 +25,13 @@ $stmt->bind_param(
     $data["numOfQuestions"]
 );
 
-echo json_encode($stmt);
-exit;
+echo json_encode("Here");
 
 $stmt->execute();
+
+echo json_encode("Here");
+exit;
+
 $stmt->bind_result($survey_id);
 $stmt_fetch();
 
