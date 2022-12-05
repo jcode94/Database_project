@@ -13,7 +13,6 @@ $conn = new DBConnection(new Config());
 $stmt = $conn->prepare(
     file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_SURVEYS_METADATA.sql')
 );
-
 $stmt->bind_param(
     "sssssi",
     $a,
@@ -32,6 +31,10 @@ $e = $data["endD"];
 $nq = $data["numOfQuestions"];
 
 $stmt->execute();
+
+echo json_encode("Here");
+exit;
+
 $stmt->bind_result($survey_id);
 $stmt_fetch();
 
