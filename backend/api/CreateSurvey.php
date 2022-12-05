@@ -22,17 +22,23 @@ $stmt = $conn->prepare(
 // $nq = $data["numOfQuestions"];
 
 $stmt->bind_param(
-    'sssssi', $a,$t,$d,$s,$e,$nq
+    'sssssi',
+    $a,
+    $t,
+    $d,
+    $s,
+    $e,
+    $nq
 );
 
-$a = $data["author"];
-$t = $data["title"];
-$d = $data["description"];
-$s = $data["startD"];
-$e = $data["endD"];
-$nq = $data["numOfQuestions"];
+$a = $data["author"] ?? "";
+$t = $data["title"] ?? "";
+$d = $data["description"] ?? "";
+$s = $data["startD"] ?? "";
+$e = $data["endD"] ?? "";
+$nq = $data["numOfQuestions"] ?? "";
 
-echo json_encode([$a,$t,$d,$s,$e,$nq]);
+echo json_encode([$a, $t, $d, $s, $e, $nq]);
 exit;
 
 $stmt->execute();
