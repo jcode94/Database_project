@@ -259,12 +259,14 @@ function createSurveyObject()
             questions: jsonSurvey['questions']
         });
 
-        doCreateSurvey(jsonPayLoad)
+        return jsonPayLoad
     }
 }
 
-function doCreateSurvey(jsonPayLoad)
+function doCreateSurvey()
 {
+    let jsonPayLoad = createSurveyObject()
+    
     console.log('JSON Stringify', jsonPayLoad)
 
     let urlBase = "http://157.245.93.19/backend/api";
