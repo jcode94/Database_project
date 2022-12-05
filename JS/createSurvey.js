@@ -303,6 +303,8 @@ function doCreateSurvey(jsonPayLoad)
     {
         xhr.onreadystatechange = function () {
 
+            console.log("onreadystatechange")
+
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
