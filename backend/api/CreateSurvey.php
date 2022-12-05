@@ -2,8 +2,8 @@
 header('Content-Type: application/json; charset=utf-8');
 
 $data = json_decode(file_get_contents("php://input"), true);
-echo json_encode($data["author"]);
-exit;
+// echo json_encode($data["author"]);
+// exit;
 
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'] . '/backend');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Constants.php');
@@ -15,6 +15,9 @@ $conn = new DBConnection(new Config());
 $stmt = $conn->prepare(
     file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_SURVEYS_METADATA.sql')
 );
+
+echo $stmt;
+exit;
 
 $stmt->bind_param(
     "sssssi",
