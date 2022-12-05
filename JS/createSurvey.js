@@ -291,7 +291,7 @@ function doCreateSurvey(jsonPayLoad)
     let urlBase = "http://157.245.93.19/backend/api";
     let extension = ".php";
 
-    let url = urlBase + "/Login" + extension;
+    let url = urlBase + "/CreateSurvey" + extension;
     let method = "POST";
 
     //* Opening the connection to the login api file with the login & password typed in
@@ -312,6 +312,12 @@ function doCreateSurvey(jsonPayLoad)
                 console.log('JSON Received', jsonObject)
             }
         };
+
+        xhr.onerror = (err) => {
+            console.log("Error?\n", err)
+            console.log("xhr.responseText\n", xhr.responseText)
+            console.log("xhr whole:\n", xhr)
+        }
 
         xhr.send(jsonPayLoad)
 
