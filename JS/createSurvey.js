@@ -305,7 +305,7 @@ function doCreateSurvey(jsonPayLoad)
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
-                console.log('Received\n', xhr.responseText)
+                console.log('Received From PHP:\n', xhr.responseText)
 
                 let jsonObject = JSON.parse(xhr.responseText);
 
