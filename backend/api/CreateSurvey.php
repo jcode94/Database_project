@@ -33,7 +33,7 @@ $nq = $data["numOfQuestions"] ?? 0;
 
 $stmt->execute();
 
-$query = "SELECT IDENT_CURRENT(`surveys_metadata`)";
+$query = "SELECT IDENT_CURRENT(`survey_project_db.surveys_metadata`)";
 
 $stmt = $conn->prepare($query);
 
