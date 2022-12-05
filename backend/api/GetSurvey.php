@@ -7,7 +7,8 @@ $participant_email = $data['email'];
 
 
 // Create composite return from the results sets of the following:
-function getMetaData($conn, $data) {
+function getMetaData($conn, $data)
+{
     if ($stmt = $conn->prepare(
         "SELECT `title`, `description`, `start_date`, `end_date`
         FROM `surveys_metadata` 
@@ -23,7 +24,8 @@ function getMetaData($conn, $data) {
 
 $metadata = getMetaData($conn, $data);
 
-function getQuestions($conn, $data) {
+function getQuestions($conn, $data)
+{
     if ($stmt = $conn->prepare(
         "SELECT *
         FROM `questions` 
@@ -42,7 +44,8 @@ function getQuestions($conn, $data) {
 
 $questions = getQuestions($conn, $data);
 
-function getResponses($conn, $data) {
+function getResponses($conn, $data)
+{
     if ($stmt = $conn->prepare(
         "SELECT `order`, `value`
         FROM `responses` 
