@@ -1,6 +1,8 @@
 <?php
 define('__BACKEND_ROOT__',$_SERVER['DOCUMENT_ROOT'].'/backend');
-
+require_once($_SERVER['DOCUMENT_ROOT'].'/backend/models/Constants.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/../config/Config.class.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/backend/dao/DBConnection.php');
 $data = json_decode(file_get_contents("php://input"), true);
 
 // insert survey into table surveys_metadata, get back its ID
@@ -61,4 +63,3 @@ if (isset($survey)) {
     echo 'Unable to save survey T-T';
     exit;
 }
-?>
