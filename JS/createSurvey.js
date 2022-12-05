@@ -303,8 +303,6 @@ function doCreateSurvey(jsonPayLoad)
     {
         xhr.onreadystatechange = function () {
 
-            console.log("onreadystatechange", xhr)
-
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
@@ -323,10 +321,6 @@ function doCreateSurvey(jsonPayLoad)
         }
 
         xhr.send(jsonPayLoad)
-        // let testJSON = JSON.stringify( {test:"test"} )
-        // console.log("Sent Item", testJSON)
-        // console.log("From Frontend:", xhr)
-        // xhr.send( testJSON )
 
     } catch (err) {
         document.getElementById("loginResult").innerHTML = err.message;
