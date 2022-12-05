@@ -8,8 +8,8 @@ $conn = new DBConnection(new Config());
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-$survey_id = $data['survey_id'];
-$participant_email = $data['email'];
+$survey_id = $data['survey_id'] ?? "";
+$participant_email = $data['email'] ?? "";
 
 
 // Create composite return from the results sets of the following:
