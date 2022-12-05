@@ -1,2 +1,2 @@
-INSERT INTO `participants`(`survey_id`, `email`, `status`) VALUES (?,?,?);
+INSERT INTO `participants`(`survey_id`, `email`) VALUES (?,?);
     
