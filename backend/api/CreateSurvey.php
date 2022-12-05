@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
 echo json_encode(print_r($_GET));
 echo json_encode(print_r($_POST));
 echo json_encode(print_r($_COOKIE));
