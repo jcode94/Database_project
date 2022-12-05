@@ -4,8 +4,8 @@ function createSurveyObject()
 {
     console.log("Create Survey")
 
-    let urlBase = "http://157.245.93.19/backend/api";
-    let extension = ".php";
+    // let urlBase = "http://157.245.93.19/backend/api";
+    // let extension = ".php";
 
     let flag = false
 
@@ -226,9 +226,9 @@ function createSurveyObject()
     }
     else
     {
-        /* Send Survey Packet To API */
-        let url = urlBase + "/CreateSurvey" + extension;
-        let method = 'POST';
+        // /* Send Survey Packet To API */
+        // let url = urlBase + "/CreateSurvey" + extension;
+        // let method = 'POST';
 
        
      
@@ -267,21 +267,55 @@ function createSurveyObject()
             numOfQuestions: jsonSurvey['numOfQuestions'],
             questions: jsonSurvey['questions']
         });
-        console.log(jsonPayLoad);
-        let xhr = new XMLHttpRequest();
-        xhr.open(method, url, true);
+
+        doCreateSurvey(jsonPayLoad)
+
+        // console.log(jsonPayLoad);
+        // let xhr = new XMLHttpRequest();
+        // xhr.open(method, url, true);
         
-        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        // xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
-        xhr.onerror = () => {
-            console.log("On Error")
-        }
+        // xhr.onerror = () => {
+        //     console.log("On Error")
+        // }
 
-        xhr.send(jsonPayLoad);
+        // xhr.send(jsonPayLoad);
     }
-   
-    // If no flag was triggered return jsonSurvey
-    console.log(jsonSurvey)
-    
-    return jsonSurvey
+}
+
+function doCreateSurvey(jsonPayLoad)
+{
+    console.log('JSON Stringify', jsonPayLoad)
+
+    let urlBase = "http://157.245.93.19/backend/api";
+    let extension = ".php";
+
+    let url = urlBase + "/CreateSurvey" + extension;
+    let method = "POST";
+
+    //* Opening the connection to the login api file with the login & password typed in
+    let xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try {
+        xhr.onreadystatechange = function () {
+
+            // If server pinged and a response is sent back
+            if (this.readyState == 4 && this.status == 200) {
+
+                console.log('Received', xhr.responseText)
+
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                console.log('JSON Received', jsonObject)
+            }
+        };
+
+        xhr.send(jsonPayLoad)
+
+    } catch (err) {
+        document.getElementById("loginResult").innerHTML = err.message;
+    }
 }
