@@ -38,7 +38,7 @@ $survey_id = $rs->fetch_row()[0];
 
 if (isset($continue)) {
     // INSERT INTO QUESTIONS (survey_id, number, type, statement)
-    foreach ($data['questions'] as $index => $question) {
+    foreach (array($data['questions']) as $index => $question) {
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_QUESTIONS.sql')
         );
@@ -55,7 +55,7 @@ if (isset($continue)) {
         }
     }
 
-    foreach ($data['emails'] as $key => $value) {
+    foreach (array($data['emails']) as $key => $value) {
         // INSERT INTO PARTICIPANTS (survey_id, email, status)
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_PARTICIPANTS.sql')
