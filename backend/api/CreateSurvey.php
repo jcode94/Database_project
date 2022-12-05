@@ -1,10 +1,11 @@
 <?php
-return file_get_contents("php://input");
+error_log($_SERVER);
+error_log($_POST);
+error_log($_FILES);
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'] . '/backend');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Constants.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../config/Config.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/dao/DBConnection.php');
-
 
 $data = json_decode(file_get_contents("php://input"), true);
 
