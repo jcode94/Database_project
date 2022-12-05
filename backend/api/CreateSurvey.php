@@ -18,12 +18,12 @@ $stmt = $conn->prepare(
 
 $stmt->bind_param(
     "sssssi",
-    $data->author,
-    $data->title,
-    $data->description,
-    $data->startD,
-    $data->endD,
-    $data->numOfQuestions
+    $data["author"],
+    $data["title"],
+    $data["description"],
+    $data["startD"],
+    $data["endD"],
+    $data["numOfQuestions"]
 );
 
 $stmt->execute();
