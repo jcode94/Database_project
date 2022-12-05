@@ -25,13 +25,7 @@ $nq = $data["numOfQuestions"];
 // exit;
 
 $stmt->bind_param(
-    'sssssi',
-    $a,
-    $t,
-    $d,
-    $s,
-    $e,
-    $nq
+    'sssssi', [$a,$t,$d,$s,$e,$nq]
 );
 
 $stmt->execute();
