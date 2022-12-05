@@ -9,14 +9,13 @@ function generateSurvey()
         let url = urlBase + "/GetSurvey" + extension;
         let method = 'POST';
         let xhr = new XMLHttpRequest();
-        /*
+        
         xhr.open(method, url, true);
         
         xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+        let jsonObject = JSON.parse(xhr.responseText);
 
-        xhr.send();*/
-        //store the data we retrieve in jsonSurvey 
-        let jsonSurvey = fetch(url);
+        console.log('JSON Received', jsonObject)
         //
 
     let survey =
