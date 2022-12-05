@@ -1,8 +1,11 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
+foreach ($_GET as $key => $value)
+    echo "Key: $key Val;: $value";
+foreach ($_POST as $key => $value)
+    echo "Key: $key Val;: $value";
 echo json_encode($_GET);
 echo json_encode($_POST);
-echo json_encode($_COOKIE);
 exit;
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'] . '/backend');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Constants.php');
