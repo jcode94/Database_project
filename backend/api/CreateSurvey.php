@@ -10,15 +10,15 @@ $conn = new DBConnection(new Config());
 $stmt = $conn->prepare(
     file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_SURVEYS_METADATA.sql')
 );
-error_log(print_r($data['author'], true));
+
 $stmt->bind_param(
     "sssssi",
-    $data['author'],
-    $data['title'],
-    $data['description'],
-    $data['startD'],
-    $data['endD'],
-    $data['numOfQuestions']
+    $data->author,
+    $data->title,
+    $data->description,
+    $data->startD,
+    $data->endD,
+    $data->numOfQuestions
 );
 
 $stmt->execute();
