@@ -40,7 +40,7 @@ function createReportHTML(jsonReport)
         if( jsonReport.questions[i].type == 1 )
         {
             surveyQuestionsArea.innerHTML = surveyQuestionsArea.innerHTML +
-            '<div class="row space">' +
+            '<div class="row space freeResponse">' +
 
                 '<div id="" class="col space bd">' +
                     '<div id="questionLeft' + i + '" class="row box questionInner' + i + ' bd">' +
@@ -94,9 +94,8 @@ function createReportHTML(jsonReport)
         }
         else if( jsonReport.questions[i].type == 2 )
         {
-
             surveyQuestionsArea.innerHTML = surveyQuestionsArea.innerHTML +
-                '<div class="row space bd">' +
+                '<div class="row space bd scaleResponse">' +
                     '<div id="scaleCol' + i + '" class="col">' +
 
                         '<div class="row rating">' +
