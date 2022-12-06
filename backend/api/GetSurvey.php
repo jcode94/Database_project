@@ -2,6 +2,7 @@
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'] . '/backend');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Constants.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Question.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Answer.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../config/Config.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/dao/DBConnection.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Survey.php');
