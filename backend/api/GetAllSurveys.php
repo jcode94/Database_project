@@ -51,7 +51,6 @@ $authored = getAuthoredSurveyMetadata($conn, $data) ?? array();
 // Get all surveys for which email is participant
 function getParticipantSurveyMetadata($conn, $data)
 {
-    $metadata = array();
     if ($stmt = $conn->prepare(
         "SELECT `survey_id`
         FROM `participants` 
@@ -60,7 +59,12 @@ function getParticipantSurveyMetadata($conn, $data)
         $stmt->bind_param('s', $data['email']);
         $stmt->execute();
         $rs = $stmt->get_result();
-        $survey_id_list = $rs->fetch_all()[0];
+        while ($row = $rs->fetch_assoc()) {
+            array_push(
+                $survey_id_list,
+                $row['survey_id']
+            );
+        }
     }
     echo json_encode($survey_id_list);
 
@@ -71,6 +75,7 @@ function getParticipantSurveyMetadata($conn, $data)
             WHERE `survey_id` = ?
             AND `email` = ?"
         );
+        echo json_encode($survey_id);
         $stmt->bind_param('is', $survey_id, $data['email']);
         $stmt->execute();
         $status = $stmt->fetch();
