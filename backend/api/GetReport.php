@@ -60,13 +60,10 @@ foreach ($questions as $key => $value) {
         $stmt->execute();
         $rs = $stmt->get_result();
 
-        while ($row = $rs->fetch_assoc()) {
-            $temp = array();
-            array_push(
-                $temp,
-                new Answer($row['order'], $row['value'])
-            );
-        }
+        $temp = array();
+        $temp = $rs->fetch_all();
+        $stmt->free_result();
+        $stmt->close();
     }
     array_push($responses, $temp);
 }
