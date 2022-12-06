@@ -86,7 +86,7 @@ $survey = new Survey(
     $survey_id,
     $participant_email,
     $metadata['title'],
-    $metadata['desc'],
+    $metadata['description'],
     $metadata['startDate'],
     $metadata['endDate'],
     count($questions),
