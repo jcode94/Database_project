@@ -59,8 +59,8 @@ if (isset($continue)) {
             exit;
         }
     }
-
-    foreach (array($data['emails']) as $key => $value) {
+    $emails = $data['emails'] ?? array();
+    foreach ($emails as $key => $value) {
         // INSERT INTO PARTICIPANTS (survey_id, email, status)
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_PARTICIPANTS.sql')
@@ -79,6 +79,7 @@ if (isset($continue)) {
         $order = $key + 1;
         $response = "";
         $stmt->bind_param("isis", $survey_id, $value, $order, $response);
+
         if (!$stmt->execute()) {
             echo json_encode(["valid" => "invalid r"]);
             exit;
