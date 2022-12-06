@@ -84,8 +84,6 @@ function getSurveysAPICall() {
         flag = true
     }
 
-
-
     // Missing either email or password -> return
     if(flag) {return}
 
@@ -104,40 +102,41 @@ function getSurveysAPICall() {
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
 
+    
+
     try
     {
-        xhr.onload = () => 
-        {
-            xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function () {
 
-                // If server pinged and a response is sent back
-                if (this.readyState == 4 && this.status == 200) {
+            // If server pinged and a response is sent back
+            if (this.readyState == 4 && this.status == 200) {
 
-                    let jsonObject = JSON.parse(xhr.responseText);
+                console.log("Response Text : ", xhr.responseText)
 
-                    console.log('JSON Received', jsonObject)
+                let jsonObject = JSON.parse(xhr.responseText);
 
-                    let authored = []
-                    let participant = []
+                console.log('JSON Received', jsonObject)
 
-                    try
-                    {
-                        getSurveys( jsonObject.authored, jsonObject.participant )
-                    }
-                    catch
-                    {
-                        let ret = [
-                        {
-                            surveyName : "Failed to fetch surveys",
-                            surveyQuestionNumbers : "",
-                            surveyStatus : "Error"
-                        }]
+                let authored = []
+                let participant = []
 
-                        getSurveys( ret, ret )
-                    }
+                try
+                {
+                    getSurveys( jsonObject.authored, jsonObject.participant )
                 }
-            };
-        }
+                catch
+                {
+                    let ret = [
+                    {
+                        surveyName : "Failed to fetch surveys",
+                        surveyQuestionNumbers : "",
+                        surveyStatus : "Error"
+                    }]
+
+                    getSurveys( ret, ret )
+                }
+            }
+        };
 
         xhr.onerror = () =>
         {
