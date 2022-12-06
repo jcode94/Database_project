@@ -4,10 +4,9 @@
         public $type;
         public $statement;
         
-        public function __construct($o, $t, $s) {
-            $this->$order = $o;
-            $this->$type = $t;
-            $this->$statement = $s;
+        public function __construct(int $order, int $type, string $statement) {
+            $this->$order = $order;
+            $this->$type = $type;
+            $this->$statement = $statement;
         }
     }
-?>
