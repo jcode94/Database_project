@@ -46,9 +46,9 @@ function doRegister()
                         sessionStorage['userEmail'] = email
                         console.log( "Session Storage", sessionStorage )
     
-                        document.getElementById('loginResult').innerText = "Successful Login"
+                        document.getElementById('loginResult').innerText = "Registered Successfully"
     
-                        // window.location.href = "./HTML/homePage.html";
+                        window.location.href = "./HTML/homePage.html";
                     }
                     else
                     {
