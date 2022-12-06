@@ -18,11 +18,21 @@ foreach ($answers as $key => $value) {
     WHERE `email` = ?
     AND `survey_id` = ?
     AND `order` = ?";
-
     $stmt = $conn->prepare($query);
-    $stmt->bind_param('ssii', $answers[$key], $email, $survey_id, $key);
+    $order = $key + 1;
+    $answer = $answers[$key];
+    $stmt->bind_param('ssii', $answer, $email, $survey_id, $order);
 
     $stmt->execute();
 }
+
+$query = "UPDATE `participants`
+    SET `status` = ?
+    WHERE `email` = ?
+    AND `survey_id` = ?";
+
+$stmt = $conn->prepare($query);
+$status = 1;
+$stmt->bind_param('isi', $status, $email, $survey_id);
 
 echo json_encode(['valid' => 'valid']);
