@@ -212,7 +212,7 @@ function doGetReport()
     let url = urlBase + "/GetReport" + extension;
     let method = "POST";
 
-    //* Opening the connection to the login api file with the login & password typed in
+    //* Opening the connection to the getReport api file
     let xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -230,14 +230,14 @@ function doGetReport()
                 console.log('JSON Received', jsonObject)
 
                 /*####################################### Add Next Line after API works #######################################*/
-                // createReportHTML(jsonObject)
+                 // createReportHTML(jsonObject)
             }
         };
 
         xhr.send(jsonPayLoad)
 
     } catch (err) {
-        document.getElementById("loginResult").innerHTML = err.message;
+        console.log("Issue pulling data" + err);
     }
 
     /*####################################### Remove Next Line after API works #######################################*/

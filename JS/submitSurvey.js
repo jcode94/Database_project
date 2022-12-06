@@ -52,11 +52,39 @@ function submitSurvey()
 
     let xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
-    
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-    // sends data to SubmitSurvey php file
-    xhr.send(jsonPayLoad);
+    
+    try
+    {
+        xhr.onreadystatechange = function () {
+
+            // If server pinged and a response is sent back
+            if (this.readyState == 4 && this.status == 200) {
+
+                console.log( xhr.responseText)
+
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                console.log('JSON Received', jsonObject)
+
+                if(jsonObject.valid == "valid")
+                {
+                    window.location.href = "./homePage.html"
+                }
+                else
+                {
+                    console.log("Error In Survey Submit")
+                }
+            }
+        };
+
+        xhr.send(jsonPayLoad)
+
+    } catch (err) {
+        console.log("Unknown Error", err)
+    }
 
     console.log(jsonSurvey)
+
     return jsonSurvey
 }
