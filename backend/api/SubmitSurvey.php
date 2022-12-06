@@ -25,7 +25,7 @@ foreach ($answers as $key => $value) {
     $stmt->execute();
 }
 
-$query = "UPDATE `status`
+$query = "UPDATE `participants`
     SET `status` = ?
     WHERE `email` = ?
     AND `survey_id` = ?";
