@@ -12,7 +12,7 @@ $conn = new DBConnection(new Config());
 function getMetaData($conn, $data)
 {
     if ($stmt = $conn->prepare(
-        "SELECT `title`, `description`, `start_date`, `end_date`
+        "SELECT `survey_id`, `title`, `description`, `start_date`, `end_date`, `number_of_questions`
         FROM `surveys_metadata` 
         WHERE `survey_id` = ?"
     )) {
@@ -112,7 +112,11 @@ function getParticipantSurveyMetadata($conn, $data)
             $stmt->bind_param('is', $row['survey_id'], $data['email']);
             $stmt->execute();
             $status = $stmt->fetch();
-            $metadata = [getMetaData($conn, $row), 'status' => $status];
+            $metadata = getMetaData($conn, $row);
+            array_push(
+                $metadata,
+                $status
+            );
             array_push(
                 $participant_surveys,
                 $metadata
