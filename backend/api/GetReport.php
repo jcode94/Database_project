@@ -1,6 +1,8 @@
 <?php
 $data = json_decode(file_get_contents("php://input"), true);
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../config/Config.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/dao/DBConnection.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Answer.php');
 $conn = new DBConnection(new Config());
 
 function getMetaData($conn, $data)
