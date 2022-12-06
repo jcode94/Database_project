@@ -32,6 +32,7 @@ $query = "UPDATE `participants`
     AND `survey_id` = ?";
 
 $stmt = $conn->prepare($query);
-$stmt->bind_param('isi', 1, $email, $survey_id);
+$status = 1;
+$stmt->bind_param('isi', $status, $email, $survey_id);
 
 echo json_encode(['valid' => 'valid']);
