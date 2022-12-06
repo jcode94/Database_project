@@ -4,6 +4,7 @@ function download(filename) {
  // gets survey title and start and end date
  let title = document.getElementById("surveyName").textContent;
  let dates = document.getElementById("surveyDate").textContent;
+ let Participantscount = document.getElementById("activeParticipantsCount").textContent;
  // sets up Temp string
  var tmp = "";
  var tmp2 = "";
@@ -11,25 +12,51 @@ function download(filename) {
  filename = title +"_Survey.txt";
  
     //Creating one big text string
-    const text = [title+dates+numQuestions];
-    
+    const text = [title+dates+numQuestions+Participantscount];
 
+    for(let i = 0; i <= itr; i++)
+    {
+           
         // gets mean and adds it to document
-        tmp = document.getElementById('question1Mean').textContent;
-        text.push("\nQuestion1Mean: " + tmp);
+        tmp = document.getElementById("question" + i + "Mean");
+        if(tmp != null)
+        {
+            tmp = document.getElementById("question" + i + "Mean").textContent;
+            text.push("\nQuestion"+ i + "Mean: " + tmp);
+        }
+        
+
         // gets Variance and adds it to document 
-        tmp2= document.getElementById('question1Variance').textContent;
-        text.push("\nQuestion1Variance: " + tmp2);
-     
+        tmp2= document.getElementById('question'+i+'Variance');
+        if(tmp2 != null)
+        {
+            tmp2= document.getElementById('question'+i+'Variance').textContent;
+            text.push("\nQuestion"+ i + "Variance: " + tmp2);
+        }
+
+
+
+
+    }
+    
+       
 
     for(let i = 0; i < itr; i++)
     {
+        
+        tmp = document.getElementById("questionLeft" + i);
+        if(tmp != null)
+        {
+            tmp = document.getElementById("questionLeft" + i).textContent;
+            text.push("\n"+tmp);
+        }
 
-        tmp = document.getElementById("questionLeft" + i).textContent;
-        text.push("\n"+tmp);
-        tmp2 = document.getElementById("answersRight" + i).textContent;
-        text.push("\n"+tmp2);
-
+        tmp2 = document.getElementById("answersRight" + i);
+        if(tmp2 != null)
+        {
+            tmp2 = document.getElementById("answersRight" + i).textContent;
+            text.push("\n"+tmp2);
+        }
     }
     // Saving of the document
     var pom = document.createElement('a');
