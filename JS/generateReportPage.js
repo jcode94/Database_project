@@ -204,7 +204,7 @@ function doGetReport()
 
     //* Variables for the http request to login with the login api
     let jsonPayLoad = JSON.stringify({
-        surveyId: surveyId,
+        survey_id: surveyId,
     });
 
     console.log('JSON Package', jsonPayLoad)
