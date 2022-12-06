@@ -24,9 +24,10 @@ function getAuthoredSurveyMetadata($conn, $data)
             );
         }
     }
+    return $survey_metadata;
 }
 
-$authored = getAuthoredSurveyMetadata($conn, $data);
+$authored = getAuthoredSurveyMetadata($conn, $data) ?? array();
 
 // Get all surveys for which email is participant
 function getParticipantSurveyMetadata($conn, $data)
@@ -60,7 +61,7 @@ function getParticipantSurveyMetadata($conn, $data)
     return $participant_surveys;
 }
 
-$participant = getParticipantSurveyMetadata($conn, $data);
+$participant = getParticipantSurveyMetadata($conn, $data) ?? array();
 
 $ret = ['authored' => $authored, 'participant' => $participant];
 
