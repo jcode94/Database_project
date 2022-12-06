@@ -49,20 +49,24 @@ $metadata = getMetaData($conn, $data);
 $questions = getQuestions($conn, $data);
 $responses = array();
 
-if ($stmt = $conn->prepare(
-    "SELECT `order`, `value`
-    FROM `responses` 
-    WHERE `survey_id` = ?"
-)) {
-    $stmt->bind_param('i', $data['survey_id']);
-    $stmt->execute();
-    $rs = $stmt->get_result();
+foreach ($questions as $key => $value) {
+    $order = $key + 1;
+    if ($stmt = $conn->prepare(
+        "SELECT `value`
+        FROM `responses` 
+        WHERE `survey_id` = ? AND `order` = ?"
+    )) {
+        $stmt->bind_param('ii', $data['survey_id'], $order);
+        $stmt->execute();
+        $rs = $stmt->get_result();
 
-    while ($row = $rs->fetch_assoc()) {
-        array_push(
-            $responses,
-            new Answer($row['order'], $row['value'])
-        );
+        while ($row = $rs->fetch_assoc()) {
+            $temp = array();
+            array_push(
+                $temp,
+                new Answer($row['order'], $row['value'])
+            );
+        }
     }
 }
 
