@@ -93,6 +93,7 @@ $authored = getAuthoredSurveyMetadata($conn, $data) ?? array();
 // Get all surveys for which email is participant
 function getParticipantSurveyMetadata($conn, $data)
 {
+    $participant_surveys = array();
     if ($stmt = $conn->prepare(
         "SELECT `survey_id`
         FROM `participants` 
@@ -101,27 +102,30 @@ function getParticipantSurveyMetadata($conn, $data)
         $stmt->bind_param('s', $data['email']);
         $stmt->execute();
         $rs = $stmt->get_result();
-        $participant_surveys = array();
         while ($row = $rs->fetch_assoc()) {
-            $stmt = $conn->prepare(
-                "SELECT `status`
-                FROM `participants`
-                WHERE `survey_id` = ?
-                AND `email` = ?"
-            );
-            $stmt->bind_param('is', $row['survey_id'], $data['email']);
-            $stmt->execute();
-            $status = $stmt->fetch();
-            $metadata = getMetaData($conn, $row);
-            array_push(
-                $metadata,
-                $status
-            );
-            array_push(
-                $participant_surveys,
-                $metadata
-            );
+            $survey_id_list[] = $row['survey_id'];
         }
+    }
+
+    foreach ($survey_id_list as $survey_id) {
+        $stmt = $conn->prepare(
+            "SELECT `status`
+            FROM `participants`
+            WHERE `survey_id` = ?
+            AND `email` = ?"
+        );
+        $stmt->bind_param('is', $survey_id, $data['email']);
+        $stmt->execute();
+        $status = $stmt->fetch();
+        $metadata = getMetaData($conn, $row);
+        array_push(
+            $metadata,
+            $status
+        );
+        array_push(
+            $participant_surveys,
+            $metadata
+        );
     }
     return $participant_surveys;
 }
