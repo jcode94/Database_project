@@ -26,3 +26,5 @@ $stmt->bind_param('is', $survey_id, $email);
 $stmt->execute();
 $stmt->free_result();
 $conn->next_result();
+
+echo json_encode(["valid" => "valid"]);
