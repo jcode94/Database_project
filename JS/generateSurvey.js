@@ -2,8 +2,6 @@
 
 function generateSurvey(jsonSurvey)
 {
-    console.log("generateSurvey", jsonSurvey)
-
     let survey = {
         title : jsonSurvey.title,
         desc : jsonSurvey.description,
@@ -49,7 +47,7 @@ function generateSurvey(jsonSurvey)
 
         if( questions[ idx ].type == 2)
         {
-            console.log( 'Scale:', questions[idx].type )
+            // console.log( 'Scale:', questions[idx].type )
 
             innerHTMLString = innerHTMLString +
                 '<div id="question' + questions[idx].order + 'Example" class="row box bd">' +
@@ -71,7 +69,7 @@ function generateSurvey(jsonSurvey)
         }
         else if( questions[ idx ].type == 1 )
         {
-            console.log( 'Free Response:', questions[idx].type )
+            // console.log( 'Free Response:', questions[idx].type )
 
             let startStr = '' +
             '<div id="question' + questions[idx].order + 'Example" class="row box bd">' +
@@ -180,7 +178,7 @@ function doGetSurveyAPICall()
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
-                console.log("Response Text : ", xhr.responseText)
+                // console.log("Response Text : ", xhr.responseText)
 
                 let jsonObject = JSON.parse(xhr.responseText);
 

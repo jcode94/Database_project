@@ -2,10 +2,6 @@
 
 function getSurveys(jsonSurveys, type, func)
 {
-    console.log( "Session Storage", sessionStorage )
-
-    console.log(jsonSurveys)
-
     let surveyList = document.getElementById('surveyList')
 
     let surveyIds=[]
@@ -29,13 +25,13 @@ function getSurveys(jsonSurveys, type, func)
             }
     })
 
-    console.log(
-        "Post Read",
-        surveyIds,
-        surveyTitles,
-        surveyQuestionNumbers,
-        surveyStatuses
-    )
+    // console.log(
+    //     "Post Read",
+    //     surveyIds,
+    //     surveyTitles,
+    //     surveyQuestionNumbers,
+    //     surveyStatuses
+    // )
 
     for( let idx = 0; idx < surveyIds.length; idx++ )
     {
@@ -54,6 +50,8 @@ function getSurveysAPICall() {
 
     let urlBase = "http://157.245.93.19/backend/api";
     let extension = ".php";
+
+    console.log( "Session Storage", sessionStorage )
 
     let email = sessionStorage['userEmail']
     if( email == undefined )
@@ -88,7 +86,7 @@ function getSurveysAPICall() {
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
-                console.log("Response Text : ", xhr.responseText)
+                // console.log("Response Text : ", xhr.responseText)
 
                 let jsonObject = JSON.parse(xhr.responseText);
 
@@ -100,7 +98,6 @@ function getSurveysAPICall() {
                 try
                 {
                     getSurveys( jsonObject.authored, "authored", 'openReport' )
-                    // getSurveys( jsonObject.authored, "authored", 'openSurvey' )
                     getSurveys( jsonObject.participant, "participant", 'openSurvey' )
                 }
                 catch
@@ -117,32 +114,10 @@ function getSurveysAPICall() {
             }
         };
 
-        xhr.onerror = () =>
-        {
-            console.log('XHR On Error')
-            error = true
-            let ret = [
-            {
-                surveyName : "Failed to fetch surveys",
-                surveyQuestionNumbers : "",
-                surveyStatus : "Error"
-            }]
-
-            getSurveys( ret, ret )
-        }
-
         xhr.send(jsonPayLoad)
     }
     catch (err)
     {
         console.log("Unknown Error", err)
-        let ret = [
-        {
-            surveyName : "Failed to fetch surveys",
-            surveyQuestionNumbers : "",
-            surveyStatus : "Error"
-        }]
-
-        getSurveys( ret, ret )
     }
 }

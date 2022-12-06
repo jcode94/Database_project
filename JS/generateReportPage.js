@@ -1,24 +1,7 @@
 
 
-function createReportHTML()
+function createReportHTML(jsonReport)
 {
-    let jsonReport = {
-        title:"Title",
-        description:"Desc",
-        startDate:"2022/12/01",
-        endDate:"2022/12/01",
-        number_of_questions:2,
-        questions:[
-            {type:1,statement:"Question 1",order:1},
-            {type:2,statement:"Question 2",order:2}
-        ],
-        responses:[
-            [{response:"answer1",order:1}, {response:"answer2",order:1}],
-            [{response:1,order:1}, {response:2,order:2}]
-        ],
-    }
-    console.log("Create Report HTML")
-
     let surveyMeta = document.getElementById('surveyMeta')
 
     surveyMeta.innerHTML = '' +
@@ -46,8 +29,6 @@ function createReportHTML()
 
     for( let i = 0; i < jsonReport.number_of_questions; i++)
     {
-        console.log(i, jsonReport.questions[i].type)
-
         if( jsonReport.questions[i].type == 1 )
         {
             surveyQuestionsArea.innerHTML = surveyQuestionsArea.innerHTML +
@@ -93,7 +74,6 @@ function createReportHTML()
 
             for( let j = 0; j < jsonReport.responses[i].length; j++)
             {
-                console.log(j)
                 freeResponseAnswers.innerHTML = freeResponseAnswers.innerHTML +
                     '<div id="answer1" class="row box bd">' +
                         '<div class="col-auto box"><p>' + jsonReport.responses[i][j].response + '</p></div>' +
@@ -155,11 +135,8 @@ function createReportHTML()
 
             let scaleAnswers = document.getElementById('scaleAnswers' + i)
 
-            console.log(jsonReport.responses[i])
-
             for( let j = 0; j < jsonReport.responses[i].length; j++)
             {
-                console.log(j)
                 scaleAnswers.innerHTML = scaleAnswers.innerHTML +
                     '<div class="col-auto box bd"><p class="box">' + jsonReport.responses[i][j].response + '</p></div>'
 
@@ -193,7 +170,7 @@ function createReportHTML()
             let scaleArrayMean = calculateMean(scaleArray)
             let scaleArrayVar = calculateVariance(scaleArray)
 
-            console.log(scaleArrayMean, scaleArrayVar)
+            // console.log(scaleArrayMean, scaleArrayVar)
 
             let scaleCol = document.getElementById( 'scaleCol' + i )
 
@@ -232,7 +209,7 @@ function doGetReport()
 
     console.log('JSON Package', jsonPayLoad)
 
-    let url = urlBase + "/Login" + extension;
+    let url = urlBase + "/GetReport" + extension;
     let method = "POST";
 
     //* Opening the connection to the login api file with the login & password typed in
@@ -251,6 +228,9 @@ function doGetReport()
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 console.log('JSON Received', jsonObject)
+
+                /*####################################### Add Next Line after API works #######################################*/
+                // createReportHTML(jsonObject)
             }
         };
 
@@ -260,5 +240,21 @@ function doGetReport()
         document.getElementById("loginResult").innerHTML = err.message;
     }
 
-    createReportHTML()
+    /*####################################### Remove Next Line after API works #######################################*/
+    let jsonReport = {
+        title:"Title",
+        description:"Desc",
+        startDate:"2022/12/01",
+        endDate:"2022/12/01",
+        number_of_questions:2,
+        questions:[
+            {type:1,statement:"Question 1",order:1},
+            {type:2,statement:"Question 2",order:2}
+        ],
+        responses:[
+            [{response:"answer1",order:1}, {response:"answer2",order:1}],
+            [{response:1,order:1}, {response:2,order:2}]
+        ],
+    }
+    createReportHTML(jsonReport)
 }
