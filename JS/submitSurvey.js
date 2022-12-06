@@ -8,9 +8,9 @@ function submitSurvey()
 
     let jsonSurvey = {}
 
-    let surveyId = 1
+    let surveyId = sessionStorage['surveyId']
     let answers = []
-    let email = 'email'
+    let email = sessionStorage['userEmail']
 
     let surveyQuestionsArea = document.getElementById('surveyQuestionsArea')
 
@@ -35,7 +35,7 @@ function submitSurvey()
         }
     }
 
-    jsonSurvey['surveyId'] = surveyId
+    jsonSurvey['survey_id'] = surveyId
     jsonSurvey['email'] = email
     jsonSurvey['answers'] = answers
 
