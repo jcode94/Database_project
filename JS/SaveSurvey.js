@@ -8,9 +8,8 @@ function download(filename) {
  var tmp = "";
  var tmp2 = "";
  var itr = parseInt(numQuestions,8);
- filename = title+".txt";
+ filename = title +"_Survey.txt";
  
-console.log("itr: " + itr);
     //Creating one big text string
     const text = [title+dates+numQuestions];
     
