@@ -88,7 +88,7 @@ echo json_encode([
     "title" => $metadata['title'] ?? "",
     "participant_email" => $participant_email ?? "",
     "startDate" => $metadata['start_date'] ?? "",
-    "endDate" => $metadata['end_date'],
+    "endDate" => $metadata['end_date'] ?? "",
     "number_of_questions" => $metadata['number_of_questions'] ?? "",
     "questions" => $questions ?? "",
     "responses" => $responses ?? ""
