@@ -83,13 +83,13 @@ function getResponses($conn, $data)
 $responses = getResponses($conn, $data);
 
 echo json_encode([
-    "survey_id" => $survey_id,
-    "description" => $metadata['description'],
-    "title" => $metadata['title'],
-    "participant_email" => $participant_email,
-    "startDate" => $metadata['start_date'],
+    "survey_id" => $survey_id ?? "",
+    "description" => $metadata['description'] ?? "",
+    "title" => $metadata['title'] ?? "",
+    "participant_email" => $participant_email ?? "",
+    "startDate" => $metadata['start_date'] ?? "",
     "endDate" => $metadata['end_date'],
-    "number_of_questions" => $metadata['number_of_questions'],
-    "questions" => $questions,
-    "responses" => $responses
+    "number_of_questions" => $metadata['number_of_questions'] ?? "",
+    "questions" => $questions ?? "",
+    "responses" => $responses ?? ""
 ]);
