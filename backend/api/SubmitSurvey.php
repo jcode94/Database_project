@@ -1,10 +1,28 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'].'/backend/models/Constants.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/../config/Config.class.php');
-require_once($_SERVER['DOCUMENT_ROOT'].'/backend/dao/DBConnection.php');
+define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'] . '/backend');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Constants.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/../config/Config.class.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/dao/DBConnection.php');
 
 $data = json_decode(file_get_contents("php://input"), true);
+$conn = new DBConnection(new Config());
+$survey_id = $data['survey_id'] ?? 0;
+$answers = $data['answers'] ?? array();
+$email = $data['email'] ?? "";
 
-"UPDATE `responses`
-SET "
+foreach ($answers as $key => $value) {
+    $query =
+        "UPDATE `responses`
+    SET `value` = ?
+    WHERE `email` = ?
+    AND `survey_id` = ?
+    AND `order` = ?";
+
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('ssii', $answers[$key], $email, $survey_id, $key);
+
+    $stmt->execute();
+}
+
+echo json_encode(['valid' => 'valid']);
