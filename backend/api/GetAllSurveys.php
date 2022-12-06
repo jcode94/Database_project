@@ -27,6 +27,7 @@ function getMetaData($conn, $data)
 // Get all surveys for which email is eq to author col in surveys metadata
 function getAuthoredSurveyMetadata($conn, $data)
 {
+    $survey_metadata = array();
     if ($stmt = $conn->prepare(
         "SELECT `survey_id`
         FROM `surveys_metadata` 
@@ -35,7 +36,6 @@ function getAuthoredSurveyMetadata($conn, $data)
         $stmt->bind_param('s', $data['email']);
         $stmt->execute();
         $rs = $stmt->get_result();
-        $survey_metadata = array();
         while ($row = $rs->fetch_assoc()) {
             array_push(
                 $survey_metadata,
@@ -51,7 +51,6 @@ $authored = getAuthoredSurveyMetadata($conn, $data) ?? array();
 // Get all surveys for which email is participant
 function getParticipantSurveyMetadata($conn, $data)
 {
-    $metadata = array();
     if ($stmt = $conn->prepare(
         "SELECT `survey_id`
         FROM `participants` 
@@ -60,7 +59,15 @@ function getParticipantSurveyMetadata($conn, $data)
         $stmt->bind_param('s', $data['email']);
         $stmt->execute();
         $rs = $stmt->get_result();
-        $survey_id_list = $rs->fetch_all();
+        $survey_id_list = array();
+        while ($row = $rs->fetch_assoc()) {
+            array_push(
+                $survey_id_list,
+                $row['survey_id']
+            );
+        }
+        $stmt->close();
+        $conn->next_result();
     }
 
     foreach ($survey_id_list as $survey_id) {
@@ -72,14 +79,18 @@ function getParticipantSurveyMetadata($conn, $data)
         );
         $stmt->bind_param('is', $survey_id, $data['email']);
         $stmt->execute();
-        $status = $stmt->fetch();
+        $rs = $stmt->get_result();
+        $status = $rs->fetch_assoc();
+        $stmt->close();
+        $conn->next_result();
+        $metadata = array();
         array_push(
             $metadata,
-            getMetaData($conn, $survey_id)
+            getMetaData($conn, array("survey_id" => $survey_id)) ?? array()
         );
         array_push(
             $metadata,
-            $status
+            $status['status']
         );
     }
     return $metadata;
