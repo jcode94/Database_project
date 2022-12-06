@@ -82,6 +82,7 @@ function getParticipantSurveyMetadata($conn, $data)
         $status = $stmt->fetch();
         $stmt->close();
         $conn->next_result();
+        $metadata = array();
         array_push(
             $metadata,
             getMetaData($conn, $data) ?? array()
