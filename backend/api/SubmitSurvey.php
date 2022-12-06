@@ -19,10 +19,10 @@ $query =
     AND `order` = ?";
 
 $stmt = $conn->prepare($query);
-$answer = $answers[$key];
 
 $num_answers = count($answers);
 for ($i = 1; $i <= $num_answers; $i++) {
+    $answer = $answers[$i - 1];
     $stmt->bind_param('ssii', $answer, $email, $survey_id, $i);
     $stmt->execute();
 }
