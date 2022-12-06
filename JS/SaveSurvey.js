@@ -22,16 +22,16 @@ function download(filename) {
         if(tmp != null)
         {
             tmp = document.getElementById("question" + i + "Mean").textContent;
-            text.push("\nQuestion"+ i + "Mean: " + tmp);
+            text.push("\nQuestion"+ (i+1) + "Mean: " + tmp);
         }
         
 
         // gets Variance and adds it to document 
-        tmp2= document.getElementById('question'+i+'Variance');
+        tmp2= document.getElementById('question '+i+' Variance');
         if(tmp2 != null)
         {
-            tmp2= document.getElementById('question'+i+'Variance').textContent;
-            text.push("\nQuestion"+ i + "Variance: " + tmp2);
+            tmp2= document.getElementById('question '+i+' Variance').textContent;
+            text.push("\nQuestion"+ (i+1) + "Variance: " + tmp2);
         }
 
 
