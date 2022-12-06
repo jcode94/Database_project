@@ -28,6 +28,7 @@
         <script src="../JS/generateQuestionsSurveyCreate.js"></script>
         <script src="../JS/generateSurvey.js"></script>
         <script src="../Js/generateEmailList.js"></script>
+        <script src="../Js/generateReportPage.js"></script>
         <script src="../Js/query.js"></script>
         <script src="../Js/createSurvey.js"></script>
         <script src="../Js/SaveSurvey.js"></script>
@@ -35,7 +36,7 @@
         <title>Survey Report Page</title>
       </head>
 
-    <body onload="">
+    <body onload="createReportHTML()">
 
         <div class="container-fluid tall color">
             
@@ -43,24 +44,14 @@
 
                 <div class="col color">
 
-                    <div class="tall dflx flxflw color">
+                    <div id="main" class="tall dflx flxflw color">
 
                         <div class="row right color bd">
                             <div class="col-auto box"><button class="pad" onclick="location.href='./homePage.html';">Home</button></div>
                             <div class="col-auto box"><button class="pad" onclick="location.href='./index.html';">Logout</button></div>
                         </div>
 
-                        <div class="row center color space bd">
-                            <div class="col-3 box">
-                                <h1>Survey Name</h1>
-                            </div>
-                        </div>
-
-                        <div class="row center color space bd">
-                            <div class="col-3 box">
-                                <h5>Survey Description</h5>
-                            </div>
-                        </div>
+                        <div id="surveyMeta" class="row center bd"></div>
 
                         <div id="surveyQuestionsArea" class="row center growAuto color space bd">
 
