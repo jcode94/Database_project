@@ -12,17 +12,12 @@ function generateSurvey(jsonSurvey)
         numQuestions : jsonSurvey.number_of_questions,
     }
 
-    let questions = [
-        jsonSurvey.questions
-    ]
-
-    let responses = [
-        jsonSurvey.responses
-    ]
+    let questions = jsonSurvey.questions
+    let responses = jsonSurvey.responses
 
     let surveyMetaDataArea = document.getElementById('surveyMetaDataArea')
 
-    surveyMetaDataArea.innerHTML = '' +
+    surveyMetaDataArea.innerHTML = ('' +
         '<div class="col">' +
 
             '<div class="row">' +
@@ -40,6 +35,7 @@ function generateSurvey(jsonSurvey)
             '</div>' +
 
         '</div>'
+    )
 
     let scaleLabels = [ 'Strong Disagree', 'Disagree', 'Neutral', 'Agree', 'Strong Agree' ]
     let scaleLabelsNum = [ '1', '2', '3', '4', '5' ]
@@ -50,17 +46,18 @@ function generateSurvey(jsonSurvey)
 
     for( let idx = 0; idx < questions.length; idx++ )
     {
+
         if( questions[ idx ].type == 2)
         {
             console.log( 'Scale:', questions[idx].type )
 
             innerHTMLString = innerHTMLString +
-                '<div id="question' + questions[idx].number + 'Example" class="row box bd">' +
+                '<div id="question' + questions[idx].order + 'Example" class="row box bd">' +
 
                     '<div class="col">' +
 
                         '<div class="row">' +
-                            '<div class="col-auto box"><p>' + questions[idx].number + ')</p></div>' +
+                            '<div class="col-auto box"><p>' + questions[idx].order + ')</p></div>' +
                             '<div class="col-auto box"><p>' + questions[idx].statement + '</p></div>' +
                         '</div>' +
 
@@ -72,16 +69,16 @@ function generateSurvey(jsonSurvey)
 
                 '</div>'
         }
-        else
+        else if( questions[ idx ].type == 1 )
         {
             console.log( 'Free Response:', questions[idx].type )
 
             let startStr = '' +
-            '<div id="question' + questions[idx].number + 'Example" class="row box bd">' +
+            '<div id="question' + questions[idx].order + 'Example" class="row box bd">' +
                 '<div class="col">' +
 
                     '<div class="row">' +
-                        '<div class="col-auto box"><p>' + questions[idx].number + ')</p></div>' +
+                        '<div class="col-auto box"><p>' + questions[idx].order + ')</p></div>' +
                         '<div class="col-auto box"><p>' + questions[idx].statement + '</p></div>' +
                     '</div>' +
 
@@ -110,9 +107,7 @@ function generateSurvey(jsonSurvey)
     }
 
     surveyQuestionsArea.innerHTML = innerHTMLString
-
     
-
     for( let idx = 0; idx < responses.length; idx++ )
     {
         if( responses[idx].value != '')
@@ -121,12 +116,12 @@ function generateSurvey(jsonSurvey)
             {
                 scaleValueNum = scaleLabelsNum.indexOf( responses[idx].value )
 
-                let scaleInputElm = document.getElementById('question' + responses[idx].number + 'Scale' + scaleValueNum )
+                let scaleInputElm = document.getElementById('question' + responses[idx].order + 'Scale' + scaleValueNum )
                 scaleInputElm.checked = true
             }
             else
             {
-                let freeResponseInputElm = document.getElementById('question' + responses[idx].number + 'Free' )
+                let freeResponseInputElm = document.getElementById('question' + responses[idx].order + 'Free' )
                 freeResponseInputElm.value = responses[idx].value
             }
         }

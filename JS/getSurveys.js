@@ -22,7 +22,11 @@ function getSurveys(jsonSurveys, type, func)
             surveyQuestionNumbers.push(jsonSurveys[index].number_of_questions)
 
             if( type == "authored" ) { surveyStatuses.push("Authored") }
-            else { surveyStatuses.push(jsonSurveys[index].status) }
+            else
+            {
+                if(jsonSurveys[index].status){ surveyStatuses.push('Old') }
+                else{ surveyStatuses.push('New') }
+            }
     })
 
     console.log(
@@ -95,8 +99,8 @@ function getSurveysAPICall() {
 
                 try
                 {
-                    // getSurveys( jsonObject.authored, "authored", 'openReport' )
-                    getSurveys( jsonObject.authored, "authored", 'openSurvey' )
+                    getSurveys( jsonObject.authored, "authored", 'openReport' )
+                    // getSurveys( jsonObject.authored, "authored", 'openSurvey' )
                     getSurveys( jsonObject.participant, "participant", 'openSurvey' )
                 }
                 catch
