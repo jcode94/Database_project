@@ -18,7 +18,7 @@ $participant_email = $data['email'] ?? "";
 function getMetaData($conn, $data)
 {
     if ($stmt = $conn->prepare(
-        "SELECT `title`, `description`, `start_date`, `end_date`
+        "SELECT `title`, `description`, `start_date`, `end_date`, `number_of_questions`
         FROM `surveys_metadata` 
         WHERE `survey_id` = ?"
     )) {
@@ -46,7 +46,11 @@ function getQuestions($conn, $data)
         while ($row = $rs->fetch_assoc()) {
             array_push(
                 $questions,
-                new Question($row['order'], $row['type'], $row['statement'])
+                array(
+                    "order" => $row['order'],
+                    "type" => $row['type'],
+                    "statement" => $row['statement']
+                )
             );
         }
     }
@@ -78,20 +82,14 @@ function getResponses($conn, $data)
 
 $responses = getResponses($conn, $data);
 
-echo json_encode(["survey_id" => $survey_id, "description" => $metadata['description']]);
-exit;
-
-// return survey details, all questions, all responses
-$survey = new Survey(
-    $survey_id,
-    $participant_email,
-    $metadata['title'],
-    $metadata['description'],
-    $metadata['startDate'],
-    $metadata['endDate'],
-    count($questions),
-    $questions,
-    $responses
-);
-
-echo json_encode($survey);
+echo json_encode([
+    "survey_id" => $survey_id ?? "",
+    "description" => $metadata['description'] ?? "",
+    "title" => $metadata['title'] ?? "",
+    "participant_email" => $participant_email ?? "",
+    "startDate" => $metadata['start_date'] ?? "",
+    "endDate" => $metadata['end_date'],
+    "number_of_questions" => $metadata['number_of_questions'] ?? "",
+    "questions" => $questions ?? "",
+    "responses" => $responses ?? ""
+]);

@@ -1,13 +1,8 @@
 
 
-function getSurveys(jsonSurveys, type)
+function getSurveys(jsonSurveys, type, func)
 {
     console.log( "Session Storage", sessionStorage )
-
-    // let jsonSurveys = {
-    //     ...authored,
-    //     ...participant
-    // }
 
     console.log(jsonSurveys)
 
@@ -41,7 +36,7 @@ function getSurveys(jsonSurveys, type)
     for( let idx = 0; idx < surveyIds.length; idx++ )
     {
         surveyList.innerHTML = surveyList.innerHTML + 
-        '<div class="col-auto box clickable bd" onclick="openSurvey(' + surveyIds[idx] + ')">\n' +
+        '<div class="col-auto box clickable bd" onclick="' + func + '(' + surveyIds[idx] + ')">\n' +
             '\t<div class="row"><p>' + surveyTitles[idx] + '</p></div>\n' +
             '\t<div class="row"><p>Questions: ' + surveyQuestionNumbers[idx] + '</p></div>\n'+
             '\t<div class="row"><p>' + surveyStatuses[idx] + '</p></div>\n'+
@@ -103,8 +98,8 @@ function getSurveysAPICall() {
 
                 try
                 {
-                    getSurveys( jsonObject.authored, "authored" )
-                    // getSurveys( jsonObject.participant )
+                    getSurveys( jsonObject.authored, "authored", 'getReport' )
+                    getSurveys( jsonObject.participant, "participant", 'getSurvey' )
                 }
                 catch
                 {
@@ -115,7 +110,7 @@ function getSurveysAPICall() {
                         surveyStatus : "Error"
                     }]
 
-                    getSurveys( ret, ret )
+                    getSurveys( ret, '', '' )
                 }
             }
         };
