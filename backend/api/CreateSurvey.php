@@ -1,12 +1,17 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
-
-$data = json_decode(file_get_contents("php://input"), true);
-
 define('__BACKEND_ROOT__', $_SERVER['DOCUMENT_ROOT'] . '/backend');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/models/Constants.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../config/Config.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/dao/DBConnection.php');
+
+$data = json_decode(file_get_contents("php://input"), true);
+$a = $data["author"] ?? "";
+$t = $data["title"] ?? "";
+$d = $data["description"] ?? "";
+$s = $data["startD"] ?? "";
+$e = $data["endD"] ?? "";
+$nq = $data["numOfQuestions"] ?? 0;
 
 // insert survey into table surveys_metadata, get back its ID
 $conn = new DBConnection(new Config());
@@ -24,13 +29,6 @@ $stmt->bind_param(
     $nq
 );
 
-$a = $data["author"] ?? "";
-$t = $data["title"] ?? "";
-$d = $data["description"] ?? "";
-$s = $data["startD"] ?? "";
-$e = $data["endD"] ?? "";
-$nq = $data["numOfQuestions"] ?? 0;
-
 $continue = $stmt->execute();
 
 $rs = $conn->query("SELECT `survey_id` FROM `surveys_metadata` ORDER BY `survey_id` DESC LIMIT 1");
@@ -38,7 +36,7 @@ $survey_id = $rs->fetch_row()[0];
 
 if (isset($continue)) {
     // INSERT INTO QUESTIONS (survey_id, number, type, statement)
-    foreach (array($data['questions']) as $index => $question) {
+    foreach ($data['questions'] as $index => $question) {
         $stmt = $conn->prepare(
             file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_QUESTIONS.sql')
         );
