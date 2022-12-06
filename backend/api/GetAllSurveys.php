@@ -70,6 +70,7 @@ function getParticipantSurveyMetadata($conn, $data)
         $conn->next_result();
     }
 
+    $metadata = array();
     foreach ($survey_id_list as $survey_id) {
         $stmt = $conn->prepare(
             "SELECT `status`
@@ -83,15 +84,9 @@ function getParticipantSurveyMetadata($conn, $data)
         $status = $rs->fetch_assoc();
         $stmt->close();
         $conn->next_result();
-        $metadata = array();
-        array_push(
-            $metadata,
-            getMetaData($conn, array("survey_id" => $survey_id)) ?? array()
-        );
-        array_push(
-            $metadata,
-            $status['status']
-        );
+        $temp = getMetaData($conn, array("survey_id" => $survey_id)) ?? array();
+        $temp["status"] = $status['status'];
+        array_push($metadata, $temp);
     }
     return $metadata;
 }
