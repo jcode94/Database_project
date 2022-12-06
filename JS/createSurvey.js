@@ -237,9 +237,8 @@ function createSurveyObject()
         for( let i = 0; i < questions.length; i++)
         {
             let tmpQuestion = {}
-
             
-            tmpQuestion['type'] = jsonTypes[i]
+            tmpQuestion['type'] = parseInt( jsonTypes[i] )
             tmpQuestion['statement'] = jsonPrompts[i]
             tmpQuestion['number'] = jsonNumbers[i]
             
@@ -257,7 +256,9 @@ function createSurveyObject()
             endD:   jsonSurvey['endD'], 
             numOfQuestions: jsonSurvey['numOfQuestions'],
             questions: jsonSurvey['questions']
-        });
+        }, null, 2);
+
+        console.log( jsonPayLoad )
 
         return jsonPayLoad
     }
@@ -267,7 +268,7 @@ function doCreateSurvey()
 {
     let jsonPayLoad = createSurveyObject()
 
-    console.log('JSON Stringify', jsonPayLoad)
+    console.log('JSON Payload Object\n', JSON.parse( jsonPayLoad ) )
 
     let urlBase = "http://157.245.93.19/backend/api";
     let extension = ".php";
@@ -287,6 +288,8 @@ function doCreateSurvey()
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
 
+                console.log( xhr.responseText)
+
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 console.log('JSON Received', jsonObject)
@@ -301,12 +304,6 @@ function doCreateSurvey()
                 }
             }
         };
-
-        xhr.onerror = (err) => {
-            console.log("Error?\n", err)
-            console.log("xhr.responseText\n", xhr.responseText)
-            console.log("xhr whole:\n", xhr)
-        }
 
         xhr.send(jsonPayLoad)
 

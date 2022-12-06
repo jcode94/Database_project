@@ -48,7 +48,7 @@ function doRegister()
     
                         document.getElementById('loginResult').innerText = "Successful Login"
     
-                        window.location.href = "./HTML/homePage.html";
+                        // window.location.href = "./HTML/homePage.html";
                     }
                     else
                     {
