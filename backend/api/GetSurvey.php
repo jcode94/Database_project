@@ -46,11 +46,11 @@ function getQuestions($conn, $data)
         while ($row = $rs->fetch_assoc()) {
             array_push(
                 $questions,
-                array([
+                array(
                     "order" => $row['order'],
                     "type" => $row['type'],
                     "statement" => $row['statement']
-                ])
+                )
             );
         }
     }
