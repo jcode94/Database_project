@@ -8,21 +8,22 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/dao/DBConnection.php');
 $data = json_decode(file_get_contents("php://input"), true);
 $conn = new DBConnection(new Config());
 $survey_id = $data['survey_id'] ?? 0;
-$answers = $data['answers'] ?? array();
 $email = $data['email'] ?? "";
+$answers = $data['answers'] ?? array();
 
-foreach ($answers as $key => $value) {
-    $query =
-        "UPDATE `responses`
+$query =
+    "UPDATE `responses`
     SET `value` = ?
     WHERE `email` = ?
     AND `survey_id` = ?
     AND `order` = ?";
-    $stmt = $conn->prepare($query);
-    $order = $key + 1;
-    $answer = $answers[$key];
-    $stmt->bind_param('ssii', $answer, $email, $survey_id, $order);
 
+$stmt = $conn->prepare($query);
+$answer = $answers[$key];
+
+$num_answers = count($answers);
+for ($i = 1; $i <= $num_answers; $i++) {
+    $stmt->bind_param('ssii', $answer, $email, $survey_id, $i);
     $stmt->execute();
 }
 
