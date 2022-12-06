@@ -60,7 +60,7 @@ function getParticipantSurveyMetadata($conn, $data)
         $stmt->bind_param('s', $data['email']);
         $stmt->execute();
         $rs = $stmt->get_result();
-        $survey_id_list = $rs->fetch_all();
+        $survey_id_list = $rs->fetch_all()[0];
     }
     echo json_encode($survey_id_list);
 
