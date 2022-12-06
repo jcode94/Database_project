@@ -62,7 +62,7 @@ foreach ($questions as $key => $value) {
 
         $temp = array();
         while ($row = $rs->fetch_assoc()) {
-            array(
+            $temp[] = array(
                 "response" => $row['value'],
                 "order" => $order
             );
