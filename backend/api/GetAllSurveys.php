@@ -27,6 +27,7 @@ function getMetaData($conn, $data)
 // Get all surveys for which email is eq to author col in surveys metadata
 function getAuthoredSurveyMetadata($conn, $data)
 {
+    $survey_metadata = array();
     if ($stmt = $conn->prepare(
         "SELECT `survey_id`
         FROM `surveys_metadata` 
@@ -35,7 +36,6 @@ function getAuthoredSurveyMetadata($conn, $data)
         $stmt->bind_param('s', $data['email']);
         $stmt->execute();
         $rs = $stmt->get_result();
-        $survey_metadata = array();
         while ($row = $rs->fetch_assoc()) {
             array_push(
                 $survey_metadata,
@@ -62,6 +62,7 @@ function getParticipantSurveyMetadata($conn, $data)
         $rs = $stmt->get_result();
         $survey_id_list = $rs->fetch_all();
     }
+    echo json_encode($survey_id_list);
 
     foreach ($survey_id_list as $survey_id) {
         $stmt = $conn->prepare(
