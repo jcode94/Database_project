@@ -42,7 +42,7 @@ function submitSurvey()
     let jsonPayLoad = JSON.stringify({
 
         email: jsonSurvey['email'],
-        surveyId: jsonSurvey['surveyId'],
+        survey_id: jsonSurvey['surveyId'],
         answers: jsonSurvey['answers']
        
     });
@@ -69,7 +69,7 @@ function submitSurvey()
 
                 if(jsonObject.valid == "valid")
                 {
-                    window.location.href = "./homePage.html"
+                    // window.location.href = "./homePage.html"
                 }
                 else
                 {
