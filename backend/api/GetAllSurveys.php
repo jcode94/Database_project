@@ -115,7 +115,10 @@ function getParticipantSurveyMetadata($conn, $data)
         $stmt->bind_param('is', $survey_id, $data['email']);
         $stmt->execute();
         $status = $stmt->fetch();
-        $metadata = getMetaData($conn, $survey_id);
+        array_push(
+            $metadata,
+            getMetaData($conn, $survey_id)
+        );
         array_push(
             $metadata,
             $status
