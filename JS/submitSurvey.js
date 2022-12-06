@@ -67,7 +67,7 @@ function submitSurvey()
 
                 if(jsonObject.valid == "valid")
                 {
-                    // window.location.href = "./homePage.html"
+                    window.location.href = "./homePage.html"
                 }
                 else
                 {
