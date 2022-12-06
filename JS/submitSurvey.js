@@ -22,7 +22,6 @@ function submitSurvey()
     {
         let inputBox = $('input[id^="question' + i +'"]')[0]
 
-
         if(inputBox.id.split('question' + i)[1].startsWith('Free'))
         {
             // Free Response
@@ -30,8 +29,7 @@ function submitSurvey()
         }
         else
         {
-            answers.push(inputBox.value)
-
+            answers.push( $('input[name="scale' + i + '"]:checked').val() )
         }
     }
 
