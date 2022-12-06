@@ -96,7 +96,7 @@ function createReportHTML(jsonReport)
         {
 
             surveyQuestionsArea.innerHTML = surveyQuestionsArea.innerHTML +
-                '<div class="row space">' +
+                '<div class="row space bd">' +
                     '<div id="scaleCol' + i + '" class="col">' +
 
                         '<div class="row rating">' +
