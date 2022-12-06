@@ -20,7 +20,8 @@ foreach ($answers as $key => $value) {
     AND `order` = ?";
     $stmt = $conn->prepare($query);
     $order = $key + 1;
-    $stmt->bind_param('ssii', $answers[$key], $email, $survey_id, $order);
+    $answer = $answers[$key];
+    $stmt->bind_param('ssii', $answer, $email, $survey_id, $order);
 
     $stmt->execute();
 }
