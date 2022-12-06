@@ -88,10 +88,7 @@ function getParticipantSurveyMetadata($conn, $data)
             $metadata,
             getMetaData($conn, array("survey_id" => $survey_id)) ?? array()
         );
-        array_push(
-            $metadata,
-            $status
-        );
+        $metadata["status"] = $status['status'];
     }
     return $metadata;
 }
