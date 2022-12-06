@@ -15,19 +15,18 @@ $participant_email = $data['email'] ?? "";
 
 
 // Create composite return from the results sets of the following:
-function getMetaData($conn, $survey_id)
+function getMetaData($conn, $data)
 {
     if ($stmt = $conn->prepare(
         "SELECT `title`, `description`, `start_date`, `end_date`, `number_of_questions`
         FROM `surveys_metadata` 
         WHERE `survey_id` = ?"
     )) {
-        $stmt->bind_param('i', $survey_id);
+        $stmt->bind_param('i', $data['survey_id']);
         $stmt->execute();
         $rs = $stmt->get_result();
         $metadata = $rs->fetch_assoc();
     }
-    echo json_encode($metadata);
     return $metadata;
 }
 
