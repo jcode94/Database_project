@@ -54,12 +54,12 @@ function createReportHTML()
             '<div class="row space">' +
 
                 '<div id="" class="col space bd">' +
-                    '<div id="" class="row box questionInner' + i + ' bd">' +
+                    '<div id="questionLeft' + i + '" class="row box questionInner' + i + ' bd">' +
 
                         '<div class="col">' +
 
                             '<div class="row">' +
-                                '<div class="col-auto box"><p>' + jsonReport.questions[i].number + ')</p></div>' +
+                                '<div class="col-auto box"><p>' + jsonReport.questions[i].order + ')</p></div>' +
                             '</div>' +
 
                             '<div class="row">' +
@@ -75,7 +75,7 @@ function createReportHTML()
                     '</div>' +
                 '</div>' +
 
-                '<div id="" class="col overflow space bd">' +
+                '<div id="answersRight' + i + '" class="col overflow space bd">' +
 
                     '<div class="row answersList">' +
 
@@ -90,8 +90,6 @@ function createReportHTML()
             '</div>'
 
             let freeResponseAnswers = document.getElementById('freeResponseAnswers' + i)
-
-            console.log(jsonReport.responses[i])
 
             for( let j = 0; j < jsonReport.responses[i].length; j++)
             {
@@ -112,13 +110,13 @@ function createReportHTML()
 
                         '<div class="row rating">' +
 
-                            '<div id="" class="col space bd">' +
+                            '<div id="questionLeft' + i + '" class="col space bd">' +
                                 '<div id="" class="row box questionInner' + i + ' bd">' +
 
                                     '<div class="col">' +
                 
                                         '<div class="row">' +
-                                            '<div class="col-auto box"><p>' + jsonReport.questions[i].number + ')</p></div>' +
+                                            '<div class="col-auto box"><p>' + jsonReport.questions[i].order + ')</p></div>' +
                                         '</div>' +
 
                                         '<div class="row">' +
@@ -134,7 +132,7 @@ function createReportHTML()
                                 '</div>' +
                             '</div>' +
 
-                            '<div id="" class="col overflow space bd">' +
+                            '<div id="answersRight' + i + '" class="col overflow space bd">' +
 
                                 '<div class="row answersList">' +
 
@@ -204,11 +202,11 @@ function createReportHTML()
 
                     '<div class="col">' +
                         '<div class="row center">Mean</div>' +
-                        '<div class="row center">' + scaleArrayMean + '</div>' +
+                        '<div id="question' + i + 'Mean" class="row center">' + scaleArrayMean + '</div>' +
                     '</div>' +
                     '<div class="col">' +
                         '<div class="row center">Variance</div>' +
-                        '<div class="row center">' + scaleArrayVar + '</div>' +
+                        '<div id="question' + i + 'Variance" class="row center">' + scaleArrayVar + '</div>' +
                     '</div>' +
 
                 '</div>'
