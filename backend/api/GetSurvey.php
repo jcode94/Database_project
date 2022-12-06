@@ -27,6 +27,7 @@ function getMetaData($conn, $survey_id)
         $rs = $stmt->get_result();
         $metadata = $rs->fetch_assoc();
     }
+    echo json_encode($metadata);
     return $metadata;
 }
 
