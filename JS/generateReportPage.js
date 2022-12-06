@@ -157,7 +157,7 @@ function createReportHTML(jsonReport)
 
             let scaleArray = []
 
-            for( let i = 0; i < jsonReport.number_of_questions; i++)
+            for( let i = 0; i < jsonReport.questions.length; i++)
             {
                 if(jsonReport.questions[i].type == 2)
                 {
