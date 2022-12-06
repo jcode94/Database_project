@@ -12,12 +12,6 @@ $survey_id = $data['survey_id'] ?? 0;
 $email = $data['email'] ?? "";
 $answers = $data['answers'] ?? array();
 
-echo json_encode($survey_id);
-echo json_encode($email);
-echo json_encode($answers);
-exit;
-
-
 $query =
     "UPDATE `responses`
     SET `value` = ?
