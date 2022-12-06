@@ -79,7 +79,7 @@ function getParticipantSurveyMetadata($conn, $data)
         );
         $stmt->bind_param('is', $survey_id, $data['email']);
         $stmt->execute();
-        $status = $stmt->fetch();
+        $status = $stmt->fetch_assoc();
         $stmt->close();
         $conn->next_result();
         $metadata = array();
@@ -89,7 +89,7 @@ function getParticipantSurveyMetadata($conn, $data)
         );
         array_push(
             $metadata,
-            $status
+            $status['status']
         );
     }
     return $metadata;
