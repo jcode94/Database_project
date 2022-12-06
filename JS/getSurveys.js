@@ -70,16 +70,13 @@ function getSurveysAPICall() {
 
     console.log('JSON Package', jsonPayLoad)
 
-    let url = urlBase + "/GetAllSurveys" + extension;
-    let method = "POST";
+    let url = urlBase + "/GetAllSurveys" + extension
+    let method = "POST"
 
     //* Opening the connection to the getAllSurveys api file with the email typed in
-    let xhr = new XMLHttpRequest();
-    xhr.open(method, url, true);
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
-    
-
+    let xhr = new XMLHttpRequest()
+    xhr.open(method, url, true)
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8")
     try
     {
         xhr.onreadystatechange = function () {
@@ -98,8 +95,9 @@ function getSurveysAPICall() {
 
                 try
                 {
-                    getSurveys( jsonObject.authored, "authored", 'getReport' )
-                    getSurveys( jsonObject.participant, "participant", 'getSurvey' )
+                    // getSurveys( jsonObject.authored, "authored", 'openReport' )
+                    getSurveys( jsonObject.authored, "authored", 'openSurvey' )
+                    getSurveys( jsonObject.participant, "participant", 'openSurvey' )
                 }
                 catch
                 {

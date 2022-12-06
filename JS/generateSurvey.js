@@ -1,72 +1,23 @@
 
 
-function generateSurvey()
+function generateSurvey(jsonSurvey)
 {
-    console.log("generateSurvey")
+    console.log("generateSurvey", jsonSurvey)
 
-    doGetSurveyAPICall()
-
-    /* Retrive the data from db  */
-    let urlBase = "http://157.245.93.19/backend/api";
-    let extension = ".php";
-    let url = urlBase + "/GetSurvey" + extension;
-    let method = 'POST';
-    let xhr = new XMLHttpRequest();
-    
-    xhr.open(method, url, true);
-    
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-    let jsonObject = JSON.parse(xhr.responseText);
-
-    console.log('JSON Received', jsonObject)
-    //
-
-    let survey =
-    {
-        title:jsonSurvey['title'],
-        desc:jsonSurvey['desc'],
-        startD:jsonSurvey['startD'],
-        endD:jsonSurvey['endD'],
-        numQuestions:jsonSurvey['numQuestions'],
-        questions:jsonSurvey['questions'],
+    let survey = {
+        title : jsonSurvey.title,
+        desc : jsonSurvey.description,
+        startD : jsonSurvey.startDate,
+        endD : jsonSurvey.endDate,
+        numQuestions : jsonSurvey.number_of_questions,
     }
-    console.log(survey);
+
     let questions = [
-       /* Testing keeping just incase
-        {
-            number:1,
-            type:2,
-            statement:"Name Your Favorite Food"
-        },
-        {
-            number:2,
-            type:1,
-            statement:"Fish Is You Favorite Food"
-        },
-        {
-            number:3,
-            type:2,
-            statement:"List Your Favorite Foods"
-        }*/
+        jsonSurvey.questions
     ]
-    for(let i =0; i < survey[5]; i++)
-    {
-        //Stores our question data in our questions array
-        questions[i] = questions
-    }
+
     let responses = [
-        {
-            number:1,
-            value:''
-        },
-        {
-            number:2,
-            value:'3',
-        },
-        {
-            number:3,
-            value:''
-        }
+        jsonSurvey.responses
     ]
 
     let surveyMetaDataArea = document.getElementById('surveyMetaDataArea')
@@ -239,6 +190,11 @@ function doGetSurveyAPICall()
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 console.log('JSON Received', jsonObject)
+
+                if(jsonObject)
+                {
+                    generateSurvey(jsonObject)
+                }
             }
         };
 
