@@ -76,8 +76,7 @@ function getResponses($conn, $data)
 
 $responses = getResponses($conn, $data);
 
-// return survey details, all questions, all responses
-$survey = new Survey(
+$survey = array(
     $survey_id,
     $participant_email,
     $metadata['title'],
