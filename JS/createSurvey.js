@@ -72,7 +72,7 @@ function createSurveyObject()
     {
         questions.forEach(elm=>{
 
-            let number = elm.getAttribute('id').split('question')[1]
+            let number = parseInt( elm.getAttribute('id').split('question')[1] )
             let type = NaN
             let prompt = ''
 
@@ -266,7 +266,7 @@ function createSurveyObject()
 function doCreateSurvey()
 {
     let jsonPayLoad = createSurveyObject()
-    
+
     console.log('JSON Stringify', jsonPayLoad)
 
     let urlBase = "http://157.245.93.19/backend/api";
@@ -293,7 +293,7 @@ function doCreateSurvey()
 
                 if(jsonObject.valid == "valid")
                 {
-                    window.location.href = "./HTML/homePage.html"
+                    window.location.href = "./homePage.html"
                 }
                 else
                 {
