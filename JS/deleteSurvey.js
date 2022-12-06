@@ -39,7 +39,8 @@ function doDeleteSurveyAPI()
 
                 if ( jsonObject.valid == "valid")
                 {
-                    window.location.href = "./HTML/homePage.html";
+                    sessionStorage.removeItem('surveyId')
+                    if(sessionStorage['surveyID'] == undefined) { window.location.href = "./homePage.html"; }
                 }
             }
         };
