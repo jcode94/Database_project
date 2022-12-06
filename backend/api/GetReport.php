@@ -47,7 +47,7 @@ function getQuestions($conn, $data)
 
 $metadata = getMetaData($conn, $data);
 $questions = getQuestions($conn, $data);
-$responses = getResponses($conn, $data);
+$responses = array();
 
 if ($stmt = $conn->prepare(
     "SELECT `order`, `value`
