@@ -8,8 +8,14 @@ function createReportHTML()
         startDate:"2022/12/01",
         endDate:"2022/12/01",
         number_of_questions:2,
-        questions:[{type:1,statement:"statement",number:1}],
-        responses:[{type:1,statement:"statement",number:1}],
+        questions:[
+            {type:1,statement:"Question 1",order:1},
+            {type:2,statement:"Question 2",order:2}
+        ],
+        responses:[
+            [{response:"answer1",order:1}, {response:"answer2",order:1}],
+            [{response:1,order:1}, {response:2,order:2}]
+        ],
     }
     console.log("Create Report HTML")
 
@@ -36,62 +42,225 @@ function createReportHTML()
     
     let surveyQuestionsArea = document.getElementById('surveyQuestionsArea')
 
+    surveyQuestionsArea.innerHTML = ''
+
     for( let i = 0; i < jsonReport.number_of_questions; i++)
     {
-        surveyQuestionsArea.innerHTML = surveyQuestionsArea.innerHTML +
-        '<div class="row space">' +
+        console.log(i, jsonReport.questions[i].type)
 
-            '<div id="" class="col space bd">' +
-                '<div id="" class="row box questionInner bd">' +
+        if( jsonReport.questions[i].type == 1 )
+        {
+            surveyQuestionsArea.innerHTML = surveyQuestionsArea.innerHTML +
+            '<div class="row space">' +
 
-                    '<div class="col">' +
+                '<div id="" class="col space bd">' +
+                    '<div id="" class="row box questionInner' + i + ' bd">' +
 
-                        '<div class="row">' +
-                            '<div class="col-auto box"><p>1)</p></div'> +
-                        '</div>' +
+                        '<div class="col">' +
 
-                        '<div class="row">' +
-                            '<div class="col-auto box"><p>What is your favorite food</p></div>' +
-                        '</div>' +
+                            '<div class="row">' +
+                                '<div class="col-auto box"><p>' + jsonReport.questions[i].number + ')</p></div>' +
+                            '</div>' +
 
-                        '<div class="row">' +
-                            '<div class="col-auto box"><p>Free Response</p></div>' +
+                            '<div class="row">' +
+                                '<div class="col-auto box"><p>' + jsonReport.questions[i].statement + '</p></div>' +
+                            '</div>' +
+
+                            '<div class="row">' +
+                                '<div class="col-auto box"><p>Free Response</p></div>' +
+                            '</div>' +
+
                         '</div>' +
 
                     '</div>' +
-
                 '</div>' +
-            '</div>' +
 
-            '<div id="" class="col overflow space bd">' +
+                '<div id="" class="col overflow space bd">' +
 
-                '<div class="row answersList">' +
+                    '<div class="row answersList">' +
 
-                    '<div class="col">' +
+                        '<div id="freeResponseAnswers' + i + '" class="col">' +
 
-                        '<div id="answer1" class="row box bd">' +
-                            '<div class="col-auto box"><p>Strawberries</p></div>' +
-                        '</div>' +
-
-                        '<div id="answer2" class="row box bd">' +
-                            '<div class="col-auto box"><p>Strawberries</p></div>' +
-                        '</div>' +
-
-                        '<div id="answer3" class="row box bd">' +
-                            '<div class="col-auto box"><p>Strawberries</p></div>' +
-                        '</div>' +
-
-                        '<div id="answer4" class="row box bd">' +
-                            '<div class="col-auto box"><p>Strawberries</p></div>' +
                         '</div>' +
 
                     '</div>' +
 
                 '</div>' +
 
-            '</div>' +
+            '</div>'
 
-        '</div>'
+            let freeResponseAnswers = document.getElementById('freeResponseAnswers' + i)
+
+            console.log(jsonReport.responses[i])
+
+            for( let j = 0; j < jsonReport.responses[i].length; j++)
+            {
+                console.log(j)
+                freeResponseAnswers.innerHTML = freeResponseAnswers.innerHTML +
+                    '<div id="answer1" class="row box bd">' +
+                        '<div class="col-auto box"><p>' + jsonReport.responses[i][j].response + '</p></div>' +
+                    '</div>'
+            }
+
+        }
+        else if( jsonReport.questions[i].type == 2 )
+        {
+
+            surveyQuestionsArea.innerHTML = surveyQuestionsArea.innerHTML +
+                '<div class="row space">' +
+                    '<div id="scaleCol' + i + '" class="col">' +
+
+                        '<div class="row rating">' +
+
+                            '<div id="" class="col space bd">' +
+                                '<div id="" class="row box questionInner' + i + ' bd">' +
+
+                                    '<div class="col">' +
+                
+                                        '<div class="row">' +
+                                            '<div class="col-auto box"><p>' + jsonReport.questions[i].number + ')</p></div>' +
+                                        '</div>' +
+
+                                        '<div class="row">' +
+                                            '<div class="col-auto box"><p>' + jsonReport.questions[i].statement + '</p></div>' +
+                                        '</div>' +
+
+                                        '<div class="row">' +
+                                            '<div class="col-auto box"><p>Rating Question</p></div>' +
+                                        '</div>' +
+
+                                    '</div>' +
+
+                                '</div>' +
+                            '</div>' +
+
+                            '<div id="" class="col overflow space bd">' +
+
+                                '<div class="row answersList">' +
+
+                                    '<div class="col">' +
+
+                                        '<div id="scaleAnswers' + i + '" class="row box">' +
+                                        '</div>' +
+
+                                    '</div>' +
+
+                                '</div>' +
+
+                            '</div>' +
+
+                        '</div>' +
+
+                    '</div>' +
+                    
+                '</div>'
+
+            let scaleAnswers = document.getElementById('scaleAnswers' + i)
+
+            console.log(jsonReport.responses[i])
+
+            for( let j = 0; j < jsonReport.responses[i].length; j++)
+            {
+                console.log(j)
+                scaleAnswers.innerHTML = scaleAnswers.innerHTML +
+                    '<div class="col-auto box bd"><p class="box">' + jsonReport.responses[i][j].response + '</p></div>'
+
+            }
+
+            let scaleArray = []
+
+            for( let i = 0; i < jsonReport.number_of_questions; i++)
+            {
+                if(jsonReport.questions[i].type == 2)
+                {
+                    jsonReport.responses[i].forEach( (response) => {scaleArray.push(response.response)})
+                }
+            }
+
+            const calculateMean = (values) => {
+                const mean = (values.reduce((sum, current) => sum + current)) / values.length;
+                return mean;
+            };
+            
+            const calculateVariance = (values) => {
+                const average = calculateMean(values);
+                const squareDiffs = values.map((value) => {
+                    const diff = value - average;
+                    return diff * diff;
+                });
+                const variance = calculateMean(squareDiffs);
+                return variance;
+            };
+
+            let scaleArrayMean = calculateMean(scaleArray)
+            let scaleArrayVar = calculateVariance(scaleArray)
+
+            console.log(scaleArrayMean, scaleArrayVar)
+
+            let scaleCol = document.getElementById( 'scaleCol' + i )
+
+            scaleCol.innerHTML = scaleCol.innerHTML +
+                '<div class="row report">' +
+
+                    '<div class="col">' +
+                        '<div class="row center">Mean</div>' +
+                        '<div class="row center">' + scaleArrayMean + '</div>' +
+                    '</div>' +
+                    '<div class="col">' +
+                        '<div class="row center">Variance</div>' +
+                        '<div class="row center">' + scaleArrayVar + '</div>' +
+                    '</div>' +
+
+                '</div>'
+
+        }
 
     }
+}
+
+function doGetReport()
+{
+    let urlBase = "http://157.245.93.19/backend/api";
+    let extension = ".php";
+
+    let surveyId = sessionStorage['surveyId']
+
+    if(surveyId == undefined){console.log('No SurveyId');return;}
+
+    //* Variables for the http request to login with the login api
+    let jsonPayLoad = JSON.stringify({
+        surveyId: surveyId,
+    });
+
+    console.log('JSON Package', jsonPayLoad)
+
+    let url = urlBase + "/Login" + extension;
+    let method = "POST";
+
+    //* Opening the connection to the login api file with the login & password typed in
+    let xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+
+    try {
+        xhr.onreadystatechange = function () {
+
+            // If server pinged and a response is sent back
+            if (this.readyState == 4 && this.status == 200) {
+
+                console.log('Received', xhr.responseText)
+
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                console.log('JSON Received', jsonObject)
+            }
+        };
+
+        xhr.send(jsonPayLoad)
+
+    } catch (err) {
+        document.getElementById("loginResult").innerHTML = err.message;
+    }
+
+    createReportHTML()
 }
