@@ -9,7 +9,7 @@ $email = $data['email'] ?? "";
 
 // Delete participant responses
 
-$query = "DELETE FROM TABLE `responses` WHERE `survey_id` = ? AND `email` = ?";
+$query = "DELETE FROM `responses` WHERE `survey_id` = ? AND `email` = ?";
 
 $stmt = $conn->prepare($query);
 $stmt->bind_param('is', $survey_id, $email);
@@ -19,7 +19,7 @@ $conn->next_result();
 
 // delete participant record
 
-$query2 = "DELETE FROM TABLE `participants` WHERE `survey_id` = ? AND `email` = ?";
+$query2 = "DELETE FROM `participants` WHERE `survey_id` = ? AND `email` = ?";
 
 $stmt = $conn->prepare($query2);
 $stmt->bind_param('is', $survey_id, $email);
