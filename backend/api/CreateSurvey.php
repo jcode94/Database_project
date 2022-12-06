@@ -30,7 +30,7 @@ $stmt->bind_param(
     $nq
 );
 
-if ($stmt->execute()) {
+if ($continue = $stmt->execute()) {
     $rs = $conn->query("SELECT `survey_id` FROM `surveys_metadata` ORDER BY `survey_id` DESC LIMIT 1");
     $survey_id = $rs->fetch_assoc()['survey_id'];
     echo (print_r($survey_id));
