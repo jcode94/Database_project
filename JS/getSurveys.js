@@ -1,58 +1,39 @@
 
 
-function getSurveys(authored, participant)
+function getSurveys(jsonSurveys, type)
 {
     console.log( "Session Storage", sessionStorage )
 
-    let jsonSurveys = {
-        ...authored,
-        ...participant
-    }
+    // let jsonSurveys = {
+    //     ...authored,
+    //     ...participant
+    // }
 
     console.log(jsonSurveys)
 
     let surveyList = document.getElementById('surveyList')
 
-    jsonSurveys = {
-        0:{
-            surveyName:"Zero",
-            numberOfQuestions:10,
-            completionStatus:"Pending"
-        },
-        1:{
-            surveyName:"One",
-            numberOfQuestions:25,
-            completionStatus:"Completed"
-        },
-        2:{
-            surveyName:"Two",
-            numberOfQuestions:16,
-            completionStatus:"In-Progress"
-        },
-        3:{
-            surveyName:"Three",
-            numberOfQuestions:30,
-            completionStatus:"Pending"
-        }
-    }
-
     let surveyIds=[]
-    let surveyNames=[]
+    let surveyTitles=[]
     let surveyQuestionNumbers=[]
     let surveyStatuses=[]
 
-    Object.keys(jsonSurveys).forEach(surveyId=>(
-            surveyIds.push(surveyId),
+    Object.keys(jsonSurveys).forEach( (index) => {
+        
+            surveyIds.push(jsonSurveys[index].survey_id)
 
-            surveyNames.push(jsonSurveys[surveyId].surveyName),
-            surveyQuestionNumbers.push(jsonSurveys[surveyId].numberOfQuestions),
-            surveyStatuses.push(jsonSurveys[surveyId].completionStatus)
+            surveyTitles.push(jsonSurveys[index].title)
+            
+            surveyQuestionNumbers.push(jsonSurveys[index].number_of_questions)
 
-        ))
+            if( type == "authored" ) { surveyStatuses.push("Authored") }
+            else { surveyStatuses.push(jsonSurveys[index].status) }
+    })
 
     console.log(
+        "Post Read",
         surveyIds,
-        surveyNames,
+        surveyTitles,
         surveyQuestionNumbers,
         surveyStatuses
     )
@@ -60,8 +41,8 @@ function getSurveys(authored, participant)
     for( let idx = 0; idx < surveyIds.length; idx++ )
     {
         surveyList.innerHTML = surveyList.innerHTML + 
-        '<div class="col-auto box clickable bd" onclick="openSurvey()">\n' +
-            '\t<div class="row"><p>' + surveyNames[idx] + '</p></div>\n' +
+        '<div class="col-auto box clickable bd" onclick="openSurvey(' + surveyIds[idx] + ')">\n' +
+            '\t<div class="row"><p>' + surveyTitles[idx] + '</p></div>\n' +
             '\t<div class="row"><p>Questions: ' + surveyQuestionNumbers[idx] + '</p></div>\n'+
             '\t<div class="row"><p>' + surveyStatuses[idx] + '</p></div>\n'+
         '</div>\n'
@@ -122,7 +103,8 @@ function getSurveysAPICall() {
 
                 try
                 {
-                    getSurveys( jsonObject.authored, jsonObject.participant )
+                    getSurveys( jsonObject.authored, "authored" )
+                    // getSurveys( jsonObject.participant )
                 }
                 catch
                 {

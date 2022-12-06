@@ -3,20 +3,23 @@
 function generateSurvey()
 {
     console.log("generateSurvey")
-        /* Retrive the data from db  */
-        let urlBase = "http://157.245.93.19/backend/api";
-        let extension = ".php";
-        let url = urlBase + "/GetSurvey" + extension;
-        let method = 'POST';
-        let xhr = new XMLHttpRequest();
-        
-        xhr.open(method, url, true);
-        
-        xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-        let jsonObject = JSON.parse(xhr.responseText);
 
-        console.log('JSON Received', jsonObject)
-        //
+    doGetSurveyAPICall()
+
+    /* Retrive the data from db  */
+    let urlBase = "http://157.245.93.19/backend/api";
+    let extension = ".php";
+    let url = urlBase + "/GetSurvey" + extension;
+    let method = 'POST';
+    let xhr = new XMLHttpRequest();
+    
+    xhr.open(method, url, true);
+    
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    let jsonObject = JSON.parse(xhr.responseText);
+
+    console.log('JSON Received', jsonObject)
+    //
 
     let survey =
     {
@@ -178,4 +181,76 @@ function generateSurvey()
         }
     }
 
+}
+
+function doGetSurveyAPICall()
+{
+    let flag = false
+
+    let urlBase = "http://157.245.93.19/backend/api";
+    let extension = ".php";
+
+    let email = sessionStorage['userEmail']
+    let surveyId = sessionStorage['surveyId']
+
+    if( email == undefined )
+    {
+        console.log('No Email Found');
+
+        window.location.href = "../index.html";
+        flag = true
+    }
+
+    if( surveyId == undefined )
+    {
+        console.log('No Survey Id Found');
+
+        window.location.href = "../index.html";
+        flag = true
+    }
+
+    // Missing either email or password -> return
+    if(flag) {return}
+
+    //* Variables for the http request to login with the login api
+    let jsonPayLoad = JSON.stringify({
+        email: email,
+        survey_id: surveyId
+    });
+
+    console.log('JSON Package', jsonPayLoad)
+
+    let url = urlBase + "/GetSurvey" + extension;
+    let method = "POST";
+
+    //* Opening the connection to the getAllSurveys api file with the email typed in
+    let xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try
+    {
+        xhr.onreadystatechange = function () {
+
+            // If server pinged and a response is sent back
+            if (this.readyState == 4 && this.status == 200) {
+
+                console.log("Response Text : ", xhr.responseText)
+
+                let jsonObject = JSON.parse(xhr.responseText);
+
+                console.log('JSON Received', jsonObject)
+            }
+        };
+
+        xhr.onerror = () =>
+        {
+            console.log('XHR On Error')
+        }
+
+        xhr.send(jsonPayLoad)
+    }
+    catch (err)
+    {
+        console.log("Unknown Error", err)
+    }
 }
