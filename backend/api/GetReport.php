@@ -61,7 +61,12 @@ foreach ($questions as $key => $value) {
         $rs = $stmt->get_result();
 
         $temp = array();
-        $temp = $rs->fetch_all();
+        while ($row = $rs->fetch_assoc()) {
+            array(
+                "response" => $row['value'],
+                "order" => $order
+            );
+        }
         $stmt->free_result();
         $stmt->close();
     }
