@@ -2,6 +2,9 @@
 
 function createReportHTML(jsonReport)
 {
+
+    console.log(JSON.stringify(jsonReport, null, 2))
+
     let surveyMeta = document.getElementById('surveyMeta')
 
     surveyMeta.innerHTML = '' +
@@ -27,7 +30,7 @@ function createReportHTML(jsonReport)
 
     surveyQuestionsArea.innerHTML = ''
 
-    for( let i = 0; i < jsonReport.number_of_questions; i++)
+    for( let i = 0; i < jsonReport.questions.length; i++)
     {
         if( jsonReport.questions[i].type == 1 )
         {
@@ -230,7 +233,7 @@ function doGetReport()
                 console.log('JSON Received', jsonObject)
 
                 /*####################################### Add Next Line after API works #######################################*/
-                 // createReportHTML(jsonObject)
+                 createReportHTML(jsonObject)
             }
         };
 
@@ -241,20 +244,20 @@ function doGetReport()
     }
 
     /*####################################### Remove Next Line after API works #######################################*/
-    let jsonReport = {
-        title:"Title",
-        description:"Desc",
-        startDate:"2022/12/01",
-        endDate:"2022/12/01",
-        number_of_questions:2,
-        questions:[
-            {type:1,statement:"Question 1",order:1},
-            {type:2,statement:"Question 2",order:2}
-        ],
-        responses:[
-            [{response:"answer1",order:1}, {response:"answer2",order:1}],
-            [{response:1,order:1}, {response:2,order:2}]
-        ],
-    }
-    createReportHTML(jsonReport)
+    // let jsonReport = {
+    //     title:"Title",
+    //     description:"Desc",
+    //     startDate:"2022/12/01",
+    //     endDate:"2022/12/01",
+    //     number_of_questions:2,
+    //     questions:[
+    //         {type:1,statement:"Question 1",order:1},
+    //         {type:2,statement:"Question 2",order:2}
+    //     ],
+    //     responses:[
+    //         [{response:"answer1",order:1}, {response:"answer2",order:1}],
+    //         [{response:1,order:1}, {response:2,order:2}]
+    //     ],
+    // }
+    // createReportHTML(jsonReport)
 }

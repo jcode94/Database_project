@@ -45,7 +45,7 @@ function generateSurvey(jsonSurvey)
     for( let idx = 0; idx < questions.length; idx++ )
     {
 
-        if( questions[ idx ].type == 2)
+        if( questions[ idx ].type == 1)
         {
             // console.log( 'Scale:', questions[idx].type )
 
@@ -67,7 +67,7 @@ function generateSurvey(jsonSurvey)
 
                 '</div>'
         }
-        else if( questions[ idx ].type == 1 )
+        else if( questions[ idx ].type == 2 )
         {
             // console.log( 'Free Response:', questions[idx].type )
 
