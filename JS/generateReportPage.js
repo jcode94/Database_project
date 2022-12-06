@@ -25,7 +25,7 @@ function createReportHTML(jsonReport)
             '</div>' +
 
             '<div class="row center">' +
-                '<div class="col-auto"><p id="numQuestions">Active Participants : ' + jsonReport.responses[0].length + '</p></div>'   +                                
+                '<div class="col-auto"><p id="activeParticipantsCount">Active Participants : ' + jsonReport.responses[0].length + '</p></div>'   +                                
             '</div>' +
 
         '</div>'
