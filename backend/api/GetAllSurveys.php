@@ -66,8 +66,9 @@ function getParticipantSurveyMetadata($conn, $data)
                 $row['survey_id']
             );
         }
+        $stmt->close();
+        $conn->next_result();
     }
-    echo json_encode($survey_id_list);
 
     foreach ($survey_id_list as $survey_id) {
         $stmt = $conn->prepare(
@@ -76,10 +77,11 @@ function getParticipantSurveyMetadata($conn, $data)
             WHERE `survey_id` = ?
             AND `email` = ?"
         );
-        echo json_encode($survey_id);
         $stmt->bind_param('is', $survey_id, $data['email']);
         $stmt->execute();
         $status = $stmt->fetch();
+        $stmt->close();
+        $conn->next_result();
         array_push(
             $metadata,
             getMetaData($conn, $survey_id)
