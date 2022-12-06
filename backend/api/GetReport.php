@@ -68,6 +68,7 @@ foreach ($questions as $key => $value) {
             );
         }
     }
+    array_push($responses, $temp);
 }
 
 echo json_encode([
