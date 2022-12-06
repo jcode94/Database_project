@@ -72,17 +72,20 @@ if (isset($continue)) {
             exit;
         }
 
-        // SET UP DEFAULT RESPONSES(save state)
-        $stmt = $conn->prepare(
-            file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_RESPONSES.sql')
-        );
-        $order = $key + 1;
-        $response = "";
-        $stmt->bind_param("isis", $survey_id, $value, $order, $response);
+        for ($i = 1; $i <= $nq; $i++) {
+            // SET UP DEFAULT RESPONSES(save state)
+            $stmt = $conn->prepare(
+                file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_RESPONSES.sql')
+            );
+            $response = "";
+            $stmt->bind_param("isis", $survey_id, $email, $i, $response);
 
-        if (!$stmt->execute()) {
-            echo json_encode(["valid" => "invalid r"]);
-            exit;
+            if (!$stmt->execute()) {
+                echo json_encode(["valid" => "invalid r"]);
+                exit;
+            }
+            $stmt->close();
+            $conn->next_result();
         }
     }
     echo json_encode(["valid" => "valid"]);
