@@ -76,7 +76,11 @@ function getResponses($conn, $data)
 
 $responses = getResponses($conn, $data);
 
-$survey = array(
+echo json_encode(["survey_id" => $survey_id, "description" => $metadata['desc']]);
+exit;
+
+// return survey details, all questions, all responses
+$survey = new Survey(
     $survey_id,
     $participant_email,
     $metadata['title'],
