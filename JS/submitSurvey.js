@@ -16,7 +16,7 @@ function submitSurvey()
 
     let questions = surveyQuestionsArea.childNodes
 
-    console.log(questions.length)
+    // console.log(questions.length)
 
     for( let i = 1; i <= questions.length; i++ )
     {
@@ -40,7 +40,7 @@ function submitSurvey()
     let jsonPayLoad = JSON.stringify({
 
         email: jsonSurvey['email'],
-        survey_id: jsonSurvey['surveyId'],
+        survey_id: jsonSurvey['survey_id'],
         answers: jsonSurvey['answers']
        
     });
