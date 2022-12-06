@@ -102,9 +102,7 @@ function getParticipantSurveyMetadata($conn, $data)
         $stmt->bind_param('s', $data['email']);
         $stmt->execute();
         $rs = $stmt->get_result();
-        while ($row = $rs->fetch_assoc()) {
-            $survey_id_list[] = $row['survey_id'];
-        }
+        $survey_id_list = $rs->fetch_all();
     }
 
     foreach ($survey_id_list as $survey_id) {
@@ -117,7 +115,7 @@ function getParticipantSurveyMetadata($conn, $data)
         $stmt->bind_param('is', $survey_id, $data['email']);
         $stmt->execute();
         $status = $stmt->fetch();
-        $metadata = getMetaData($conn, $row);
+        $metadata = getMetaData($conn, $survey_id);
         array_push(
             $metadata,
             $status
