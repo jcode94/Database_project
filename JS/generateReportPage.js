@@ -155,7 +155,7 @@ function createReportHTML(jsonReport)
             }
 
             let scaleArray = []
-            
+
             if(jsonReport.questions[i].type == 2)
             {
                 jsonReport.responses[i].forEach( (response) => {
@@ -168,8 +168,6 @@ function createReportHTML(jsonReport)
                 let mean = (values.reduce((sum, current) => sum + current)) / values.length;
                 return mean;
             };
-
-            console.log(scaleArray)
             
             let calculateVariance = (values) => {
                 let average = calculateMean(values);
