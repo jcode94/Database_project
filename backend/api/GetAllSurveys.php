@@ -90,7 +90,7 @@ function getParticipantSurveyMetadata($conn, $data)
         );
         array_push(
             $metadata,
-            $status['status']
+            $status
         );
     }
     return $metadata;
