@@ -42,5 +42,8 @@
         {
             mysqli_close($this->connection);
         }
+        
+        public function next_result($sql) {
+            return $this->connection->next_result();
+        }
     }
-?>
