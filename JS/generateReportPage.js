@@ -24,6 +24,10 @@ function createReportHTML(jsonReport)
                 '<div class="col-auto"><p id="numQuestions">&nbsp;' + jsonReport.questions.length + ' Questions</p></div>'   +                                
             '</div>' +
 
+            '<div class="row center">' +
+                '<div class="col-auto"><p id="activeParticipantsCount">Active Participants : ' + jsonReport.responses[0].length + '</p></div>'   +                                
+            '</div>' +
+
         '</div>'
     
     let surveyQuestionsArea = document.getElementById('surveyQuestionsArea')
