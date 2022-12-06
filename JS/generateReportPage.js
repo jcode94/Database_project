@@ -21,7 +21,7 @@ function createReportHTML(jsonReport)
             '<div class="row center">' +
                 '<div class="col-auto"><p id="surveyDate">' + jsonReport.startDate + ' - ' + jsonReport.endDate + '&nbsp;|</p></div>' +
                 '<div class="col-auto"><p id="surveyDate"></p></div>' +
-                '<div class="col-auto"><p id="numQuestions">&nbsp;' + jsonReport.number_of_questions + ' Questions</p></div>'   +                                
+                '<div class="col-auto"><p id="numQuestions">&nbsp;' + jsonReport.questions.length + ' Questions</p></div>'   +                                
             '</div>' +
 
         '</div>'
@@ -32,6 +32,7 @@ function createReportHTML(jsonReport)
 
     for( let i = 0; i < jsonReport.questions.length; i++)
     {
+
         if( jsonReport.questions[i].type == 1 )
         {
             surveyQuestionsArea.innerHTML = surveyQuestionsArea.innerHTML +
@@ -77,10 +78,13 @@ function createReportHTML(jsonReport)
 
             for( let j = 0; j < jsonReport.responses[i].length; j++)
             {
-                freeResponseAnswers.innerHTML = freeResponseAnswers.innerHTML +
-                    '<div id="answer1" class="row box bd">' +
-                        '<div class="col-auto box"><p>' + jsonReport.responses[i][j].response + '</p></div>' +
-                    '</div>'
+                if(jsonReport.responses[i][j].response != '')
+                {
+                    freeResponseAnswers.innerHTML = freeResponseAnswers.innerHTML +
+                        '<div id="answer1" class="row box bd">' +
+                            '<div class="col-auto box"><p>' + jsonReport.responses[i][j].response + '</p></div>' +
+                        '</div>'
+                }
             }
 
         }
@@ -140,9 +144,11 @@ function createReportHTML(jsonReport)
 
             for( let j = 0; j < jsonReport.responses[i].length; j++)
             {
-                scaleAnswers.innerHTML = scaleAnswers.innerHTML +
-                    '<div class="col-auto box bd"><p class="box">' + jsonReport.responses[i][j].response + '</p></div>'
-
+                if(jsonReport.responses[i][j].response != '')
+                {
+                    scaleAnswers.innerHTML = scaleAnswers.innerHTML +
+                        '<div class="col-auto box bd"><p class="box">' + jsonReport.responses[i][j].response + '</p></div>'
+                }
             }
 
             let scaleArray = []
