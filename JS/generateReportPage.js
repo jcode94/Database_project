@@ -21,7 +21,7 @@ function createReportHTML(jsonReport)
             '<div class="row center">' +
                 '<div class="col-auto"><p id="surveyDate">' + jsonReport.startDate + ' - ' + jsonReport.endDate + '&nbsp;|</p></div>' +
                 '<div class="col-auto"><p id="surveyDate"></p></div>' +
-                '<div class="col-auto"><p id="numQuestions">&nbsp;' + jsonReport.number_of_questions + ' Questions</p></div>'   +                                
+                '<div class="col-auto"><p id="numQuestions">&nbsp;' + jsonReport.questions.length + ' Questions</p></div>'   +                                
             '</div>' +
 
         '</div>'
