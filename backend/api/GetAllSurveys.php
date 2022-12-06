@@ -59,6 +59,7 @@ function getParticipantSurveyMetadata($conn, $data)
         $stmt->bind_param('s', $data['email']);
         $stmt->execute();
         $rs = $stmt->get_result();
+        $survey_id_list = array();
         while ($row = $rs->fetch_assoc()) {
             array_push(
                 $survey_id_list,
