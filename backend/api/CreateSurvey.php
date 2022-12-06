@@ -6,6 +6,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/../config/Config.class.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/backend/dao/DBConnection.php');
 
 $data = json_decode(file_get_contents("php://input"), true);
+echo json_encode($data);
+exit;
+
 $a = $data["author"] ?? "";
 $t = $data["title"] ?? "";
 $d = $data["description"] ?? "";
@@ -29,11 +32,11 @@ $stmt->bind_param(
     $nq
 );
 
-$continue = $stmt->execute();
-
-$rs = $conn->query("SELECT `survey_id` FROM `surveys_metadata` ORDER BY `survey_id` DESC LIMIT 1");
-$survey_id = $rs->fetch_assoc()['survey_id'];
-echo (print_r($survey_id));
+if ($stmt->execute()) {
+    $rs = $conn->query("SELECT `survey_id` FROM `surveys_metadata` ORDER BY `survey_id` DESC LIMIT 1");
+    $survey_id = $rs->fetch_assoc()['survey_id'];
+    echo (print_r($survey_id));
+}
 
 if (isset($continue)) {
     // INSERT INTO QUESTIONS (survey_id, number, type, statement)
