@@ -6,13 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- comment -->
         <!-- Bootstrap CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+            crossorigin="anonymous"
+        />
 
         <!-- JQUERY -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
         <!-- My CSS -->
-        <link href="../CSS/index.css" rel="stylesheet">
+        <link href="../CSS/index.css" rel="stylesheet" />
         <script src="../JS/getSurveys.js"></script>
         <script src="../JS/openSurvey.js"></script>
         <script src="../JS/openReport.js"></script>
@@ -20,35 +25,34 @@
         <script src="../JS/logout.js"></script>
         <script src="../JS/goHome.js"></script>
 
-
         <title>Home Page</title>
-      </head>
+    </head>
 
     <body onload="getSurveysAPICall()">
-
         <div class="container-fluid tall color">
-            
             <div class="row tall">
-
                 <div class="col color">
-                    
                     <div class="tall dflx flxflw color">
-
                         <div class="row right color bd">
-                            <div class="col-auto box"><button class="pad" onclick="goHome()">Home</button></div>
-                            <div class="col-auto box"><button class="pad" onclick="logout()">Logout</button></div>
+                            <div class="col-auto box">
+                                <button class="pad" onclick="goHome()">Home</button>
+                            </div>
+                            <div class="col-auto box">
+                                <button class="pad" onclick="logout()">Logout</button>
+                            </div>
                         </div>
 
                         <div class="row center grow60 color bd">
-                            
-                            <div class="col-4 box clickable bd" onclick="location.href='./createSurvey.html';">
+                            <div
+                                class="col-4 box clickable bd"
+                                onclick="location.href='./createSurvey.html';"
+                            >
                                 <h1>Create A New Survey</h1>
                             </div>
                             <!-- <div class="col-4 box clickable bd" onclick=""> </div> -->
                             <!-- <div class="col-4 box clickable bd" onclick="location.href='./takeSurvey.html';">
                                 <p>Take A Survey</p>
                             </div> -->
-
                         </div>
 
                         <div class="row center color bd">
@@ -58,15 +62,9 @@
                         <div id="surveyList" class="row center grow40 color bd">
                             <!-- Available Surveys will automatically populate here from database -->
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
-        </div>            
-                
+        </div>
     </body>
-
 </html>

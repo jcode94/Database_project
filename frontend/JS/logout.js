@@ -1,6 +1,4 @@
-
-function logout()
-{
-    console.log( sessionStorage.clear() )
-    window.location.href = "./homePage.html"
+function logout() {
+    console.log(sessionStorage.clear());
+    window.location.href = "/index.html";
 }

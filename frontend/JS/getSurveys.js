@@ -1,29 +1,28 @@
+function getSurveys(jsonSurveys, type, func) {
+    let surveyList = document.getElementById("surveyList");
 
+    let surveyIds = [];
+    let surveyTitles = [];
+    let surveyQuestionNumbers = [];
+    let surveyStatuses = [];
 
-function getSurveys(jsonSurveys, type, func)
-{
-    let surveyList = document.getElementById('surveyList')
+    Object.keys(jsonSurveys).forEach((index) => {
+        surveyIds.push(jsonSurveys[index].survey_id);
 
-    let surveyIds=[]
-    let surveyTitles=[]
-    let surveyQuestionNumbers=[]
-    let surveyStatuses=[]
+        surveyTitles.push(jsonSurveys[index].title);
 
-    Object.keys(jsonSurveys).forEach( (index) => {
-        
-            surveyIds.push(jsonSurveys[index].survey_id)
+        surveyQuestionNumbers.push(jsonSurveys[index].number_of_questions);
 
-            surveyTitles.push(jsonSurveys[index].title)
-            
-            surveyQuestionNumbers.push(jsonSurveys[index].number_of_questions)
-
-            if( type == "authored" ) { surveyStatuses.push("Authored") }
-            else
-            {
-                if(jsonSurveys[index].status){ surveyStatuses.push('Old') }
-                else{ surveyStatuses.push('New') }
+        if (type == "authored") {
+            surveyStatuses.push("Authored");
+        } else {
+            if (jsonSurveys[index].status) {
+                surveyStatuses.push("Old");
+            } else {
+                surveyStatuses.push("New");
             }
-    })
+        }
+    });
 
     // console.log(
     //     "Post Read",
@@ -33,91 +32,94 @@ function getSurveys(jsonSurveys, type, func)
     //     surveyStatuses
     // )
 
-    for( let idx = 0; idx < surveyIds.length; idx++ )
-    {
-        surveyList.innerHTML = surveyList.innerHTML + 
-        '<div class="col-auto box clickable bd" onclick="' + func + '(' + surveyIds[idx] + ')">\n' +
-            '\t<div class="row"><p>' + surveyTitles[idx] + '</p></div>\n' +
-            '\t<div class="row"><p>Questions: ' + surveyQuestionNumbers[idx] + '</p></div>\n'+
-            '\t<div class="row"><p>' + surveyStatuses[idx] + '</p></div>\n'+
-        '</div>\n'
-    }    
+    for (let idx = 0; idx < surveyIds.length; idx++) {
+        surveyList.innerHTML =
+            surveyList.innerHTML +
+            '<div class="col-auto box clickable bd" onclick="' +
+            func +
+            "(" +
+            surveyIds[idx] +
+            ')">\n' +
+            '\t<div class="row"><p>' +
+            surveyTitles[idx] +
+            "</p></div>\n" +
+            '\t<div class="row"><p>Questions: ' +
+            surveyQuestionNumbers[idx] +
+            "</p></div>\n" +
+            '\t<div class="row"><p>' +
+            surveyStatuses[idx] +
+            "</p></div>\n" +
+            "</div>\n";
+    }
 }
 
 function getSurveysAPICall() {
-
-    let flag = false
+    let flag = false;
 
     let urlBase = "http://157.245.93.19/backend/api";
     let extension = ".php";
 
-    console.log( "Session Storage", sessionStorage )
+    console.log("Session Storage", sessionStorage);
 
-    let email = sessionStorage['userEmail']
-    if( email == undefined )
-    {
-        console.log('No Email Found');
+    let email = sessionStorage["userEmail"];
+    if (email == undefined) {
+        console.log("No Email Found");
 
-        window.location.href = "../index.html";
-        flag = true
+        window.location.href = "/index.html";
+        flag = true;
     }
 
     // Missing either email or password -> return
-    if(flag) {return}
+    if (flag) {
+        return;
+    }
 
     //* Variables for the http request to login with the login api
     let jsonPayLoad = JSON.stringify({
         email: email,
     });
 
-    console.log('JSON Package', jsonPayLoad)
+    console.log("JSON Package", jsonPayLoad);
 
-    let url = urlBase + "/GetAllSurveys" + extension
-    let method = "POST"
+    let url = urlBase + "/GetAllSurveys" + extension;
+    let method = "POST";
 
     //* Opening the connection to the getAllSurveys api file with the email typed in
-    let xhr = new XMLHttpRequest()
-    xhr.open(method, url, true)
-    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8")
-    try
-    {
+    let xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
         xhr.onreadystatechange = function () {
-
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
-
                 // console.log("Response Text : ", xhr.responseText)
 
                 let jsonObject = JSON.parse(xhr.responseText);
 
-                console.log('JSON Received', jsonObject)
+                console.log("JSON Received", jsonObject);
 
-                let authored = []
-                let participant = []
+                let authored = [];
+                let participant = [];
 
-                try
-                {
-                    getSurveys( jsonObject.authored, "authored", 'openReport' )
-                    getSurveys( jsonObject.participant, "participant", 'openSurvey' )
-                }
-                catch
-                {
+                try {
+                    getSurveys(jsonObject.authored, "authored", "openReport");
+                    getSurveys(jsonObject.participant, "participant", "openSurvey");
+                } catch {
                     let ret = [
-                    {
-                        surveyName : "Failed to fetch surveys",
-                        surveyQuestionNumbers : "",
-                        surveyStatus : "Error"
-                    }]
+                        {
+                            surveyName: "Failed to fetch surveys",
+                            surveyQuestionNumbers: "",
+                            surveyStatus: "Error",
+                        },
+                    ];
 
-                    getSurveys( ret, '', '' )
+                    getSurveys(ret, "", "");
                 }
             }
         };
 
-        xhr.send(jsonPayLoad)
-    }
-    catch (err)
-    {
-        console.log("Unknown Error", err)
+        xhr.send(jsonPayLoad);
+    } catch (err) {
+        console.log("Unknown Error", err);
     }
 }

@@ -48,7 +48,7 @@ function doLogin() {
 
                     document.getElementById("loginResult").innerText = "Successful Login";
 
-                    window.location.href = "./HTML/homePage.html";
+                    window.location.href = "./frontend/HTML/homePage.html";
                 } else {
                     document.getElementById("loginResult").innerText = jsonObject.valid;
                 }
