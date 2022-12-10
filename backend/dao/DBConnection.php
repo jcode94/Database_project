@@ -54,4 +54,89 @@ class DBConnection
     {
         return $this->connection->next_result();
     }
+
+    // Create composite return from the results sets of the following:
+    public function getMetaData($data)
+    {
+        if ($stmt = $this->connection->prepare(
+            "SELECT `title`, `description`, `start_date`, `end_date`, `number_of_questions`
+            FROM `surveys_metadata` 
+            WHERE `survey_id` = ?"
+        )) {
+            $stmt->bind_param('i', $data['survey_id']);
+            $stmt->execute();
+            $rs = $stmt->get_result();
+            $metadata = $rs->fetch_assoc();
+        }
+        return $metadata;
+    }
+
+    public function getQuestions($data)
+    {
+        if ($stmt = $this->connection->prepare(
+            "SELECT *
+            FROM `questions` 
+            WHERE `survey_id` = ?"
+        )) {
+            $stmt->bind_param('i', $data['survey_id']);
+            $stmt->execute();
+            $rs = $stmt->get_result();
+            $questions = array();
+            while ($row = $rs->fetch_assoc()) {
+                array_push(
+                    $questions,
+                    array(
+                        "order" => $row['order'],
+                        "type" => $row['type'],
+                        "statement" => $row['statement']
+                    )
+                );
+            }
+        }
+        return $questions;
+    }
+
+    public function getResponses($data)
+    {
+        if ($stmt = $this->connection->prepare(
+            "SELECT `order`, `value`
+            FROM `responses` 
+            WHERE `survey_id` = ? AND `email` = ?"
+        )) {
+            $stmt->bind_param('is', $data['survey_id'], $data['email']);
+            $stmt->execute();
+            $rs = $stmt->get_result();
+            $responses = array();
+            while ($row = $rs->fetch_assoc()) {
+                array_push(
+                    $responses,
+                    new Answer($row['order'], $row['value'])
+                );
+            }
+        }
+        return $responses;
+    }
+    
+    public function getResponsesForOrder($data, $order) {
+        if ($stmt = $this->connection->prepare(
+            "SELECT `value`
+            FROM `responses` 
+            WHERE `survey_id` = ? AND `order` = ?"
+        )) {
+            $stmt->bind_param('ii', $data['survey_id'], $order);
+            $stmt->execute();
+            $rs = $stmt->get_result();
+    
+            $temp = array();
+            while ($row = $rs->fetch_assoc()) {
+                $temp[] = array(
+                    "response" => $row['value'],
+                    "order" => $order
+                );
+            }
+            $stmt->free_result();
+            $stmt->close();
+        }
+        return $temp;
+    }
 }
