@@ -20,9 +20,6 @@ function doLogin() {
         password: password.value,
     });
 
-    email.value = "";
-    password.value = "";
-
     console.log("JSON Package", jsonPayLoad);
 
     let url = urlBase + "/Login" + extension;
@@ -43,7 +40,7 @@ function doLogin() {
                 console.log("JSON Received", jsonObject);
 
                 if (jsonObject.valid == "valid") {
-                    sessionStorage["userEmail"] = email;
+                    sessionStorage.setItem("userEmail", email.value);
                     console.log("Session Storage", sessionStorage);
 
                     document.getElementById("loginResult").innerText = "Successful Login";

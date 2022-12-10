@@ -13,9 +13,9 @@ $data = json_decode(file_get_contents("php://input"), true);
 $survey_id = $data['survey_id'] ?? "";
 $participant_email = $data['email'] ?? "";
 
-$metadata = getMetaData($data);
-$questions = getQuestions($data);
-$responses = getResponses($data);
+$metadata = $conn->getMetaData($data);
+$questions = $conn->getQuestions($data);
+$responses = $conn->getResponses($data);
 
 echo json_encode([
     "survey_id" => $survey_id ?? "",
