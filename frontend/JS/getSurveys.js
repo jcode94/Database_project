@@ -1,4 +1,4 @@
-function getSurveys(jsonSurveys, type, func) {
+function populateSurveys(jsonSurveys, type, func) {
     let surveyList = document.getElementById("surveyList");
 
     let surveyIds = [];
@@ -54,23 +54,20 @@ function getSurveys(jsonSurveys, type, func) {
 }
 
 function getSurveysAPICall() {
-    let flag = false;
-
     let urlBase = "http://157.245.93.19/backend/api";
     let extension = ".php";
 
     console.log("Session Storage", sessionStorage);
 
+    // Logout originally only changed session storage
+    // state and refreshed the page, doing the below.
+    // The below has been left in as a safeguard, but
+    // logout now redirects to the landing page after
+    // clearing session storage.
     let email = sessionStorage["userEmail"];
     if (email == undefined) {
         console.log("No Email Found");
-
         window.location.href = "/index.html";
-        flag = true;
-    }
-
-    // Missing either email or password -> return
-    if (flag) {
         return;
     }
 
@@ -92,18 +89,15 @@ function getSurveysAPICall() {
         xhr.onreadystatechange = function () {
             // If server pinged and a response is sent back
             if (this.readyState == 4 && this.status == 200) {
-                // console.log("Response Text : ", xhr.responseText)
+                console.log("Response Text : ", xhr.responseText);
 
                 let jsonObject = JSON.parse(xhr.responseText);
 
                 console.log("JSON Received", jsonObject);
 
-                let authored = [];
-                let participant = [];
-
                 try {
-                    getSurveys(jsonObject.authored, "authored", "openReport");
-                    getSurveys(jsonObject.participant, "participant", "openSurvey");
+                    populateSurveys(jsonObject.authored, "authored", "openReport");
+                    populateSurveys(jsonObject.participant, "participant", "openSurvey");
                 } catch {
                     let ret = [
                         {

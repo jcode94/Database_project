@@ -23,7 +23,6 @@ function doRegister() {
     let xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
     try {
         xhr.onreadystatechange = function () {
             // If server pinged and a response is sent back

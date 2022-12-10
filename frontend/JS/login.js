@@ -8,19 +8,20 @@ function doLogin() {
     if (fieldIsEmpty(email)) {
         setFieldErrorState(email);
         return;
-    } else if (fieldIsEmpty(password)) {
+    }
+    if (fieldIsEmpty(password)) {
         setFieldErrorState(password);
         return;
-    } else {
-        email = email.value;
-        password = password.value;
     }
 
     //* Variables for the http request to login with the login api
     let jsonPayLoad = JSON.stringify({
-        email: email,
-        password: password,
+        email: email.value,
+        password: password.value,
     });
+
+    email.value = "";
+    password.value = "";
 
     console.log("JSON Package", jsonPayLoad);
 
@@ -31,7 +32,6 @@ function doLogin() {
     let xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-
     try {
         xhr.onreadystatechange = function () {
             // If server pinged and a response is sent back
