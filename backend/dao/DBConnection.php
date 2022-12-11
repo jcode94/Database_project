@@ -59,7 +59,7 @@ class DBConnection
     public function getMetaData($data)
     {
         if ($stmt = $this->connection->prepare(
-            "SELECT `title`, `description`, `start_date`, `end_date`, `number_of_questions`
+            "SELECT `survey_id`, `title`, `description`, `start_date`, `end_date`, `number_of_questions`
             FROM `surveys_metadata` 
             WHERE `survey_id` = ?"
         )) {
@@ -67,6 +67,71 @@ class DBConnection
             $stmt->execute();
             $rs = $stmt->get_result();
             $metadata = $rs->fetch_assoc();
+        }
+        return $metadata;
+    }
+    
+    // Get all surveys for which email is eq to author col in surveys metadata
+    function getAuthoredSurveyMetadata($data)
+    {
+        $survey_metadata = array();
+        if ($stmt = $this->connection->prepare(
+            "SELECT `survey_id`
+            FROM `surveys_metadata` 
+            WHERE `author` = ?"
+        )) {
+            $stmt->bind_param('s', $data['email']);
+            $stmt->execute();
+            $rs = $stmt->get_result();
+            while ($row = $rs->fetch_assoc()) {
+                array_push(
+                    $survey_metadata,
+                    $this->getMetaData($row)
+                );
+            }
+        }
+        return $survey_metadata;
+    }
+    
+    // Get all surveys for which email is participant
+    function getParticipantSurveyMetadata($data)
+    {
+        if ($stmt = $this->connection->prepare(
+            "SELECT `survey_id`
+            FROM `participants` 
+            WHERE `email` = ?"
+        )) {
+            $stmt->bind_param('s', $data['email']);
+            $stmt->execute();
+            $rs = $stmt->get_result();
+            $survey_id_list = array();
+            while ($row = $rs->fetch_assoc()) {
+                array_push(
+                    $survey_id_list,
+                    $row['survey_id']
+                );
+            }
+            $stmt->close();
+            $this->next_result();
+        }
+
+        $metadata = array();
+        $stmt = $this->connection->prepare(
+            "SELECT `status`
+            FROM `participants`
+            WHERE `survey_id` = ?
+            AND `email` = ?"
+        );
+        foreach ($survey_id_list as $survey_id) {
+            $stmt->bind_param('is', $survey_id, $data['email']);
+            $stmt->execute();
+            $rs = $stmt->get_result();
+            $status = $rs->fetch_assoc();
+            $stmt->close();
+            $this->connection->next_result();
+            $temp = $this->getMetaData(array("survey_id" => $survey_id)) ?? array();
+            $temp["status"] = $status['status'];
+            array_push($metadata, $temp);
         }
         return $metadata;
     }

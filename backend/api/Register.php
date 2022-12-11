@@ -9,21 +9,16 @@ $email = $data["email"] ?? "";
 $password = $data["password"] ?? "";
 $conn = new DBConnection(new Config());
 
-if (empty($email) || empty($password)) {
+$query = "SELECT `email` FROM `users` where `email` = '$email'";
+$rs = $conn->query($query);
+if (mysqli_num_rows($rs) > 0) {
     echo json_encode(["valid" => "invalid"]);
     exit;
 } else {
-    $query = "SELECT `email` FROM `users` where `email` = '$email'";
-    $rs = $conn->query($query);
-    if (mysqli_num_rows($rs) > 0) {
-        echo json_encode(["valid" => "invalid"]);
+    $stmt = $conn->prepare(file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_USERS.sql'));
+    $stmt->bind_param("ss", $email, $password);
+    if ($stmt->execute()) {
+        echo json_encode(["valid" => "valid"]);
         exit;
-    } else {
-        $stmt = $conn->prepare(file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_USERS.sql'));
-        $stmt->bind_param("ss", $email, $password);
-        if ($stmt->execute()) {
-            echo json_encode(["valid" => "valid"]);
-            exit;
-        }
     }
 }
