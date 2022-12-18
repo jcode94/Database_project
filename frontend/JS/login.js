@@ -40,11 +40,8 @@ function doLogin() {
                 console.log("JSON Received", jsonObject);
 
                 if (jsonObject.valid == "valid") {
-                    sessionStorage.setItem("userEmail", email.value);
+                    sessionStorage["userEmail"] = email.value;
                     console.log("Session Storage", sessionStorage);
-
-                    document.getElementById("loginResult").innerText = "Successful Login";
-
                     window.location.href = "./frontend/HTML/homePage.html";
                 } else {
                     document.getElementById("loginResult").innerText = jsonObject.valid;

@@ -64,8 +64,10 @@ function getSurveysAPICall() {
     // The below has been left in as a safeguard, but
     // logout now redirects to the landing page after
     // clearing session storage.
-    let email = sessionStorage.getItem("userEmail");
-    if (email == undefined) {
+
+    // This also stops users from access through
+    // backward navigation after logout.
+    if (sessionStorage.getItem("userEmail") === null) {
         console.log("No Email Found");
         window.location.href = "/index.html";
         return;

@@ -20,7 +20,6 @@ $stmt = $conn->prepare(
     file_get_contents(__BACKEND_ROOT__ . '/SQL/INSERT_INTO_SURVEYS_METADATA.sql')
 );
 
-
 $stmt->bind_param(
     'sssssi',
     $a,
